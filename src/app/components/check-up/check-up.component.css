@@ -1,0 +1,12 @@
+.col-lg-12{
+    text-align: center;
+}
+#file_upload{
+    display: none;
+}
+label{
+    padding: 50px 25px;
+}
+button{
+    margin: 50px 25px;
+}
