@@ -1,0 +1,16 @@
+.container{
+    padding-top: 20px;
+}
+.name-doctor{
+    font-family:Playfair Display, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 130%;
+}
+.col-lg-4{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+table{
+    width: 100%;
+}

@@ -12,6 +12,9 @@ import { CheckUpComponent } from './components/check-up/check-up.component';
 import { ResultCheckUpComponent } from './components/result-check-up/result-check-up.component';
 import { DoctorsRecommendingComponent } from './components/doctors-recommending/doctors-recommending.component';
 import { AppointmentsComponent } from './components/appointments/appointments.component';
+import { AppointmentComponent } from './components/appointment/appointment.component';
+import { FindDoctorsComponent } from './components/find-doctors/find-doctors.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { AppointmentsComponent } from './components/appointments/appointments.co
     CheckUpComponent,
     ResultCheckUpComponent,
     DoctorsRecommendingComponent,
-    AppointmentsComponent
+    AppointmentsComponent,
+    AppointmentComponent,
+    FindDoctorsComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,
