@@ -1,0 +1,11 @@
+.nav-link {
+    color: #434343;
+    align-self: center;
+}
+.nav-link:hover{
+    color: #0000ff;
+    font-weight: bold;
+}
+.last-nav-link{
+    padding-right: 0px;
+}

@@ -15,6 +15,25 @@ import { AppointmentsComponent } from './components/appointments/appointments.co
 import { AppointmentComponent } from './components/appointment/appointment.component';
 import { FindDoctorsComponent } from './components/find-doctors/find-doctors.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { NotifDialogComponent } from './components/notif-dialog/notif-dialog.component';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { RegisterDialogComponent } from './components/register-dialog/register-dialog.component';
+import { UnloginComponent } from './components/unlogin/unlogin.component';
+import { AuthenticatedComponent } from './components/authenticated/authenticated.component';
+import { UpdateScheduleComponent } from './components/update-schedule/update-schedule.component';
+import { ContributeComponent } from './components/contribute/contribute.component';
+import { HistoryComponent } from './components/history/history.component';
+import { SideBarAdminComponent } from './components/side-bar-admin/side-bar-admin.component';
+import { BodyAdminComponent } from './components/body-admin/body-admin.component';
+import { OverviewComponent } from './components/overview/overview.component';
+import { PatientChartComponent } from './components/patient-chart/patient-chart.component';
+import { DoctorChartComponent } from './components/doctor-chart/doctor-chart.component';
+import { AppointmentChartComponent } from './components/appointment-chart/appointment-chart.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
+import { UsersComponent } from './components/users/users.component';
+import { UserComponent } from './components/user/user.component';
+import { RequirementComponent } from './components/requirement/requirement.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +48,26 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
     AppointmentsComponent,
     AppointmentComponent,
     FindDoctorsComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    ConfirmDialogComponent,
+    NotifDialogComponent,
+    LoginDialogComponent,
+    RegisterDialogComponent,
+    UnloginComponent,
+    AuthenticatedComponent,
+    UpdateScheduleComponent,
+    ContributeComponent,
+    HistoryComponent,
+    SideBarAdminComponent,
+    BodyAdminComponent,
+    OverviewComponent,
+    PatientChartComponent,
+    DoctorChartComponent,
+    AppointmentChartComponent,
+    LineChartComponent,
+    UsersComponent,
+    UserComponent,
+    RequirementComponent
   ],
   imports: [
     BrowserModule,

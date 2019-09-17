@@ -25,3 +25,7 @@ i{
 .fa-skype:hover{
     color: #038ae4;
 }
+a{
+    color: gray;
+    font-size: 80%;
+}

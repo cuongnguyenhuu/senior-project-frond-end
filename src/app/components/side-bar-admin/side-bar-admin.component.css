@@ -1,0 +1,10 @@
+.nav-link {
+    color: #434343;
+}
+.active, .nav-link:hover{
+    color: #0000ff;
+    font-weight: bold;
+}
+i{
+    margin-right: 20px;
+}

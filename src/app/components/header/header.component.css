@@ -23,13 +23,12 @@ nav{
     padding: 0;
 }
 .col-lg-10{
-    align-self: flex-end;
+    align-self: center;
 }
-.last-nav-link{
-    padding-right: 0px;
-}
+
 .nav-link {
     color: #434343;
+    align-self: center;
 }
 .nav-link:hover{
     color: #0000ff;
