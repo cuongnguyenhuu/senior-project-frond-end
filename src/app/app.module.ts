@@ -27,13 +27,12 @@ import { HistoryComponent } from './components/history/history.component';
 import { SideBarAdminComponent } from './components/side-bar-admin/side-bar-admin.component';
 import { BodyAdminComponent } from './components/body-admin/body-admin.component';
 import { OverviewComponent } from './components/overview/overview.component';
-import { PatientChartComponent } from './components/patient-chart/patient-chart.component';
-import { DoctorChartComponent } from './components/doctor-chart/doctor-chart.component';
-import { AppointmentChartComponent } from './components/appointment-chart/appointment-chart.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserComponent } from './components/user/user.component';
 import { RequirementComponent } from './components/requirement/requirement.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { LogoComponent } from './components/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -61,13 +60,12 @@ import { RequirementComponent } from './components/requirement/requirement.compo
     SideBarAdminComponent,
     BodyAdminComponent,
     OverviewComponent,
-    PatientChartComponent,
-    DoctorChartComponent,
-    AppointmentChartComponent,
     LineChartComponent,
     UsersComponent,
     UserComponent,
-    RequirementComponent
+    RequirementComponent,
+    ChatComponent,
+    LogoComponent
   ],
   imports: [
     BrowserModule,

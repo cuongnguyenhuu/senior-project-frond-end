@@ -1,0 +1,65 @@
+.title{
+    font-weight: bold;
+    font-size: 150%;
+    text-align: center;
+}
+.name{
+    color: black;
+}
+.last-message{
+    color: gray;
+    font-size: 80%;
+}
+.conversation{
+    background-color: #80808029;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 5px 0px;
+}
+.name-chat{
+    font-weight: bold;
+}
+hr{
+    padding: 0;
+    margin: 0;
+}
+.message{
+    padding: 5px;
+    border-radius: 10px;
+    margin: 5px 0px;
+}
+p{
+    word-break: break-all;
+}
+.text-message{
+    background-color: #80808029;
+    /* padding: 5px; */
+    border-radius: 10px;
+    margin: 0px 10px;
+}
+.my-message{
+    justify-content: flex-end;
+}
+.my-message > .text-message{
+    background-color: #0E99FF;
+    color: white;
+}
+.upload-image{
+    color: #0E99FF;
+    font-size: 150%;
+}
+.input-box{
+    position: fixed;
+    width: 570px;
+    bottom: 0;
+}
+.button-send{
+    justify-content: flex-end;
+    display: flex;
+}
+.information{
+    text-align: center;
+}
+.specialist{
+    color: gray;
+}
