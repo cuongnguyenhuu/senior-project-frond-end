@@ -73,48 +73,48 @@
                 </tr>
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-danger">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-danger">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success">7:00-8:00</button>
+                        <button type="button" (click)="toggleConfirmDialog()" class="btn btn-success">7:00-8:00</button>
                     </td>
                 </tr>
             </table>  
@@ -141,3 +141,5 @@
         </div>
     </div>
 </div>
+<app-confirm-dialog (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" ></app-confirm-dialog>
+<app-notif-dialog (closeDialog)="setOpenConfirm($event)" [open]="open_notif"></app-notif-dialog>

@@ -9,3 +9,11 @@
 .last-nav-link{
     padding-right: 0px;
 }
+.login_form{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    /* top: 0;
+    left: 0; */
+}

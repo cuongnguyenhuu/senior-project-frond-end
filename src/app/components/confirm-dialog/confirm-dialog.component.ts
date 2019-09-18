@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmDialogComponent implements OnInit {
 
+  @Input() open : boolean;
+
+  @Output() closeDialog = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public toggleConfirmDialog(){
+    this.open = !this.open;
+    this.closeDialog.emit(this.open);
   }
 
 }

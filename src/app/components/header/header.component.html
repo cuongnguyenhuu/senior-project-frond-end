@@ -5,10 +5,10 @@
         </div>
         <div class="col-lg-10">
            <nav class="nav justify-content-end">
-             <a class="nav-link active" href="#">HOME</a>
-             <a class="nav-link" href="#">CHECK-UP</a>
-             <a class="nav-link" href="#">APPOINTMENTS</a>
-             <a class="nav-link" href="#">FIND-DOCTORS</a>
+             <a class="nav-link" [routerLink]="['/patient/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">HOME</a>
+             <a class="nav-link" [routerLink]="['/patient/check-up']" routerLinkActive="active">CHECK-UP</a>
+             <a class="nav-link" [routerLink]="['/patient/appointments']" routerLinkActive="active">APPOINTMENTS</a>
+             <a class="nav-link" [routerLink]="['/patient/find-doctors']" routerLinkActive="active">FIND-DOCTORS</a>
              <!-- <app-unlogin></app-unlogin> -->
              <app-authenticated></app-authenticated>
            </nav>

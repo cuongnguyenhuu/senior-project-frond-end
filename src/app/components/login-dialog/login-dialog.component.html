@@ -1,5 +1,5 @@
-<div class="confirm-dialog">
-<div class="background">
+<div class="confirm-dialog" *ngIf="open">
+<div class="background" (click)="toggleLoginDialog()">
 
 </div>
 <div class="dialog">
@@ -23,7 +23,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12 forgot-password">
-            <p ><a href="#">Do you have account?</a> Or <a href="">forgot password?</a></p>
+            <p ><a href="javascript:void(0)" (click)="toggleRegisterDialog()">Do you have account?</a> Or <a href="">forgot password?</a></p>
         </div>
     </div>
     <div class="row">
@@ -33,3 +33,4 @@
     </div>
 </div>
 </div>
+<app-register-dialog (closeDialog)="setOpenRegister($event)" [open]="open_register"></app-register-dialog>

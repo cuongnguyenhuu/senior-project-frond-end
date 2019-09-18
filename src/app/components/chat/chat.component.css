@@ -1,3 +1,12 @@
+.container{
+    height: 70vh;
+}
+.box-messages{
+    height: 100%;
+}
+.box-chat{
+    height: 100%;
+}
 .title{
     font-weight: bold;
     font-size: 150%;
@@ -49,7 +58,7 @@ p{
     font-size: 150%;
 }
 .input-box{
-    position: fixed;
+    position: absolute;
     width: 570px;
     bottom: 0;
 }

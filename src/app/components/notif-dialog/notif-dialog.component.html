@@ -1,5 +1,5 @@
-<div class="confirm-dialog">
-<div class="background">
+<div class="confirm-dialog" *ngIf = "open">
+<div class="background" (click) = "toggleConfirmDialog()">
 
 </div>
 <div class="dialog">

@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UnloginComponent implements OnInit {
 
+  private open_login:boolean = false;
+  
   constructor() { }
 
   ngOnInit() {
   }
 
+  public toggleLoginForm(){
+    this.open_login = !this.open_login;
+  }
+
+  public setOpenLogin(status){
+    this.open_login = status;
+  }
 }
