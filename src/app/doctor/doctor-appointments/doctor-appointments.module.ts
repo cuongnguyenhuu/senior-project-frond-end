@@ -7,23 +7,22 @@ import { AppointmentComponent } from '../../components/appointment/appointment.c
 
 const routes: Routes = [
   {
-    path: 'patient/appointments',
+    path: 'doctor/appointments',
     component: AppointmentsComponent,
   },
   {
-    path: 'patient/appointments/detail',
+    path: 'doctor/appointments/detail',
     component: AppointmentComponent
   },
 ];
-
 @NgModule({
   declarations: [
-    AppointmentsComponent,
-    AppointmentComponent
+    // AppointmentsComponent,
+    // AppointmentComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
   ]
 })
-export class PatientAppointmentsModule { }
+export class DoctorAppointmentsModule { }

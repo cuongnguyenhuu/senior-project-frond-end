@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FindDoctorsComponent } from './find-doctors/find-doctors.component';
-import { ScheduleComponent } from './schedule/schedule.component';
+import { ScheduleComponent } from '../../components/schedule/schedule.component';
 import { ConfirmDialogComponent } from './../../components/confirm-dialog/confirm-dialog.component';
 import { NotifDialogComponent } from './../../components/notif-dialog/notif-dialog.component';
 

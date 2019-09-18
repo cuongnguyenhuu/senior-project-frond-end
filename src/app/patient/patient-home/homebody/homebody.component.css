@@ -26,7 +26,7 @@
 .title{
     font-family: Playfair Display, Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 200%;
+    font-size: 150%;
 }
 .description{
     color: gray;
@@ -58,4 +58,7 @@
 }
 .specialist{
     color: gray;
+}
+.intro3 img{
+    width: inherit;
 }

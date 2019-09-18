@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import { Routes, RouterModule } from '@angular/router';
 import { PatientModule } from './patient/patient.module';
+import { DoctorModule } from './doctor/doctor.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +28,7 @@ import { LogoComponent } from './components/logo/logo.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'patient/home',
+    redirectTo: 'doctor/appointments',
     pathMatch: 'full'
   },
   // {
@@ -68,6 +69,7 @@ const routes: Routes = [
     AppRoutingModule,
     ChartsModule,
     PatientModule,
+    DoctorModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
