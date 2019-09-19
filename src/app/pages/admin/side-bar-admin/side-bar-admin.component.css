@@ -1,0 +1,30 @@
+.nav-link {
+    color: #434343;
+    font-size: 90%;
+}
+.active, .nav-link:hover{
+    color: #0000ff;
+    font-weight: bold;
+}
+i{
+    margin-right: 20px;
+    width: 30px;
+    font-size: 150%;
+}
+.navbar{
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+}
+.fa-chart-line{
+    color: #F8AC21;
+}
+.fa-users{
+    color: #3081AB;
+}
+.fa-tasks{
+    color: #7AB605;
+}
+.navbar-nav{
+    width: 100%;
+}

@@ -1,19 +1,19 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-2">
-                <app-logo></app-logo>
+                <app-logo [ROLE] = "ROLE"></app-logo>
         </div>
         <div class="col-lg-10">
            <nav class="nav justify-content-end">
-             <!-- <a class="nav-link" [routerLink]="['/patient/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">HOME</a> -->
-             <!-- <a class="nav-link" [routerLink]="['/patient/check-up']" routerLinkActive="active">CHECK-UP</a> -->
-             <!-- <a class="nav-link" [routerLink]="['/patient/appointments']" routerLinkActive="active">APPOINTMENTS</a> -->
-             <!-- <a class="nav-link" [routerLink]="['/patient/find-doctors']" routerLinkActive="active">FIND-DOCTORS</a> -->
-             <a class="nav-link" [routerLink]="['/doctor/appointments']" routerLinkActive="active">APPOINTMENTS</a>
-             <a class="nav-link" [routerLink]="['/doctor/schedule']" routerLinkActive="active">SCHEDULE</a>
-             <a class="nav-link" [routerLink]="['/doctor/contribute']" routerLinkActive="active">CONTRIBUTE</a>
-             <!-- <app-unlogin></app-unlogin> -->
-             <app-authenticated></app-authenticated>
+             <a class="nav-link" [routerLink]="['/patient/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="ROLE==='PATIENT'">HOME</a>
+             <a class="nav-link" [routerLink]="['/patient/check-up']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'">CHECK-UP</a>
+             <a class="nav-link" [routerLink]="['/patient/appointments']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'" >APPOINTMENTS</a>
+             <a class="nav-link" [routerLink]="['/patient/find-doctors']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'">FIND-DOCTORS</a>
+             <a class="nav-link" [routerLink]="['/doctor/appointments']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'">APPOINTMENTS</a>
+             <a class="nav-link" [routerLink]="['/doctor/schedule']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'" >SCHEDULE</a>
+             <a class="nav-link" [routerLink]="['/doctor/contribute']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'" >CONTRIBUTE</a>
+             <app-unlogin></app-unlogin>
+             <!-- <app-authenticated [ROLE] = "ROLE"></app-authenticated> -->
            </nav>
            
         </div>

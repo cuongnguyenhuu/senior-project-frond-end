@@ -118,28 +118,34 @@
                     </td>
                 </tr>
             </table>  
-            <div class="col-lg-4">
-                <table>
-                    <tr>
-                        <td>
-                            <button type="button" class="btn btn-success"></button>
-                        </td>
-                        <td>
-                            Available
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button type="button" class="btn btn-danger"></button>
-                        </td>
-                        <td>
-                            Busy
-                        </td>
-                    </tr>
-                </table>
-            </div>  
+            <div class="row">
+                <div class="col-lg-4">
+                    <table>
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-success"></button>
+                            </td>
+                            <td>
+                                Available
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-danger"></button>
+                            </td>
+                            <td>
+                                Busy
+                            </td>
+                        </tr>
+                    </table>
+                </div>  
+                <div class="col-lg-8 btn-update">
+                    <button type="button" class="btn btn-primary" (click)="toggleUpdateDialog()">Update your schedule</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <app-confirm-dialog (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" ></app-confirm-dialog>
 <app-notif-dialog (closeDialog)="setOpenConfirm($event)" [open]="open_notif"></app-notif-dialog>
+<app-update-schedule (closeDialog)="setOpenUpdate($event)" [open]="open_update"></app-update-schedule>

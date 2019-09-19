@@ -3,11 +3,13 @@
     align-self: center;
 }
 .nav-link:hover{
-    color: #0000ff;
+    color: #0000ff !important;
     font-weight: bold;
 }
 .last-nav-link{
     padding-right: 0px;
+    font-size: 90%;
+    color: #434343 !important;
 }
 .login_form{
     position: fixed;

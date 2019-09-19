@@ -11,6 +11,7 @@ export class ScheduleComponent implements OnInit {
 
   private open_confirm : boolean = false;
   private open_notif : boolean = false;
+  private open_update: boolean = false;
 
   ngOnInit() {
   }
@@ -29,5 +30,13 @@ export class ScheduleComponent implements OnInit {
 
   public setOpenConfirm(status){
     this.open_confirm = status;
+  }
+
+  public toggleUpdateDialog() {
+    this.open_update = !this.open_update;
+  }
+
+  public setOpenUpdate(status){
+    this.open_update = status;
   }
 }

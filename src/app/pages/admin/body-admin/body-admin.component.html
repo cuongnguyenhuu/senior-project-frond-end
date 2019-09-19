@@ -1,0 +1,24 @@
+<div class="container-fluid admin-page" >
+    <div class="row header">
+        <div class="col-lg-6">
+            <app-logo [ROLE]="ROLE"></app-logo>
+        </div>
+        <div class="col-lg-6">
+            <app-authenticated [ROLE] = "ROLE"></app-authenticated>
+        </div>
+    </div>
+    <div class="row body">
+        <div class="col-lg-2 side-bar">
+            <app-side-bar-admin ></app-side-bar-admin>
+        </div>
+        <div class="col-lg-10 infor">
+            <router-outlet></router-outlet>
+            <!-- <app-overview></app-overview> -->
+            <!-- <app-users></app-users> -->
+            <!-- <app-user></app-user> -->
+            <!-- <app-requirement></app-requirement> -->
+        </div>
+    </div>
+</div>
+    
+<!-- </div> -->
