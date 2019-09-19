@@ -17,7 +17,7 @@ import { RequirementComponent } from './admin-requirements/requirement/requireme
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: '',
     component:BodyAdminComponent,
     children:[
       {

@@ -8,6 +8,7 @@ import { PatientFindDoctorsModule } from './patient-find-doctors/patient-find-do
 import { PatientHistoryModule } from './patient-history/patient-history.module';
 import { PatientMessagesModule } from './patient-messages/patient-messages.module';
 import { PatientProfileModule } from './patient-profile/patient-profile.module';
+import { PatientAppointmentModule } from './patient-appointment/patient-appointment.module';
 import { SharedModule } from './../shared/shared.module';
 
 import { PatientBodyComponent } from './patient-body/patient-body.component';
@@ -23,13 +24,13 @@ import { ProfileComponent } from './../../components/profile/profile.component';
 
 const routes: Routes = [
   {
-    path: 'patient',
+    path: '',
     component: PatientBodyComponent,
     children: [
       {
         path:'',
         redirectTo:'home',
-        pathMatch:'full'
+        pathMatch:'full',
       },
       {
         path: 'appointments',
@@ -83,6 +84,7 @@ const routes: Routes = [
     PatientHistoryModule,
     PatientMessagesModule,
     PatientProfileModule,
+    PatientAppointmentModule,
     SharedModule,
     RouterModule.forChild(routes)
   ]

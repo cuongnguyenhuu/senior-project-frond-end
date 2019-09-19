@@ -16,7 +16,7 @@ import { ProfileComponent } from './../../components/profile/profile.component';
 
 const routes: Routes = [
   {
-    path: 'doctor',
+    path: '',
     component:DoctorBodyComponent,
     children:[
       {
