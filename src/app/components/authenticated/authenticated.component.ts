@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { UserServicesService } from './../../services/user-services/user-services.service';
 
 @Component({
   selector: 'app-authenticated',
@@ -8,11 +9,14 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AuthenticatedComponent implements OnInit {
 
   @Input() ROLE;
+  @Input() data;
 
   private messagesURL:string="";
   
   private profileURL: string="";
-  constructor() { }
+  constructor(
+   private userServicesService: UserServicesService
+  ) { }
 
   ngOnInit() {
     switch (this.ROLE) {
@@ -27,6 +31,10 @@ export class AuthenticatedComponent implements OnInit {
       default:
         break;
     }
+    // console.log(this.data.avatar+this.data.name);
   }
 
+  public logout(){
+    this.userServicesService.logout();
+  }
 }

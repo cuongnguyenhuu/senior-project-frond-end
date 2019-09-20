@@ -32,25 +32,23 @@
         <div class="col-lg-4 password">
             <input type="password" class="form-control padding" name="" id="password" aria-describedby="helpId" placeholder="Password">
             <i class="fas fa-key first-icon"></i>
-            <i class="fas fa-eye-slash"></i>
         </div>
         <div class="col-lg-4 password">
             <input type="password" class="form-control padding" name="" id="re-password" aria-describedby="helpId" placeholder="Re-password">
             <i class="fas fa-key first-icon"></i>
-            <i class="fas fa-eye-slash"></i>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-4 one-icon ">
-            <input type="text" class="form-control padding" name="" id="username" aria-describedby="helpId" placeholder="Email">
+            <input type="text" class="form-control padding" name=""  aria-describedby="helpId" placeholder="Email">
             <i class="fas fa-envelope first-icon"></i>
         </div>
         <div class="col-lg-4 one-icon ">
-            <input type="text" class="form-control padding" name="" id="username" aria-describedby="helpId" placeholder="Phone number">
+            <input type="text" class="form-control padding" name=""  aria-describedby="helpId" placeholder="Phone number">
             <i class="fas fa-phone-square-alt first-icon"></i>
         </div>
         <div class="col-lg-4 one-icon">
-            <input type="date" class="form-control padding" name="" id="re-password" aria-describedby="helpId" placeholder="Re-password">
+            <input type="date" class="form-control padding" name="" aria-describedby="helpId" placeholder="Re-password">
             <i class="fas fa-birthday-cake first-icon"></i>
         </div>
     </div>
@@ -64,30 +62,35 @@
         </div>
         <div class="col-lg-4">
             <select class="form-control">
-                <option>Country</option>
                 <option>Viet Nam</option>
                 <option>Other</option>
             </select>
         </div>
         <div class="col-lg-4">
-            <select class="form-control">
-                <option>City</option>
-                <option>Da Nang</option>
-                <option>Other</option>
+            <select class="form-control" [(ngModel)]="provinceSelected" (change)="provinceOption($event.target.value)">
+                <option value="default">City</option>
+                <option *ngFor="let province of provinces; let i = index" value="{{i}}">{{province.name}}</option>
             </select>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-4">
-            <select class="form-control">
-                <option>District</option>
-                <option>Hai Chau</option>
-                <option>Other</option>
+            <select class="form-control" [(ngModel)]="districtSelected" (change)="districtOption($event.target.value)" >
+                <option value="default">District</option>
+                <option *ngFor="let district of districts; let i = index" value="{{i}}">{{district.name}}</option>
+            </select>
+        </div>
+        <div class="col-lg-4">
+            <select class="form-control" [(ngModel)]="wardSelected" (change)="wardOption($event.target.value)" >
+                <option value="default">Ward</option>
+                <option *ngFor="let ward of wards; let i = index" value="{{i}}">{{ward.name}}</option>
             </select>
         </div>
         <div class="col-lg-4">
             <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Street">
         </div>
+    </div>
+    <div class="row" *ngIf="isDoctor">
         <div class="col-lg-4" *ngIf="isDoctor">
             <select class="form-control">
                 <option>Specialist</option>
@@ -95,8 +98,6 @@
                 <option>Other</option>
             </select>
         </div>
-    </div>
-    <div class="row" *ngIf="isDoctor">
         <div class="col-lg-4">
             <input type="number" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Experiences">
         </div>

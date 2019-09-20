@@ -1,3 +1,15 @@
+<div>
+    <ngx-spinner
+    bdOpacity = 1
+    bdColor = "#00000092"
+    size = "medium"
+    color = "#fff"
+    type = "ball-atom"
+    [fullScreen] = "true"
+    >
+    <p style="color: white" > Logging... </p>
+    </ngx-spinner>
+</div>
 <div class="confirm-dialog" *ngIf="open">
 <div class="background" (click)="toggleLoginDialog()">
 
@@ -9,16 +21,22 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-lg-12">
+            <span class="badge badge-warning">{{errorMessage}}</span>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-12 username">
-            <input type="text" class="form-control" name="" id="username" aria-describedby="helpId" placeholder="Username">
+            <input type="text" class="form-control" [(ngModel)]="username" name="" id="username" aria-describedby="helpId" placeholder="Username">
             <i class="fas fa-user"></i>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 password">
-            <input type="password" class="form-control" name="" id="password" aria-describedby="helpId" placeholder="Password">
+            <input [type]="isCoverPassword?'password':'text'" class="form-control" [(ngModel)]="password" name="" id="password" aria-describedby="helpId" placeholder="Password">
             <i class="fas fa-key"></i>
-            <i class="fas fa-eye-slash"></i>
+            <i class="fas fa-eye-slash" *ngIf="isCoverPassword" (click) = "toggleCoverPassword()"></i>
+            <i class="fas fa-eye" *ngIf="!isCoverPassword" (click) = "toggleCoverPassword()"></i>
         </div>
     </div>
     <div class="row">
@@ -28,7 +46,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <button type="button" class="btn btn-primary">LOGIN</button>
+            <button type="button" class="btn btn-primary" (click)="login()">LOGIN</button>
         </div>
     </div>
 </div>

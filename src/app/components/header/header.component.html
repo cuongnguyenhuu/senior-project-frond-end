@@ -7,13 +7,13 @@
            <nav class="nav justify-content-end">
              <a class="nav-link" [routerLink]="['/patient/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="ROLE==='PATIENT'">HOME</a>
              <a class="nav-link" [routerLink]="['/patient/check-up']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'">CHECK-UP</a>
-             <a class="nav-link" [routerLink]="['/patient/appointments']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'" >APPOINTMENTS</a>
-             <a class="nav-link" [routerLink]="['/patient/find-doctors']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'">FIND-DOCTORS</a>
+             <a class="nav-link" [routerLink]="['/patient/appointments']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'&& isLogin" >APPOINTMENTS</a>
+             <a class="nav-link" [routerLink]="['/patient/find-doctors']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'&& isLogin">FIND-DOCTORS</a>
              <a class="nav-link" [routerLink]="['/doctor/appointments']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'">APPOINTMENTS</a>
              <a class="nav-link" [routerLink]="['/doctor/schedule']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'" >SCHEDULE</a>
              <a class="nav-link" [routerLink]="['/doctor/contribute']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'" >CONTRIBUTE</a>
-             <app-unlogin></app-unlogin>
-             <!-- <app-authenticated [ROLE] = "ROLE"></app-authenticated> -->
+             <app-unlogin *ngIf="!isLogin"></app-unlogin>
+             <app-authenticated *ngIf="isLogin" [ROLE] = "ROLE" [data]="data" ></app-authenticated>
            </nav>
            
         </div>

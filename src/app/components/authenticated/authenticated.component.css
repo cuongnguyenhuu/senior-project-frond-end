@@ -8,6 +8,10 @@
 }
 .last-nav-link{
     padding-right: 0px;
+    text-decoration: none;
+}
+.last-nav-link a{
+    margin: 0px 10px;
 }
 i{
     font-size: 150%;
@@ -17,4 +21,8 @@ i{
 }
 .fa-exclamation-triangle{
     color: red;
+}
+.nav{
+    height: 100%;
+    align-items: center;
 }

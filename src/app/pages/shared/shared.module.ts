@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { LogoComponent } from './../../components/logo/logo.component';
 import { AuthenticatedComponent } from './../../components/authenticated/authenticated.component';
@@ -42,7 +45,10 @@ import { UpdateScheduleComponent } from './../../components/update-schedule/upda
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    HttpClientModule,
+    NgxSpinnerModule
   ],
   exports: [
     LogoComponent,

@@ -62,10 +62,13 @@ input{
     top: 10px;
     left: 25px;
 }
-.fa-eye-slash{
+.fa-eye-slash , .fa-eye{
     position: absolute;
     top: 10px;
     right: 25px;
+}
+.fa-eye-slash:hover , .fa-eye:hover{
+    cursor: pointer;
 }
 .fas{
     color: gray;
