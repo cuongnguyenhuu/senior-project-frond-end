@@ -50,3 +50,11 @@
     margin-top: auto;
     margin-bottom: auto;
 }
+.name_disease{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.box_name:hover{
+    cursor: pointer;
+}

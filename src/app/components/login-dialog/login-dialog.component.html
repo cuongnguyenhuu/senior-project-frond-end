@@ -1,4 +1,4 @@
-<div>
+<div >
     <ngx-spinner
     bdOpacity = 1
     bdColor = "#00000092"
@@ -7,7 +7,7 @@
     type = "ball-atom"
     [fullScreen] = "true"
     >
-    <p style="color: white" > Logging... </p>
+    <p style="color: white" > Loading... </p>
     </ngx-spinner>
 </div>
 <div class="confirm-dialog" *ngIf="open">
@@ -51,4 +51,4 @@
     </div>
 </div>
 </div>
-<app-register-dialog (closeDialog)="setOpenRegister($event)" [open]="open_register"></app-register-dialog>
+<app-register-dialog (closeDialog)="setOpenRegister($event)" (moveToLogin) = "registerSuccess()" [open]="open_register"></app-register-dialog>

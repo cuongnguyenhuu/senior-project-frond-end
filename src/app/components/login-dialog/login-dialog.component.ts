@@ -14,11 +14,14 @@ export class LoginDialogComponent implements OnInit {
 
   @Output() closeDialog = new EventEmitter();
 
+  @Output() tranforDataLogin = new EventEmitter();
+
   private open_register:boolean = false;
   private username:string='';
   private password:string='';
   private errorMessage:string='';
   private isCoverPassword:boolean = true;
+  private data:any;
 
   constructor(
     private userServicesService: UserServicesService,
@@ -49,6 +52,11 @@ export class LoginDialogComponent implements OnInit {
     this.open_register = status;
   }
 
+  public registerSuccess(){
+    this.errorMessage="Create new account successful."
+    this.toggleLoginDialog();
+  }
+
   public login(){
     this.spinner.show();
     this.toggleLoginDialog();
@@ -60,23 +68,21 @@ export class LoginDialogComponent implements OnInit {
     }
     else {
       this.userServicesService.login(this.username,this.password).subscribe(data=>{
-        console.log(data);
+        // console.log(data);
+        this.tranforDataLogin.emit(data);
         this.spinner.hide();
         localStorage.setItem("token",JSON.stringify(data));
         for(var i =0; i<data.role.length;i++){
           if(data.role[i].authority==='ROLE_ADMIN'){
-            // this.router.navigateByUrl('/admin');
-            location.href = '/admin';
+            this.router.navigateByUrl('/admin');
             break;
           }
           else if(data.role[i].authority==='ROLE_DOCTOR'){
-            // this.router.navigateByUrl('/doctor');
-            location.href = '/doctor';
+            this.router.navigateByUrl('/doctor');
             break;
           }
           else{
-            location.href = '/';
-            // this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/patient');
             break;
           }
         }

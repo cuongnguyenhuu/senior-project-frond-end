@@ -48,7 +48,7 @@ import { UpdateScheduleComponent } from './../../components/update-schedule/upda
     RouterModule,
     FormsModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
   exports: [
     LogoComponent,

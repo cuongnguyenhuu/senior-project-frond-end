@@ -1,5 +1,10 @@
 <div class="container">
-    <div class="row">
+    <div class="row text-center" *ngIf="isLoading">
+        <div class="col-lg-12">
+            <div class="spinner-border text-info"></div>
+        </div>
+    </div>
+    <div class="row" *ngIf="!isLoading">
         <div class="col-lg-4">
             <img src="assets/images/doctor1.jpg" alt="">
             <label class="name-doctor" >Dr. Abc</label>
@@ -46,8 +51,12 @@
                 </tr>
             </table>
         </div>
-        <div class="col-lg-8">
-            <table class="col-lg-12">
+        
+        <div class="col-lg-8" >
+            <!-- <div class="col-lg-12 text-center" *ngIf="data.scheduleResponses.length==0">
+                <span class="badge badge-warning">No schedule.</span>
+            </div> -->
+            <table class="col-lg-12" >
                 <tr>
                     <th>
                         Monday
@@ -139,11 +148,12 @@
                         </tr>
                     </table>
                 </div>  
-                <div class="col-lg-8 btn-update">
+                 <div class="col-lg-8 btn-update">
                     <button type="button" class="btn btn-primary" (click)="toggleUpdateDialog()">Update your schedule</button>
                 </div>
             </div>
         </div>
+       
     </div>
 </div>
 <app-confirm-dialog (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" ></app-confirm-dialog>

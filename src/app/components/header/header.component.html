@@ -12,7 +12,7 @@
              <a class="nav-link" [routerLink]="['/doctor/appointments']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'">APPOINTMENTS</a>
              <a class="nav-link" [routerLink]="['/doctor/schedule']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'" >SCHEDULE</a>
              <a class="nav-link" [routerLink]="['/doctor/contribute']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'" >CONTRIBUTE</a>
-             <app-unlogin *ngIf="!isLogin"></app-unlogin>
+             <app-unlogin (tranforDataLogin) = "setDataLogin($event)" *ngIf="!isLogin"></app-unlogin>
              <app-authenticated *ngIf="isLogin" [ROLE] = "ROLE" [data]="data" ></app-authenticated>
            </nav>
            

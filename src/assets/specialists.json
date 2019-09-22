@@ -1,0 +1,92 @@
+[
+    {
+        "id":1,
+        "name": "Family Physician",
+        "description":"Family medicine is one of the primary care specialties. Family practice physicians see patients of all ages, provide basic care for a variety of common ailments, are usually the first to recognize major health problems, and may order diagnostic tests or refer to a specialist."
+    },
+    {
+        "id":2,
+        "name": "Internal Medicine Physician",
+        "description":"General internists provide primary care to adult patients and can take additional training after internal medicine residency to sub-specialize in a variety of other areas, such as gastroenterology, endocrinology, or cardiology."
+    },
+    {
+        "id":3,
+        "name": "Pediatrician",
+        "description":"Pediatricians take care of younger patients, from infancy through age 18 or, in some cases, age 21."
+    },
+    {
+        "id":4,
+        "name": "Obstetrician",
+        "description":"An OB/GYN is a doctor who specializes in women's reproductive health. These doctors provide women with preventive care, manage pregnancy, labor, and delivery, and diagnose and treat diseases of the reproductive organs. They also specialize in women’s health issues like menopause, hormone problems, contraception, and infertility."
+    },
+    {
+        "id":5,
+        "name": "Surgeon",
+        "description":"Surgeons can be trained in general surgery or in more specialized areas of surgery, such as orthopedic surgery, neurosurgery, cardiac surgery, or vascular surgery. Surgeons spend time planning a surgical procedure, operating in the operating room, and then following up postoperatively to identify complications and to confirm that the procedure was a success."
+    },
+    {
+        "id":6,
+        "name": "Psychiatrist",
+        "description":"A psychiatrist treats emotional and behavioral problems through a combination of personal counseling (psychotherapy), psychoanalysis, hospitalization, and medication. Psychiatrists may be office-based, hospital-based, or a combination of the two."
+    },
+    {
+        "id":7,
+        "name": "Cardiologist",
+        "description":"Cardiology is one of many sub-specialties of internal medicine. Cardiologists focus on treatment of the heart and its blood vessels."
+    },
+    {
+        "id":8,
+        "name": "Dermatologist",
+        "description":"Dermatology is one of the most competitive fields for physicians. Typically, only the very top medical students are accepted into dermatology residency programs. This is because dermatologists are very well compensated due to aesthetic and cash-pay elective procedures such as Botox, laser treatments, and more. Plus, the quality of life is excellent compared to peers in medicine, with little to no on-call time required due to the nature of the work."
+    },
+    {
+        "id":9,
+        "name": "Endocrinologist",
+        "description":"A sub-specialty of internal medicine, endocrinologists treat the endocrine system—the glands that produce and secrete hormones that control and regulate nearly all of the body's functions. People with diabetes or thyroid disease are often treated by an endocrinologist."
+    },
+    {
+        "id":10,
+        "name": "Gastroenterologist",
+        "description":"A sub-specialty of internal medicine, gastroenterologists treat the digestive system. This field attracts physicians who enjoy doing procedures, but who also like seeing patients in an outpatient setting as well."
+    },
+    {
+        "id":11,
+        "name": "Infectious Disease Physician",
+        "description":"Infectious disease physicians deal with infections that are hard to diagnose or treat. A sub-specialty of internal medicine, infectious disease physicians treat serious infections such as swine flu, bird flu, and HIV/AIDS, among other communicable diseases."
+    },
+    {
+        "id":12,
+        "name": "Nephrologist",
+        "description":"Nephrologists treat kidney disease and prescribe dialysis for those experiencing kidney failure. These physicians train in internal medicine and then sub-specialize in nephrology, which requires an additional two to three years of fellowship training."
+    },
+    {
+        "id":13,
+        "name": "Ophthalmologist",
+        "description":"Ophthalmologists are medical doctors who treat diseases or disorders of the eyes, such as cataracts and glaucoma. They perform eye surgery when necessary. Vision correction that cannot be handled by an optometrist may be treated by an ophthalmologist."
+    },
+    {
+        "id":14,
+        "name": "Otolaryngologist",
+        "description":"Otolaryngologists, also known as otorhinolaryngologists, are more commonly referred to as ENTs, which stands for 'ear, nose, and throat.' Otolaryngology is another field that entails a combination of surgical skills and office-based medicine and treatment."
+    },
+    {
+        "id":15,
+        "name": "Pulmonologist",
+        "description":"Pulmonologists treat the cardio-pulmonary system, which consists of the organs, including the lungs and heart, that work together to help a person breathe. They often train in critical care medicine in conjunction with pulmonary disease. As a result, they may work as intensivists (physicians who cover the intensive care unit) in addition to seeing patients in an office setting to treat breathing disorders, severe allergies, lung problems, and other diseases."
+    },
+    {
+        "id":16,
+        "name": "Neurologist",
+        "description":"Neurologists are doctors who take care of patients with medical conditions that affect the brain, spine, or nerves. Neurologists see patients who have complex medical disorders, such as Parkinson's disease, multiple sclerosis, and neuropathy. They also take care of patients who have common problems such as migraine headaches and dizziness."
+    },
+    {
+        "id":17,
+        "name": "Radiologist",
+        "description":"A radiologist is a physician who is trained in looking at and interpreting diagnostic tests. Often, the treating physician must look at the test as well, but the radiologist's interpretation and report can offer additional information or advice for further testing."
+    },
+    {
+        "id":18,
+        "name": "Oncologist",
+        "description":"Oncology is a subspecialty of internal medicine. Oncologists take care of patients who have cancer by treating the cancer itself, as well as the symptoms caused by the disease. Often, oncologists take part in clinical trials, using new and experimental treatments for cancers that are otherwise incurable."
+    }
+]

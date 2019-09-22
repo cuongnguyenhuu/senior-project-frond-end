@@ -14,4 +14,12 @@ export class LocalServicesService {
   public getLocal() : Observable<any>{
     return this.httpClient.get("./assets/local.json");
   }
+
+  public getSpecialists(): Observable<any>{
+    return this.httpClient.get("./assets/specialists.json");
+  }
+
+  public getDiseases() : Observable<any>{
+    return this.httpClient.get("./assets/diseases.json");
+  }
 }

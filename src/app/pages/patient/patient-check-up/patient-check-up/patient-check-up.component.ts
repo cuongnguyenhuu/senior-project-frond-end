@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PatientCheckUpComponent implements OnInit {
 
+
+  private data:any;
   constructor() { }
 
   ngOnInit() {
   }
 
+  public getResult(data){
+    this.data = data;
+  }
 }

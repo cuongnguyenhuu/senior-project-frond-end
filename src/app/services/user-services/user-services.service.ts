@@ -3,6 +3,9 @@ import {HttpClient, HttpHeaders } from '@angular/common/http'
 import {Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
+import { patientRegister } from './../../models/patientRegister';
+import { doctorRegsiter } from 'src/app/models/doctorRegister';
+
 let httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -21,15 +24,31 @@ export class UserServicesService {
     return this.http.post<any>(this.API+'utility/login',{username,password},httpOptions);
   }
 
-  public getBasicInfor():Observable<any>{
-    var token ="Bearer " + JSON.parse(localStorage.getItem("token")).token;
-    console.log("token: "+token);
-    httpOptions.headers = httpOptions.headers.append("Authorization",token);
-    return this.http.get<any>(this.API+'utility/basic_infor',httpOptions);
+  // public getBasicInfor():Observable<any>{
+  //   var token ="Bearer " + JSON.parse(localStorage.getItem("token")).token;
+  //   console.log("token: "+token);
+  //   httpOptions.headers = httpOptions.headers.append("Authorization",token);
+  //   return this.http.get<any>(this.API+'utility/basic_infor',httpOptions);
+  // }
+
+  public checkTokenValidate(){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.get<any>(this.API+'check_token_validate',httpOptions);
   }
 
   public logout(){
     localStorage.removeItem('token');
     location.href = "/";
+  }
+
+  public patientRegister(data:patientRegister){
+    return this.http.post<any>(this.API+"utility/patient/register",data,httpOptions);
+  }
+
+  public doctorRegister(data:doctorRegsiter){
+    return this.http.post<any>(this.API+"utility/doctor/register",data,httpOptions);
   }
 }

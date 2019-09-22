@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-unlogin',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UnloginComponent implements OnInit {
 
+  @Output() tranforDataLogin = new EventEmitter();
   private open_login:boolean = false;
   
   constructor() { }
@@ -20,5 +21,8 @@ export class UnloginComponent implements OnInit {
 
   public setOpenLogin(status){
     this.open_login = status;
+  }
+  public setDataLogin(data){
+    this.tranforDataLogin.emit(data);
   }
 }

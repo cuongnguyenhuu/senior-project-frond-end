@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ChartsModule } from 'ng2-charts';
 import { SharedModule } from './pages/shared/shared.module';
 
 
@@ -9,6 +8,9 @@ import { AppComponent } from './app.component';
 
 import { UserServicesService } from './services/user-services/user-services.service';
 import { LocalServicesService } from './services/local-services/local-services.service';
+import { ImageServicesService } from './services/image-servives/image-services.service';
+import { ScheduleService } from './services/schedule-services/schedule.service';
+import { ConvertTimeService } from './services/convertTimeServices/convert-time.service';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { LocalServicesService } from './services/local-services/local-services.s
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ChartsModule,
     SharedModule,
   ],
   providers: [
     UserServicesService,
-    LocalServicesService
+    LocalServicesService,
+    ImageServicesService,
+    ScheduleService,
+    ConvertTimeService
   ],
   bootstrap: [AppComponent],
 })

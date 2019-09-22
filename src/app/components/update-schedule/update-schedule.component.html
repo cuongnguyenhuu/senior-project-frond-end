@@ -8,14 +8,19 @@
                 <p >UPDATE YOUR TIME</p>
             </div>
         </div>
+        <div class="row text-center" *ngIf="message!=null">
+            <div class="col-lg-12">
+                <span class="badge badge-warning">{{message}}</span>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-2">
-                <input type="radio" id="each_day">
+                <input type="radio" value="EACH_DAY" id="each_day" checked name="typeUpdate" (change)="setTypeUpdate($event)" >
                 <label for="each_day"> Each day</label>
             </div>
             <div class="col-lg-2">
-                <input type="radio" id="general">
-                <label for="general">General</label>
+                <input type="radio" value="ALL_DAY" id="general" name="typeUpdate" (change)="setTypeUpdate($event)" >
+                <label for="general">All day</label>
             </div>
         </div>
         <div class="row">
@@ -23,10 +28,10 @@
                 <p>Time per an appointment (minute):</p>
             </div>
             <div class="col-lg-3">
-                <input type="number" class="form-control" name="" id="username" aria-describedby="helpId" placeholder="minutes">
+                <input type="text" class="form-control" (change)="removeAll()" [(ngModel)]="time_per_appointment" name="" id="username" aria-describedby="helpId" placeholder="minutes">
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="typeUpdate=='EACH_DAY'">
             <div class="col-lg-12" style="width: 100%; overflow: auto;">
                 <table>
                     <tr>
@@ -52,64 +57,130 @@
                             Sun
                         </th>
                     </tr>
-                    <tr>
-                        <td>
-                            <input type="button" class="form-control btn-success add-time" value="7:00-8:00" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-times-circle"></i>
+                    <tr *ngIf="schedules.length>0">
+                        <td class="column" >
+                            <table *ngIf="schedules[0]!=null">
+                                <tr *ngFor="let period of schedules[0].time_period" >
+                                    <td>
+                                        <input type="button" class="form-control btn-success add-time" value={{formatFromIntToTime(period)}} name="" id="" aria-describedby="helpId" placeholder="Add time">
+                                        <i class="fas fa-times-circle" (click)="removeTime(0,period)"></i>
+                                    </td>   
+                                </tr>
+                            </table>
                         </td>
-                        <td>
-                            <input type="button" class="form-control btn-success add-time" value="7:00-8:00" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-times-circle"></i>
+                        <td class="column" >
+                            <table *ngIf="schedules[1]!=null">
+                                <tr *ngFor="let period of schedules[1].time_period" >
+                                    <td>
+                                        <input type="button" class="form-control btn-success add-time" value={{formatFromIntToTime(period)}} name="" id="" aria-describedby="helpId" placeholder="Add time">
+                                        <i class="fas fa-times-circle" (click)="removeTime(1,period)"></i>
+                                    </td>   
+                                </tr>
+                            </table>
                         </td>
-                        <td>
-                            <input type="button" class="form-control btn-success add-time" value="7:00-8:00" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-times-circle"></i>
+                        <td class="column" >
+                            <table *ngIf="schedules[2]!=null">
+                                <tr *ngFor="let period of schedules[2].time_period" >
+                                    <td>
+                                        <input type="button" class="form-control btn-success add-time" value={{formatFromIntToTime(period)}} name="" id="" aria-describedby="helpId" placeholder="Add time">
+                                        <i class="fas fa-times-circle" (click)="removeTime(2,period)"></i>
+                                    </td>   
+                                </tr>
+                            </table>
                         </td>
-                        <td>
-                            <input type="button" class="form-control btn-success add-time" value="7:00-8:00" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-times-circle"></i>
+                        <td class="column" >
+                            <table *ngIf="schedules[3]!=null">
+                                <tr *ngFor="let period of schedules[3].time_period" >
+                                    <td>
+                                        <input type="button" class="form-control btn-success add-time" value={{formatFromIntToTime(period)}} name="" id="" aria-describedby="helpId" placeholder="Add time">
+                                        <i class="fas fa-times-circle" (click)="removeTime(3,period)"></i>
+                                    </td>   
+                                </tr>
+                            </table>
                         </td>
-                        <td>
-                            <input type="button" class="form-control btn-success add-time" value="7:00-8:00" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-times-circle"></i>
+                        <td class="column">
+                            <table  *ngIf="schedules[4]!=null">
+                                <tr *ngFor="let period of schedules[4].time_period">
+                                    <td>
+                                        <input type="button" class="form-control btn-success add-time" value={{formatFromIntToTime(period)}} name="" id="" aria-describedby="helpId" placeholder="Add time">
+                                        <i class="fas fa-times-circle" (click)="removeTime(4,period)"></i>
+                                    </td>   
+                                </tr>
+                            </table>
                         </td>
-                        <td>
-                            <input type="button" class="form-control btn-success add-time" value="7:00-8:00" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-times-circle"></i>
+                        <td class="column">
+                            <table *ngIf="schedules[5]!=null">
+                                <tr *ngFor="let period of schedules[5].time_period" >
+                                    <td>
+                                        <input type="button" class="form-control btn-success add-time" value={{formatFromIntToTime(period)}} name="" id="" aria-describedby="helpId" placeholder="Add time">
+                                        <i class="fas fa-times-circle" (click)="removeTime(5,period)"></i>
+                                    </td>   
+                                </tr>
+                            </table>
                         </td>
-                        <td>
-                            <input type="button" class="form-control btn-success add-time" value="7:00-8:00" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-times-circle"></i>
+                        <td class="column">
+                            <table *ngIf="schedules[6]!=null">
+                                <tr *ngFor="let period of schedules[6].time_period" >
+                                    <td>
+                                        <input type="button" class="form-control btn-success add-time" value={{formatFromIntToTime(period)}} name="" id="" aria-describedby="helpId" placeholder="Add time">
+                                        <i class="fas fa-times-circle" (click)="removeTime(6,period)"></i>
+                                    </td>   
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" class="form-control add-time" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-check-circle"></i>
+                            <input type="text" class="form-control add-time" [(ngModel)]="inputTime[0]" name="" id="" aria-describedby="helpId" placeholder="Add time">
+                            <i class="fas fa-check-circle" (click)="addTime(0)"></i>
                         </td>
                         <td>
-                            <input type="text" class="form-control add-time" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-check-circle"></i>
+                            <input type="text" class="form-control add-time" [(ngModel)]="inputTime[1]" name="" id="" aria-describedby="helpId" placeholder="Add time">
+                            <i class="fas fa-check-circle" (click)="addTime(1)"></i>
                         </td>
                         <td>
-                            <input type="text" class="form-control add-time" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-check-circle"></i>
+                            <input type="text" class="form-control add-time" [(ngModel)]="inputTime[2]" name="" id="" aria-describedby="helpId" placeholder="Add time">
+                            <i class="fas fa-check-circle" (click)="addTime(2)"></i>
                         </td>
                         <td>
-                            <input type="text" class="form-control add-time" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-check-circle"></i>
+                            <input type="text" class="form-control add-time" [(ngModel)]="inputTime[3]" name="" id="" aria-describedby="helpId" placeholder="Add time">
+                            <i class="fas fa-check-circle" (click)="addTime(3)"></i>
                         </td>
                         <td>
-                            <input type="text" class="form-control add-time" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-check-circle"></i>
+                            <input type="text" class="form-control add-time" [(ngModel)]="inputTime[4]" name="" id="" aria-describedby="helpId" placeholder="Add time">
+                            <i class="fas fa-check-circle" (click)="addTime(4)"></i>
                         </td>
                         <td>
-                            <input type="text" class="form-control add-time" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-check-circle"></i>
+                            <input type="text" class="form-control add-time" [(ngModel)]="inputTime[5]" name="" id="" aria-describedby="helpId" placeholder="Add time">
+                            <i class="fas fa-check-circle" (click)="addTime(5)"></i>
                         </td>
                         <td>
-                            <input type="text" class="form-control add-time" name="" id="" aria-describedby="helpId" placeholder="Add time">
-                            <i class="fas fa-check-circle"></i>
+                            <input type="text" class="form-control add-time" [(ngModel)]="inputTime[6]" name="" id="" aria-describedby="helpId" placeholder="Add time">
+                            <i class="fas fa-check-circle" (click)="addTime(6)"></i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row " *ngIf="typeUpdate=='ALL_DAY'">
+            <div class="col-lg-12 text-center" style="display: flex; justify-content: center;">
+                <table>
+                    <tr *ngIf="schedules.length>0">
+                        <td class="column">
+                            <table *ngIf="schedules[7]!=null" style="width: 100%">
+                                <tr *ngFor="let period of schedules[7].time_period" >
+                                    <td>
+                                        <input type="button" class="form-control btn-success add-time" value={{formatFromIntToTime(period)}} name="" id="" aria-describedby="helpId" placeholder="Add time">
+                                        <i class="fas fa-times-circle" (click)="removeTime(7,period)"></i>
+                                    </td>   
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control add-time" [(ngModel)]="inputTime[7]" name="" id="" aria-describedby="helpId" placeholder="Add time">
+                            <i class="fas fa-check-circle" (click)="addTime(7)"></i>
                         </td>
                     </tr>
                 </table>
@@ -117,7 +188,7 @@
         </div>
         <div class="row buttons">
             <div class="col-lg-2">
-                <button type="button" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-primary" (click)="updateSchedules()">Update</button>
             </div>
             <div class="col-lg-2">
                 <button type="button" class="btn btn-danger">Cancel</button>

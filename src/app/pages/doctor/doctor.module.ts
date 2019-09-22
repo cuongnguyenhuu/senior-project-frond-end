@@ -5,6 +5,8 @@ import { DoctorAppointmentsModule } from './doctor-appointments/doctor-appointme
 import { DoctorScheduleModule } from'./doctor-schedule/doctor-schedule.module';
 import { DoctorContributeModule } from './doctor-contribute/doctor-contribute.module';
 import { SharedModule } from './../shared/shared.module';
+// import { BrowserModule } from '@angular/platform-browser';
+import { ChartsModule } from 'ng2-charts';
 
 import { DoctorBodyComponent } from './doctor-body/doctor-body.component';
 import { AppointmentsComponent } from './../../components/appointments/appointments.component';
@@ -62,6 +64,8 @@ const routes: Routes = [
     DoctorAppointmentsModule,
     DoctorScheduleModule,
     SharedModule,
+    // BrowserModule,
+    ChartsModule,
     RouterModule.forChild(routes)
   ],
   exports:[
