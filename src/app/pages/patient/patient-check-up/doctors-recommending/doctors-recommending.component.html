@@ -1,0 +1,53 @@
+<div class="container" *ngIf="!isAuthenticated">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3><span class="badge badge-info">Suggest doctors:</span></h3>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-lg-12">
+            <span class="badge badge-warning">Login to use this feature.</span>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="isAuthenticated">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3><span class="badge badge-info">Suggest doctors:</span></h3>
+        </div>
+    </div>
+    <div class="row text-center" *ngIf="isLoading">
+        <div class="col-lg-12">
+            <div class="spinner-border text-info"></div>
+        </div>
+    </div>
+    <div class="row text-center" *ngIf="message!=null">
+        <div class="col-lg-12">
+            <span class="badge badge-warning">{{message}}</span>
+        </div>
+    </div>
+    <div class="row doctor-recommending" *ngFor="let doctor of data">
+        <div class="col-lg-8">
+            <p>
+                <img src="assets/images/doctor.jpg" width="50px" alt="">
+                {{doctor.doctorEntity.account.name}} / {{doctor.doctorEntity.account.address.addressLine}}
+                , {{doctor.doctorEntity.account.address.ward}}, {{doctor.doctorEntity.account.address.locality}}, 
+                {{doctor.doctorEntity.account.address.city}}, {{doctor.doctorEntity.account.address.country}} / Experiences: {{doctor.doctorEntity.experiences}} / Specialist: {{doctor.doctorEntity.major}}
+            </p>
+            <p>
+                <img src="assets/images/distance.png" width="20px" alt="">
+                : {{doctor.distance}} km from you | 
+                <img src="assets/images/time.png" width="20px" alt="">
+                : {{doctor.travelDuration}} minutes
+            </p>
+        </div>
+        <div class="col-lg-4">
+           <button type="button" class="btn btn-primary" [routerLink]="['/patient/find-doctors/'+doctor.doctorEntity.account.account.username+'/schedule']"  >Make an appointment
+            </button>
+        </div>
+        <div class="col-lg-12">
+            <hr>
+        </div>
+    </div>
+   
+</div>

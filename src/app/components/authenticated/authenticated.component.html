@@ -1,0 +1,34 @@
+<nav class="nav justify-content-end">
+    <a class="nav-link " [routerLink]="[messagesURL]" *ngIf="ROLE!='ADMIN'">
+        <i class="fab fa-facebook-messenger">
+
+        </i>
+    </a>
+    <a class="nav-link " href="javascript:void(0)" *ngIf="ROLE!='ADMIN'">
+        <div class="btn-group">
+            <i class="far fa-bell dropdown-toggle" width="50px" height="50px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <!-- <label class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></label> -->
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button"><i class="fas fa-exclamation-triangle"></i> Dr. Ads have canceled your appointment.</button>
+                <hr>
+                <button class="dropdown-item" type="button"><i class="fas fa-exclamation-triangle"></i> Dr. Ads have canceled your appointment.</button>
+            </div>
+        </div>
+    </a>
+    <a class="last-nav-link " href="javascript:void(0)">
+        <div class="btn-group">
+            <!-- <img src="assets/images/doctor1.jpg" class="rounded-circle dropdown-toggle" width="40px" height="40px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt=""> -->
+            <label class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a href="#" class="badge badge-primary">{{data!=null?data.name:''}}</a>
+                <img src="assets/images/doctor1.jpg" class="rounded-circle" width="40px" height="40px" alt="">
+                
+            </label>
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" [routerLink]="[profileURL]" type="button" *ngIf="ROLE!='ADMIN'">Profile</button>
+                <button class="dropdown-item" [routerLink]="['/patient/history']" type="button" *ngIf="ROLE=='PATIENT'">History</button>
+                <hr *ngIf="ROLE!='ADMIN'">
+                <button class="dropdown-item" type="button" (click)="logout()">Log out</button>
+            </div>
+        </div>
+    </a>
+</nav>

@@ -1,0 +1,28 @@
+.nav-link {
+    color: #434343;
+    align-self: center;
+}
+.nav-link:hover{
+    color: #0000ff;
+    font-weight: bold;
+}
+.last-nav-link{
+    padding-right: 0px;
+    text-decoration: none;
+}
+.last-nav-link a{
+    margin: 0px 10px;
+}
+i{
+    font-size: 150%;
+}
+.dropdown-toggle::after{
+    display: none;
+}
+.fa-exclamation-triangle{
+    color: red;
+}
+.nav{
+    height: 100%;
+    align-items: center;
+}

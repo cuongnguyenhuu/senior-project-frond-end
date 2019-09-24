@@ -1,0 +1,31 @@
+.social-network{
+    text-align: right;
+}
+i{
+    padding: 0px 10px;
+    font-size: 100%;
+}
+.container{
+    padding: 5px 5px;
+    color: gray;
+}
+.email{
+    display: flex;
+    align-items: center;
+}
+.fa-envelope:hover{
+    color: red;
+}
+.fa-facebook-f:hover{
+    color: #1977F3;
+}
+.fa-twitter:hover{
+    color: #28AAE1;
+}
+.fa-skype:hover{
+    color: #038ae4;
+}
+a{
+    color: gray;
+    font-size: 80%;
+}

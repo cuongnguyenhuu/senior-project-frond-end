@@ -1,0 +1,10 @@
+.container{
+    padding-top: 10px;
+}
+.page-number{
+    justify-content: flex-end;
+}
+table{
+    width: 100%;
+    text-align: center;
+}

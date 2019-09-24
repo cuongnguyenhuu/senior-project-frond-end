@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3> <span class="badge badge-info">GROWTH</span></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <app-line-chart></app-line-chart>
+            </div>
+            <div class="col-lg-4">
+                <app-line-chart></app-line-chart>
+            </div>
+            <div class="col-lg-4">
+            <app-line-chart></app-line-chart>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3> <span class="badge badge-info">USERS</span></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 chart">
+            <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                [plugins]="pieChartPlugins"
+                [colors]="pieChartColors"
+                [legend]="pieChartLegend">
+            </canvas>
+            </div>
+            <div class="col-lg-4 label-users">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <span class="color-bar-1"></span>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>
+                            Patient
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <span class="color-bar-2"></span>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>
+                            Doctor
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,3 @@
+<app-check-up (result)="getResult($event)"></app-check-up>
+<app-result-check-up *ngIf="data!=null" [data] = "data"></app-result-check-up>
+<app-doctors-recommending *ngIf="data!=null" ></app-doctors-recommending>
