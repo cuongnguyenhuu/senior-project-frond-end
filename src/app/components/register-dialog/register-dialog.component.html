@@ -1,131 +1,192 @@
-
 <div class="confirm-dialog" *ngIf="open">
-<div class="background" (click)="toggleRegisterDialog()">
+    <div class="background" (click)="toggleRegisterDialog()">
 
-</div>
-<div class="dialog">
-    <div class="row">
-        <div class="col-lg-12">
-            <p class="title">REGISTER</p>
+    </div>
+    <div class="dialog">
+
+
+        <div class="row logo">
+            <div class="col-lg-12">
+                <img src="assets/images/logo.png" width="40px" class="logo" alt="">
+                <label class="name-system">HC
+                    <!-- <label class="name-role">PATIENT</label> -->
+                    <label class="name-role">REGISTER</label>
+                    <!-- <label class="name-role">ADMIN</label> -->
+                </label>
+            </div>
+        </div>
+        <div class="row sologan">
+            <div class="col-lg-12">
+                <label class="text-sologan">HEALTH CARE SOLUTION</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <span class="badge badge-warning">{{errorMessages}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="" id="username" (click)="toggleIsDoctor()"
+                                [checked]="isDoctor">
+                        </td>
+                        <td>
+                            <p>Are you Doctor?</p>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 one-icon">
+                <input type="text"
+                [class]="errorField.length==0?'form-control padding':errorField[0]?'form-control padding is-valid':'form-control padding is-invalid'" 
+                [(ngModel)]="username" name="" id="username"
+                    aria-describedby="helpId" placeholder="Username" required> 
+                <i class="fas fa-user first-icon"></i>
+            </div>
+            <div class="col-lg-4 password">
+                <input type="password" 
+                [class]="errorField.length==0?'form-control padding':errorField[1]?'form-control padding is-valid':'form-control padding is-invalid'" 
+                [(ngModel)]="password" name="" id="password"
+                    aria-describedby="helpId" placeholder="Password">
+                <i class="fas fa-key first-icon"></i>
+            </div>
+            <div class="col-lg-4 password">
+                <input type="password" 
+                [class]="errorField.length==0?'form-control padding':errorField[2]?'form-control padding is-valid':'form-control padding is-invalid'" 
+                [(ngModel)]="rePassword" name="" id="re-password"
+                    aria-describedby="helpId" placeholder="Re-password">
+                <i class="fas fa-key first-icon"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 one-icon ">
+                <input type="text" 
+                [class]="errorField.length==0?'form-control padding':errorField[3]?'form-control padding is-valid':'form-control padding is-invalid'" 
+                [(ngModel)]="email" name="" aria-describedby="helpId"
+                    placeholder="Email">
+                <i class="fas fa-envelope first-icon"></i>
+            </div>
+            <div class="col-lg-4 one-icon ">
+                <input type="text" 
+                [class]="errorField.length==0?'form-control padding':errorField[4]?'form-control padding is-valid':'form-control padding is-invalid'" 
+                [(ngModel)]="phoneNumber" name=""
+                    aria-describedby="helpId" placeholder="Phone number">
+                <i class="fas fa-phone-square-alt first-icon"></i>
+            </div>
+            <div class="col-lg-4 one-icon">
+                <input type="date" 
+                [class]="errorField.length==0?'form-control padding':errorField[5]?'form-control padding is-valid':'form-control padding is-invalid'" 
+                [(ngModel)]="birthday" name="" aria-describedby="helpId"
+                    placeholder="Re-password">
+                <i class="fas fa-birthday-cake first-icon"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <input type="text" 
+                [class]="errorField.length==0?'form-control':errorField[6]?'form-control is-valid':'form-control is-invalid'" 
+                [(ngModel)]="name" name="" aria-describedby="helpId"
+                    placeholder="Full name">
+            </div>
+            <div class="col-lg-4">
+                <select  
+                [class]="errorField.length==0?'form-control':errorField[7]?'form-control is-valid':'form-control is-invalid'" 
+                [(ngModel)]="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="col-lg-4">
+                <select
+                [class]="errorField.length==0?'form-control':errorField[8]?'form-control is-valid':'form-control is-invalid'" 
+                [(ngModel)]="country">
+                    <option value="Viet Nam">Viet Nam</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <select 
+                [class]="errorField.length==0?'form-control':errorField[9]?'form-control is-valid':'form-control is-invalid'" 
+                [(ngModel)]="provinceSelected"
+                    (change)="provinceOption($event.target.value)">
+                    <option value="default">City</option>
+                    <option *ngFor="let province of provinces; let i = index" value="{{i}}">
+                        {{changeWordToUnsigned(province.name)}}</option>
+                </select>
+            </div>
+            <div class="col-lg-4">
+                <select 
+                [class]="errorField.length==0?'form-control':errorField[10]?'form-control is-valid':'form-control is-invalid'" 
+                [(ngModel)]="districtSelected"
+                    (change)="districtOption($event.target.value)">
+                    <option value="default">District</option>
+                    <option *ngFor="let district of districts; let i = index" value="{{i}}">
+                        {{changeWordToUnsigned(district.name)}}</option>
+                </select>
+            </div>
+            <div class="col-lg-4">
+                <select 
+                [class]="errorField.length==0?'form-control':errorField[11]?'form-control is-valid':'form-control is-invalid'" 
+                [(ngModel)]="wardSelected" (change)="wardOption($event.target.value)">
+                    <option value="default">Ward</option>
+                    <option *ngFor="let ward of wards; let i = index" value="{{i}}">{{changeWordToUnsigned(ward.name)}}
+                    </option>
+                </select>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <input type="text" 
+                [class]="errorField.length==0?'form-control':errorField[12]?'form-control is-valid':'form-control is-invalid'" 
+                [(ngModel)]="street" name="" id="" aria-describedby="helpId"
+                    placeholder="Street">
+            </div>
+            <div class="col-lg-4" *ngIf="isDoctor">
+                <select 
+                [class]="errorField.length==0?'form-control':errorField[13]?'form-control is-valid':'form-control is-invalid'" 
+                [(ngModel)]="specialistSelected"
+                    (change)="specialistOption($event.target.value)">
+                    <option value="default">Specialist</option>
+                    <option value="{{i}}" *ngFor="let specialist of specialists; let i = index">{{specialist.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-lg-4" *ngIf="isDoctor">
+                <input type="number" [(ngModel)]="experiences"
+                [class]="errorField.length==0?'form-control':errorField[14]?'form-control is-valid':'form-control is-invalid'" 
+                 name="" id=""
+                    aria-describedby="helpId" placeholder="Experiences">
+            </div>
+
+        </div>
+        <div class="row" *ngIf="isDoctor" style="justify-content: center;">
+            <div class="col-lg-4">
+                <label for="upload">
+                    <h2><span class="btn btn-warning">Certificate</span></h2>
+                </label>
+                <input type="file" id="upload" (change)="uploadImage($event.target.files[0])" style="display: none">
+            </div>
+            <div [class]="errorField.length==0?'col-lg-4':errorField[15]?'col-lg-4 is-valid':'col-lg-4 is-invalid'" >
+                <img [src]="certificate!=''?'http://localhost:8080/api/utility/image/'+certificate : 'assets/images/no-image.png'"
+                    width="100px" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <button type="button" class="btn btn-primary" (click)="register()">REGISTER</button>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <span class="badge badge-warning">{{errorMessages}}</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4">
-            <table>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="" id="username" (click)="toggleIsDoctor()" [checked]="isDoctor">
-                    </td>
-                    <td>
-                        <p>Are you Doctor?</p>
-                    </td>
-                </tr>
-            </table>
-            
-            
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4 one-icon">
-            <input type="text" class="form-control padding" [(ngModel)]="username"  name="" id="username" aria-describedby="helpId" placeholder="Username">
-            <i class="fas fa-user first-icon"></i>
-        </div>
-        <div class="col-lg-4 password">
-            <input type="password" class="form-control padding" [(ngModel)]="password" name="" id="password" aria-describedby="helpId" placeholder="Password">
-            <i class="fas fa-key first-icon"></i>
-        </div>
-        <div class="col-lg-4 password">
-            <input type="password" class="form-control padding" [(ngModel)]="rePassword" name="" id="re-password" aria-describedby="helpId" placeholder="Re-password">
-            <i class="fas fa-key first-icon"></i>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4 one-icon ">
-            <input type="text" class="form-control padding" [(ngModel)]="email" name=""  aria-describedby="helpId" placeholder="Email">
-            <i class="fas fa-envelope first-icon"></i>
-        </div>
-        <div class="col-lg-4 one-icon ">
-            <input type="text" class="form-control padding" [(ngModel)]="phoneNumber" name=""  aria-describedby="helpId" placeholder="Phone number">
-            <i class="fas fa-phone-square-alt first-icon"></i>
-        </div>
-        <div class="col-lg-4 one-icon">
-            <input type="date" class="form-control padding" [(ngModel)]="birthday" name="" aria-describedby="helpId" placeholder="Re-password">
-            <i class="fas fa-birthday-cake first-icon"></i>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4">
-            <input type="text" class="form-control" [(ngModel)]="name" name=""  aria-describedby="helpId" placeholder="Full name">
-        </div>
-        <div class="col-lg-4">
-            <select class="form-control" [(ngModel)]="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-        </div>
-        <div class="col-lg-4">
-            <select class="form-control" [(ngModel)]="country" >
-                <option value="Viet Nam">Viet Nam</option>
-            </select>
-        </div>
-        
-    </div>
-    <div class="row">
-        <div class="col-lg-4">
-            <select class="form-control" [(ngModel)]="provinceSelected" (change)="provinceOption($event.target.value)">
-                <option value="default">City</option>
-                <option *ngFor="let province of provinces; let i = index" value="{{i}}">{{province.name}}</option>
-            </select>
-        </div>
-        <div class="col-lg-4">
-            <select class="form-control" [(ngModel)]="districtSelected" (change)="districtOption($event.target.value)" >
-                <option value="default">District</option>
-                <option *ngFor="let district of districts; let i = index" value="{{i}}">{{district.name}}</option>
-            </select>
-        </div>
-        <div class="col-lg-4">
-            <select class="form-control" [(ngModel)]="wardSelected" (change)="wardOption($event.target.value)" >
-                <option value="default">Ward</option>
-                <option *ngFor="let ward of wards; let i = index" value="{{i}}">{{ward.name}}</option>
-            </select>
-        </div>
-        
-    </div>
-    <div class="row">
-        <div class="col-lg-4">
-            <input type="text" class="form-control" [(ngModel)]="street" name="" id="" aria-describedby="helpId" placeholder="Street">
-        </div>
-        <div class="col-lg-4" *ngIf="isDoctor">
-            <select class="form-control" [(ngModel)]="specialistSelected" (change)="specialistOption($event.target.value)">
-                <option value="default">Specialist</option>
-                <option value="{{i}}" *ngFor="let specialist of specialists; let i = index">{{specialist.name}}</option>
-            </select>
-        </div>
-        <div class="col-lg-4" *ngIf="isDoctor">
-            <input type="number" [(ngModel)]="experiences" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Experiences">
-        </div>
-        
-    </div>
-    <div class="row" *ngIf="isDoctor">
-        <div class="col-lg-4">
-            <label for="upload"><h2><span class="badge badge-warning">Certificate</span></h2></label>
-            <input type="file" id="upload" (change)="uploadImage($event.target.files[0])" style="display: none">
-        </div>
-        <div class="col-lg-4">
-            <img
-            [src]= "certificate!=''?'http://localhost:8080/api/utility/image/'+certificate : 'assets/images/no-image.png'" width="100px" alt="">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <button type="button" class="btn btn-primary" (click)="register()">REGISTER</button>
-        </div>
-    </div>
-</div>
 </div>

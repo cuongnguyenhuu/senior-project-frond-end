@@ -47,6 +47,8 @@ export class RegisterDialogComponent implements OnInit {
   
   private errorMessages:string;
 
+  private errorField:boolean[]=[];
+
   constructor(
     private localServicesService: LocalServicesService,
     private userServicesService: UserServicesService,
@@ -64,6 +66,34 @@ export class RegisterDialogComponent implements OnInit {
       }
     })
     this.getSpecialists();
+  }
+  public changeWordToUnsigned(str:String){
+    str = str.toLowerCase();
+    str = str.replace(/á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ|à/gm,"a");
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
+    str = str.replace(/ò|ó|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ|ọ/g,"o"); 
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
+    str = str.replace(/đ/g,"d");
+    str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
+    str = str.replace(/ + /g," ");
+    str = this.firstUppercaseSentence(str);
+    str = str.trim(); 
+    return str;
+  }
+
+  public firstUppercaseSentence(st:String){
+    var words:string[] = st.split(" ");
+    var sentence ='';
+    if(words.length>0){
+      for(var i = 0; i<words.length; i++){
+        sentence += words[i].charAt(0).toUpperCase() + words[i].slice(1)+ " "
+      }
+      return sentence;
+    }else{
+      return st.charAt(0).toUpperCase() + st.slice(1);
+    }
   }
 
   public provinceOption(provinceIndex:number){
@@ -119,8 +149,9 @@ export class RegisterDialogComponent implements OnInit {
         var birthday = Date.parse(this.birthday+"");
         var data:patientRegister = new patientRegister(this.username,this.password
           ,this.email,this.phoneNumber, this.name, birthday, this.gender,
-          this.country, this.provinces[this.provinceSelected].name,
-          this.districts[this.districtSelected].name, this.wards[this.wardSelected].name,
+          this.country, this.firstUppercaseSentence(this.provinces[this.provinceSelected].name),
+          this.firstUppercaseSentence(this.districts[this.districtSelected].name), 
+          this.firstUppercaseSentence(this.wards[this.wardSelected].name),
           this.street);
         this.userServicesService.patientRegister(data).subscribe(data=>{
           this.spinner.hide();
@@ -143,8 +174,9 @@ export class RegisterDialogComponent implements OnInit {
           var birthday = Date.parse(this.birthday+"");
           var dataDoctor:doctorRegsiter = new doctorRegsiter(this.username,this.password
             ,this.email,this.phoneNumber, this.name, birthday, this.gender,
-            this.country, this.provinces[this.provinceSelected].name,
-            this.districts[this.districtSelected].name, this.wards[this.wardSelected].name,
+            this.country, this.firstUppercaseSentence(this.provinces[this.provinceSelected].name),
+              this.firstUppercaseSentence(this.districts[this.districtSelected].name), 
+              this.firstUppercaseSentence(this.wards[this.wardSelected].name),
             this.street,this.specialists[this.specialistSelected].name,this.experiences, this.certificate);
           this.userServicesService.doctorRegister(dataDoctor).subscribe(data=>{
             this.spinner.hide();
@@ -174,19 +206,74 @@ export class RegisterDialogComponent implements OnInit {
   }
 
   public isAllFill():boolean{
-    if(this.username.trim()===""||this.password.trim()===""
-    ||this.rePassword.trim()===""||this.email.trim()===""
-    ||this.phoneNumber.trim()==""||this.provinceSelected==="default"
-    ||this.districtSelected==="default"||this.wardSelected==="default"
-    ||this.street.trim()===""||this.birthday==null||this.name.trim()===""){
-      return false;
+    var status = true;
+    for(var i = 0; i<16;i++){
+      this.errorField[i] = true;
     }
+    if(this.username.trim()===""){
+      this.errorField[0] = false;
+      status =false;
+    }
+    if(this.password.trim()===""){
+      this.errorField[1] = false;
+      status =false;
+    }
+    if(this.rePassword.trim()===""){
+      this.errorField[2] = false;
+      status =false;
+    }
+    if(this.email.trim()===""){
+      this.errorField[3] = false;
+      status =false;
+    }
+    if(this.phoneNumber.trim()==""){
+      this.errorField[4] = false;
+      status =false;
+    }
+    if(this.country==="default"){
+      this.errorField[8] = false;
+      status =false;
+    }
+    if(this.provinceSelected==="default"){
+      this.errorField[9] = false;
+      status =false;
+    }
+    if(this.districtSelected==="default"){
+      this.errorField[10] = false;
+      status =false;
+    }
+    if(this.wardSelected==="default"){
+      this.errorField[11] = false;
+      status =false;
+    }
+    if(this.street.trim()===""){
+      this.errorField[12] = false;
+      status =false;
+    }
+    if(this.birthday==null){
+      this.errorField[5] = false;
+      status =false;
+    }
+    if(this.name.trim()===""){
+      this.errorField[6] = false;
+      status =false;
+    }
+    
     if(this.isDoctor){
-      if(this.specialistSelected==="default"||this.certificate===""||this.experiences===null){
-        return false;
+      if(this.specialistSelected==="default"){
+        this.errorField[13] = false;
+        status =false;
+      }
+      if(this.certificate===""){
+        this.errorField[15] = false;
+        status =false;
+      }
+      if(this.experiences==null){
+        this.errorField[14] = false;
+        status =false;
       }
     }
-    return true;
+    return status;
   }
 
   public comparePassword():boolean{
