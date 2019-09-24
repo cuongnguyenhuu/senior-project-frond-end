@@ -100,3 +100,6 @@ input{
 .sologan{
     padding:  0;
 }
+.is-valid,.is-invalid{
+    background-image: none;
+}
