@@ -6,21 +6,28 @@
         <p class="description">
             Also you dry creeping beast multiply fourth abundantly our itsel signs bring our. Won form living. Whose dry you seasons divide given gathering great in whose you'll greater let livein form beast sinthete better together these place absolute right.
         </p>
-        <button type="button" class="btn btn-primary">Check Your Disease Now</button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/patient/check-up']" >Check Your Disease Now</button>
     </div>
 </div>
-<div class="row intro intro2">
+<div class="row p-3 text-center" *ngIf="data==null">
+    <div class="col-lg-12">
+        <div class="spinner-border text-info " ></div>
+    </div>
+</div>
+
+<div class="row intro intro2" *ngIf="data!=null">
     <div class="col-lg-3 box-statistic">
         <div class="row">
             <div class="col-lg-4">
                 <img src="assets/images/doctor.jpg" width="100px" class="" alt="">
             </div>
             <div class="col-lg-8">
+                
                 <p class="title-statistic">
-                    200+ DOCTORS
+                    {{data.totalDoctors}}+ DOCTORS
                 </p>
                 <p class="description-statistic">
-                    More than 200 doctors have joined with us
+                    More than {{data.totalDoctors}} doctors have joined with us
                 </p>
             </div>
         </div>
@@ -32,10 +39,10 @@
             </div>
             <div class="col-lg-8">
                 <p class="title-statistic">
-                    200+ PATIENTS
+                    {{data.totalPatients}}+ PATIENTS
                 </p>
                 <p class="description-statistic">
-                    More than 200 patients have believed in our system
+                    More than {{data.totalPatients}} patients have believed in our system
                 </p>
             </div>
         </div>
@@ -47,46 +54,34 @@
             </div>
             <div class="col-lg-8">
                 <p class="title-statistic">
-                    200+ APPOINTMENTS
+                   {{data.totalAppointments}}+ APPOINTMENTS
                 </p>
                 <p class="description-statistic">
-                    More than 200 appointments have succeeding
+                    More than {{data.totalAppointments}} appointments created
                 </p>
             </div>
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container p-3">
     <div class="title">
-        <p>Experience Doctors</p>
+        <p>Top 3 doctors have the most experiences</p>
     </div>
 </div>
-<div class="row intro intro3">
-    <div class="col-lg-3 box-top-doctor">
-        <img src="assets/images/doctor1.jpg" class="" alt="">
-        <p class="name-doctor">
-            Dr Adam Brain
-        </p>
-        <p class="specialist">
-            Cardiologist
-        </p>
+<div class="row p-3 text-center" *ngIf="data==null">
+    <div class="col-lg-12">
+        <div class="spinner-border text-info " ></div>
     </div>
-    <div class="col-lg-3 box-top-doctor">
-        <img src="assets/images/doctor2.jpg" class="" alt="">
+</div>
+<div class="row intro intro3" *ngIf="data!=null">
+    <div class="col-lg-3 box-top-doctor" *ngFor="let doctor of data.top3DoctorsByYearExperiences" >
+        <img src="assets/images/doctor.jpg" *ngIf="doctor.account.avatar==''" class="" alt="">
+        <img [src] = "url+'/utility/image/'+doctor.account.avatar" *ngIf="doctor.account.avatar!=''" class="" alt="">
         <p class="name-doctor">
-            Dr Adam Brain
+            Dr. {{doctor.account.name}}
         </p>
         <p class="specialist">
-            Cardiologist
-        </p>
-    </div>
-    <div class="col-lg-3 box-top-doctor">
-        <img src="assets/images/doctor3.jpg" class="" alt="">
-        <p class="name-doctor">
-            Dr Adam Brain                 
-        </p>
-        <p class="specialist">
-            Cardiologist
+            {{doctor.major}} / {{doctor.experiences}} years
         </p>
     </div>
 </div>

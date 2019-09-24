@@ -54,13 +54,15 @@ export class ResultCheckUpComponent implements OnInit {
 
     this.localServicesService.getDiseases().subscribe(data=>{
       this.diseases = data;
+      for(var i = 0; i<this.diseases.length; i++){
+        this.pieChartLabels[i]=this.diseases[i].title;
+      }
     },
     error=>{
       console.log(error);
     });
-    for(var i = 0; i<this.diseases.length; i++){
-      this.pieChartLabels[i]=this.diseases[i].name;
-    }
+    
+    console.log(this.pieChartLabels);
   }
 
   public toggleDetail(i){

@@ -17,8 +17,11 @@ export class PatientAddResultService {
   ) { }
 
   public addResult(image,result) : Observable<any>{
-    var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
-    httpOptions.headers = httpOptions.headers.append("Authorization",token);
-    return this.http.post(this.API+"/patient/history", {"image":image,"result":result},httpOptions);
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    console.log("image_upload: "+image+"/"+result);
+    return this.http.post(this.API+"patient/history/", {"image":image,"result":result},httpOptions);
   }
 }

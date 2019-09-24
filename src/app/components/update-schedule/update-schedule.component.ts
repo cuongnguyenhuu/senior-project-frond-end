@@ -5,6 +5,8 @@ import { ScheduleService } from './../../services/schedule-services/schedule.ser
 
 import { Schedule } from './../../models/schedule';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-update-schedule',
   templateUrl: './update-schedule.component.html',
@@ -15,6 +17,8 @@ export class UpdateScheduleComponent implements OnInit {
   @Input() open : boolean;
 
   @Output() closeDialog = new EventEmitter();
+
+  @Output() updated = new EventEmitter();
 
   private typeUpdate:string;
   private schedules:Schedule[]=[];
@@ -27,6 +31,7 @@ export class UpdateScheduleComponent implements OnInit {
   constructor(
     private convertTimeService:ConvertTimeService,
     private scheduleService:ScheduleService,
+    private spinner:NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -150,6 +155,8 @@ export class UpdateScheduleComponent implements OnInit {
       if(data.length == 0){
         this.message = "Fill out your time below.";
       }else{
+        this.toggleUpdateDialog();
+        this.spinner.show();
         for(var i =0; i<7; i++){
           if(this.schedules[i]==null){
             this.originalData[i].time_period = "";
@@ -172,12 +179,19 @@ export class UpdateScheduleComponent implements OnInit {
         }
         this.scheduleService.updateSchedule(this.originalData).subscribe(data=>{
           console.log(data);
+          this.spinner.hide();
+          this.updated.emit(true);
         },
         error=>{
+          this.spinner.hide();
+          this.toggleUpdateDialog();
+          this.message = "Something went wrong. Try again!"
           console.log(error);
         })
       }
     }else if(this.schedules[7]!=null){
+      this.toggleUpdateDialog();
+      this.spinner.show();
       var time_string='';
             for(var j = 0; j<this.schedules[7].$time_period.length; j++){
               if(j==this.schedules[i].$time_period.length-1){
@@ -192,8 +206,13 @@ export class UpdateScheduleComponent implements OnInit {
       }
       this.scheduleService.updateSchedule(this.originalData).subscribe(data=>{
         console.log(data);
+        this.spinner.hide();
+        this.updated.emit(true);
       },
       error=>{
+        this.spinner.hide();
+        this.toggleUpdateDialog();
+        this.message = "Something went wrong. Try again!"
         console.log(error);
       })
     }else{

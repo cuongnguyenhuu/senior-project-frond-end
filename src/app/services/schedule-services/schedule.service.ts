@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders } from '@angular/common/http'
 import {Observable } from 'rxjs';
 import { Schedule } from 'src/app/models/schedule';
+import { BookingRequest } from 'src/app/models/bookingRequest';
 
 let httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -27,7 +28,7 @@ export class ScheduleService {
       var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
       httpOptions.headers = httpOptions.headers.append("Authorization",token);
     }
-    return this.http.get<any>(this.API+"doctor/schedule/",httpOptions);
+    return this.http.get<any>(this.API+"doctor/schedule/detail",httpOptions);
   }
 
   public updateSchedule(scheduleEntities:any):Observable<any>{
@@ -44,5 +45,13 @@ export class ScheduleService {
       httpOptions.headers = httpOptions.headers.append("Authorization",token);
     }
     return this.http.get<any>(this.API+"doctor/schedule/update/",httpOptions);
+  }
+
+  public bookAppointment(id:number,bookingRequest:BookingRequest){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.put<any>(this.API+"patient/schedules/"+id+"/book/",bookingRequest,httpOptions);
   }
 }

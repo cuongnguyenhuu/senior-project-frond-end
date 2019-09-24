@@ -42,7 +42,7 @@
             </p>
         </div>
         <div class="col-lg-4">
-           <button type="button" class="btn btn-primary">Make an appointment
+           <button type="button" class="btn btn-primary" [routerLink]="['/patient/find-doctors/'+doctor.doctorEntity.account.account.username+'/schedule']"  >Make an appointment
             </button>
         </div>
         <div class="col-lg-12">

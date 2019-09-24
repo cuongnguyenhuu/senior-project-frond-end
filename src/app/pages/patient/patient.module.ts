@@ -49,7 +49,7 @@ const routes: Routes = [
         component: FindDoctorsComponent,
       },
       {
-        path: 'find-doctors/doctorId/schedule',
+        path: 'find-doctors/:userdoctor/schedule',
         component: ScheduleComponent,
       },
       {
@@ -87,6 +87,9 @@ const routes: Routes = [
     PatientAppointmentModule,
     SharedModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  // exports:[
+  //   RouterModule
+  // ]
 })
 export class PatientModule { }

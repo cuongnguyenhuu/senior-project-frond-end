@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { PatientCheckUpComponent } from './patient-check-up/patient-check-up.component';
 import { CheckUpComponent } from './check-up/check-up.component';
@@ -19,7 +20,8 @@ import { PatientRecommendationService } from './services/patient-recommendation/
   ],
   imports: [
     CommonModule,
-    ChartsModule
+    ChartsModule,
+    RouterModule
   ],
   providers:[
     PatientCheckUpService,

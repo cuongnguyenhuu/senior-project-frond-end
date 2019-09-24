@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientRecommendationService } from './../services/patient-recommendation/patient-recommendation.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-doctors-recommending',
   templateUrl: './doctors-recommending.component.html',
@@ -13,7 +15,8 @@ export class DoctorsRecommendingComponent implements OnInit {
   private isLoading:boolean = true;
 
   constructor(
-    private patientRecommendationService: PatientRecommendationService
+    private patientRecommendationService: PatientRecommendationService,
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -34,5 +37,4 @@ export class DoctorsRecommendingComponent implements OnInit {
       })
     }
   }
-
 }

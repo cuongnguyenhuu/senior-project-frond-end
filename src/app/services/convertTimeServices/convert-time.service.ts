@@ -18,9 +18,9 @@ export class ConvertTimeService {
     if(minutes<10){
       return hours+":0"+minutes;
     }
-    if(hours<10){
-      return "0"+hours+":"+minutes;
-    }
+    // if(hours<10){
+    //   return "0"+hours+":"+minutes;
+    // }
     return hours+":"+minutes;
   }
 }
