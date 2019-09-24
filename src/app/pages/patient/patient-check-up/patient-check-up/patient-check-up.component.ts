@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-patient-check-up',
@@ -8,13 +8,26 @@ import { Component, OnInit } from '@angular/core';
 export class PatientCheckUpComponent implements OnInit {
 
 
-  private data:any;
-  constructor() { }
+  private TryAgain:boolean = false;
 
+  private data:any;
+  private imageName:string;
+  constructor(
+  ) { }
+  
   ngOnInit() {
+    this.data =null;
   }
 
   public getResult(data){
     this.data = data;
+  }
+
+  public setImageName(image){
+    this.imageName = image;
+  }
+
+  public tryAgain(){
+    this.ngOnInit();
   }
 }

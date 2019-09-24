@@ -4,7 +4,7 @@
 .title{
     color: #1155cc;
     font-weight: bold;
-    font-size: 130%;
+    font-size: 150%;
 }
 .note{
     color:red;
@@ -47,7 +47,7 @@
     border-radius: 10px;
 }
 .label-diseases{
-    margin-top: auto;
+    /* margin-top: auto; */
     margin-bottom: auto;
 }
 .name_disease{
@@ -57,4 +57,7 @@
 }
 .box_name:hover{
     cursor: pointer;
+}
+.img-thumbnail{
+    max-width: 70%;
 }

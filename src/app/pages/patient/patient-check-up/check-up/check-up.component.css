@@ -10,3 +10,34 @@ label{
 button{
     margin: 50px 25px;
 }
+label{
+    position: relative;
+}
+label:hover::after{
+    content: "UPLOAD IMAGE HERE";
+    position: absolute;
+    background-color: #000000b5;
+    width: 600px;
+    height: 500px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 7px;
+}
+img{
+    object-fit: contain;
+}
+.title{
+    font-weight: bold;
+    font-size: 150%;
+    padding: 25px 0px;
+    color: #1155cc;
+    margin: 0;
+}
