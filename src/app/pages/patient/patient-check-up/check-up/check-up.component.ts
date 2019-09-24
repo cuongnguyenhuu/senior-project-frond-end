@@ -13,6 +13,8 @@ export class CheckUpComponent implements OnInit {
 
   @Output() result = new EventEmitter();
 
+  @Output() imageName = new EventEmitter();
+  
   private image:string;
   private errorMessage;
   private URL:string = "http://localhost:8080/api/utility/image/";
@@ -69,6 +71,7 @@ export class CheckUpComponent implements OnInit {
       });
 
       this.result.emit(data);
+      this.imageName.emit(this.image);
     },
     error=>{
       console.log(error);

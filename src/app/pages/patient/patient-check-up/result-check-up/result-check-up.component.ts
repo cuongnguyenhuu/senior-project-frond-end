@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
@@ -13,10 +13,16 @@ export class ResultCheckUpComponent implements OnInit {
 
   @Input() data;
 
+  @Input() imageName;
+  
+  @Output() TryAgain = new EventEmitter();
   public pieChartOptions: ChartOptions = {
     responsive: true,
     legend: {
       position: 'top',
+      labels: {
+        fontColor: 'white', // legend color (can be hexadecimal too)
+      },
     },
     plugins: {
       datalabels: {
@@ -48,14 +54,19 @@ export class ResultCheckUpComponent implements OnInit {
   ngOnInit() {
     this.data = JSON.parse(this.data);
     for(var i = 0; i<this.data.length; i++){
-      this.pieChartData[i] = (Number) (this.data[i]*100);
+      this.pieChartData[i] = Math.round((Number) (this.data[i]*100)*10)/10;
     }
 
 
     this.localServicesService.getDiseases().subscribe(data=>{
       this.diseases = data;
       for(var i = 0; i<this.diseases.length; i++){
-        this.pieChartLabels[i]=this.diseases[i].title;
+        // var index = (""+this.diseases[i].name).indexOf(" ");
+        // var name = (""+this.diseases[i].name).substring(0,index);
+        if(this.pieChartData[i]>5)
+        this.pieChartLabels[i]= this.diseases[i].name;
+        else
+        this.pieChartLabels[i]= "";
       }
     },
     error=>{
@@ -63,6 +74,10 @@ export class ResultCheckUpComponent implements OnInit {
     });
     
     console.log(this.pieChartLabels);
+  }
+
+  public tryAgain(){
+    this.TryAgain.emit();
   }
 
   public toggleDetail(i){
