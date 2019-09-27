@@ -5,72 +5,123 @@
         </div>
     </div>
     <div class="row" *ngIf="!isLoading">
-        <div class="col-lg-4">
+        <div class="col-lg-4" *ngIf="data.doctor!=null">
             <img src="assets/images/doctor1.jpg" alt="">
-            <label class="name-doctor" >Dr. {{data.doctorEntity.account.name}}</label>
+            <label class="name-doctor">Dr. {{data.doctor.account.name}}</label>
             <table>
                 <tr>
                     <th>
-                            Specialist:
+                        Specialist:
                     </th>
                     <td>
-                            {{data.doctorEntity.major}}
+                        {{data.doctor.major}}
                     </td>
                 </tr>
                 <tr>
                     <th>
-                            Birthday:
+                        Birthday:
                     </th>
                     <td>
-                            {{data.doctorEntity.account.birthday | date: 'd, MMM, y'}} 
+                        {{data.doctor.account.birthday | date: 'd, MMM, y'}}
                     </td>
                 </tr>
                 <tr>
                     <th>
-                            Experience:
+                        Experience:
                     </th>
                     <td>
-                            {{data.doctorEntity.experiences}} {{data.doctorEntity.experiences>1?'years':'year'}}
+                        {{data.doctor.experiences}}
+                        {{data.doctor.experiences>1?'years':'year'}}
                     </td>
                 </tr>
                 <tr>
                     <th>
-                            Address:
+                        Address:
                     </th>
                     <td>
-                            {{data.doctorEntity.account.address.addressLine}}, 
-                            {{data.doctorEntity.account.address.ward}}, 
-                            {{data.doctorEntity.account.address.locality}}, 
-                            {{data.doctorEntity.account.address.city}}, 
-                            {{data.doctorEntity.account.address.country}}
+                        {{data.doctor.account.address.addressLine}},
+                        {{data.doctor.account.address.ward}},
+                        {{data.doctor.account.address.locality}},
+                        {{data.doctor.account.address.city}},
+                        {{data.doctor.account.address.country}}
                     </td>
                 </tr>
             </table>
         </div>
-        
-        <div class="col-lg-8" >
-            <!-- <div class="col-lg-12 text-center" *ngIf="data.scheduleResponses.length==0">
-                <span class="badge badge-warning">No schedule.</span>
-            </div> -->
-            <table class="col-lg-12" >
+
+        <div class="col-lg-8">
+
+            <div class="row">
+                <div class="col-lg-6 text-center" *ngIf="message!=null">
+                    <span class="badge badge-warning">{{message}}</span>
+                </div>
+                <div class="col-lg-6 text-center" *ngIf="message!=null">
+                    <button type="button" class="btn btn-primary" (click)="toggleUpdateDialog()">Set your schedule</button>
+                </div>
+            </div>
+            <div class="row" *ngIf="message==null">
+                <div class="col-lg-4">
+                    <select class="form-control" [(ngModel)]="weekSelected" (change)="changeWeek($event.target.value)">
+                        <option value="{{i}}" *ngFor="let week of weeks; let i = index">{{week}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <select class="form-control">
+                        <option value="default">Default</option>
+                        <option value="default">Busy</option>
+                        <option value="default">Cancel</option>
+                        <option value="default">Other</option>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <button type="button" class="btn btn-primary">Action</button>
+                </div>
+            </div>
+
+            <table class="col-lg-12" *ngIf="message==null">
                 <tr>
-                    <th *ngFor="let name of dayName">
+                    <th class="w-15">
+                        Time
+                    </th>
+                    <th class="w-15" *ngFor="let name of dayName">
                         {{name}}
                     </th>
                 </tr>
                 <tr>
-                    <td *ngFor="let scheduleResponse of data.scheduleResponses; let i = index">
+                    <td>
+
+                    </td>
+                    <td *ngFor="let date of dates">
+                        <small>{{date | date:'M/d/yy'}}</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <table>
-                            <tr *ngFor="let periodTimeResponse  of scheduleResponse.periodTimeResponses; let j = index">
+                            <tr *ngFor="let time of times">
                                 <td>
-                                    <button type="button" (click)="ROLE=='ROLE_PATIENT'?toggleConfirmDialog(i,periodTimeResponse,scheduleResponse):null" [class] = "periodTimeResponse.status?'btn btn-danger':'btn btn-success'"class="btn btn-success">{{convertTimeService.intToTime(periodTimeResponse.startAt)+"-"+convertTimeService.intToTime(periodTimeResponse.endAt)}}</button>
+                                    {{convertTimeService.intToTime(time)}}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td *ngFor="let schedule of schedules">
+                        <table>
+                            <tr *ngFor="let time of schedule.timeResponses">
+                                <td>
+                                    <label [for]="time.startTime"
+                                        [class]="time.status!='Available'?'btn btn-danger':'btn btn-success'">
+
+
+                                    </label>
+                                    <input type="checkbox" [id]="time.startTime">
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-            </table>  
-            <div class="row">
+            </table>
+            <div class="row" *ngIf="message==null">
                 <div class="col-lg-4">
                     <table>
                         <tr>
@@ -90,15 +141,17 @@
                             </td>
                         </tr>
                     </table>
-                </div>  
-                 <div class="col-lg-8 btn-update" *ngIf="ROLE=='ROLE_DOCTOR'">
-                    <button type="button" class="btn btn-primary" (click)="toggleUpdateDialog()">Update your schedule</button>
                 </div>
+                <!-- 
+                    
+                 -->
             </div>
         </div>
-       
+
     </div>
 </div>
-<app-confirm-dialog *ngIf="open_confirm" (book)="bookAppointment()" (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" [thatDay] = "thatDay" [time_period] = time_period ></app-confirm-dialog>
+<app-confirm-dialog *ngIf="open_confirm" (book)="bookAppointment()" (closeDialog)="setOpenConfirm($event)"
+    [open]="open_confirm" [thatDay]="thatDay" [time_period]=time_period></app-confirm-dialog>
 <app-notif-dialog (closeDialog)="setOpenConfirm($event)" [open]="open_notif"></app-notif-dialog>
-<app-update-schedule *ngIf="ROLE=='ROLE_DOCTOR'" (closeDialog)="setOpenUpdate($event)" (updated)="ngOnInit()" [open]="open_update"></app-update-schedule>
+<app-update-schedule *ngIf="ROLE=='ROLE_DOCTOR'" (closeDialog)="setOpenUpdate($event)" (updated)="ngOnInit()"
+    [open]="open_update"></app-update-schedule>

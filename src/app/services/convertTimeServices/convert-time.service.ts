@@ -13,6 +13,7 @@ export class ConvertTimeService {
   }
 
   public intToTime(number:number) : string{
+    number = number/1000;
     var hours = Math.floor(number/3600);
     var minutes = (number-3600*hours)/60;
     if(minutes<10){

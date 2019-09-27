@@ -23,20 +23,22 @@ export class ScheduleService {
     return this.http.get<any>(this.API+"utility/schedules/"+username,httpOptions);
   }
 
-  public getSchedule() : Observable<any>{
+  public getSchedule(week:number) : Observable<any>{
     if(httpOptions.headers.get("Authorization")==null){
       var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
       httpOptions.headers = httpOptions.headers.append("Authorization",token);
     }
-    return this.http.get<any>(this.API+"doctor/schedule/detail",httpOptions);
+    return this.http.get<any>(this.API+"doctor/schedule/detail/"+week+"/",httpOptions);
   }
 
-  public updateSchedule(scheduleEntities:any):Observable<any>{
+  public updateSchedule(timePerAppointment, preBook, startAt, endAt):Observable<any>{
     if(httpOptions.headers.get("Authorization")==null){
       var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
       httpOptions.headers = httpOptions.headers.append("Authorization",token);
     }
-    return this.http.post<any>(this.API+"doctor/schedule/update",scheduleEntities,httpOptions);
+    return this.http.post<any>(this.API+"doctor/schedule/",
+    {"timePerAppointment":timePerAppointment,"preBooking":preBook,"startAt":startAt,"endAt":endAt},
+    httpOptions);
   }
 
   public getScheduleUpdate() : Observable<any>{
