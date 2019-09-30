@@ -1,19 +1,24 @@
-.col-lg-12{
+.col-lg-12 {
     text-align: center;
 }
-#file_upload{
+
+#file_upload {
     display: none;
 }
-label{
+
+.label-image {
     padding: 50px 25px;
 }
-button{
+
+button {
     margin: 50px 25px;
 }
-label{
+
+.label-image {
     position: relative;
 }
-label:hover::after{
+
+.label-image:hover::after {
     content: "UPLOAD IMAGE HERE";
     position: absolute;
     background-color: #000000b5;
@@ -31,13 +36,7 @@ label:hover::after{
     font-weight: bold;
     border-radius: 7px;
 }
-img{
+
+img {
     object-fit: contain;
-}
-.title{
-    font-weight: bold;
-    font-size: 150%;
-    padding: 25px 0px;
-    color: #1155cc;
-    margin: 0;
 }

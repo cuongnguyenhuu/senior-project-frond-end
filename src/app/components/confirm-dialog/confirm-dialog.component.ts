@@ -10,9 +10,7 @@ export class ConfirmDialogComponent implements OnInit {
 
   @Input() open : boolean;
 
-  @Input() thatDay: number;
-
-  @Input() time_period:any;
+  @Input() timeBook:any;
 
   @Output() closeDialog = new EventEmitter();
 

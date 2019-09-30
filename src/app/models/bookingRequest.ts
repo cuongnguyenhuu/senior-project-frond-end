@@ -1,25 +1,13 @@
+import { Time } from './time';
+
 export class BookingRequest {
-    private indextime: number;
     private userDiseaseId: number;
-    private place: string;
-    private timePeriod: string;
+    private timeBooking:Time;
 
 
-
-	constructor($indextime: number, $userDiseaseId: number, $place: string, $timePeriod: string) {
-		this.indextime = $indextime;
+	constructor($userDiseaseId: number, $timeBooking: Time) {
 		this.userDiseaseId = $userDiseaseId;
-		this.place = $place;
-		this.timePeriod = $timePeriod;
-	}
-    
-
-    /**
-     * Getter $indextime
-     * @return {number}
-     */
-	public get $indextime(): number {
-		return this.indextime;
+		this.timeBooking = $timeBooking;
 	}
 
     /**
@@ -31,27 +19,11 @@ export class BookingRequest {
 	}
 
     /**
-     * Getter $place
-     * @return {string}
+     * Getter $timeBooking
+     * @return {Time}
      */
-	public get $place(): string {
-		return this.place;
-	}
-
-    /**
-     * Getter $timePeriod
-     * @return {string}
-     */
-	public get $timePeriod(): string {
-		return this.timePeriod;
-	}
-
-    /**
-     * Setter $indextime
-     * @param {number} value
-     */
-	public set $indextime(value: number) {
-		this.indextime = value;
+	public get $timeBooking(): Time {
+		return this.timeBooking;
 	}
 
     /**
@@ -63,21 +35,12 @@ export class BookingRequest {
 	}
 
     /**
-     * Setter $place
-     * @param {string} value
+     * Setter $timeBooking
+     * @param {Time} value
      */
-	public set $place(value: string) {
-		this.place = value;
+	public set $timeBooking(value: Time) {
+		this.timeBooking = value;
 	}
-
-    /**
-     * Setter $timePeriod
-     * @param {string} value
-     */
-	public set $timePeriod(value: string) {
-		this.timePeriod = value;
-	}
-
 
 
 }

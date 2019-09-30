@@ -4,101 +4,162 @@
             <div class="spinner-border text-info"></div>
         </div>
     </div>
-    <div class="row" *ngIf="!isLoading">
-        <div class="col-lg-4">
-            <img src="assets/images/doctor1.jpg" alt="">
-            <label class="name-doctor" >Dr. {{data.doctorEntity.account.name}}</label>
-            <table>
-                <tr>
-                    <th>
-                            Specialist:
-                    </th>
-                    <td>
-                            {{data.doctorEntity.major}}
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                            Birthday:
-                    </th>
-                    <td>
-                            {{data.doctorEntity.account.birthday | date: 'd, MMM, y'}} 
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                            Experience:
-                    </th>
-                    <td>
-                            {{data.doctorEntity.experiences}} {{data.doctorEntity.experiences>1?'years':'year'}}
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                            Address:
-                    </th>
-                    <td>
-                            {{data.doctorEntity.account.address.addressLine}}, 
-                            {{data.doctorEntity.account.address.ward}}, 
-                            {{data.doctorEntity.account.address.locality}}, 
-                            {{data.doctorEntity.account.address.city}}, 
-                            {{data.doctorEntity.account.address.country}}
-                    </td>
-                </tr>
-            </table>
+    <div class="row">
+        <div class="col-lg-12 text-center ">
+            <label class="title-feature frame-border">SCHEDULE</label>
         </div>
-        
-        <div class="col-lg-8" >
-            <!-- <div class="col-lg-12 text-center" *ngIf="data.scheduleResponses.length==0">
-                <span class="badge badge-warning">No schedule.</span>
-            </div> -->
-            <table class="col-lg-12" >
-                <tr>
-                    <th *ngFor="let name of dayName">
-                        {{name}}
-                    </th>
-                </tr>
-                <tr>
-                    <td *ngFor="let scheduleResponse of data.scheduleResponses; let i = index">
-                        <table>
-                            <tr *ngFor="let periodTimeResponse  of scheduleResponse.periodTimeResponses; let j = index">
-                                <td>
-                                    <button type="button" (click)="ROLE=='ROLE_PATIENT'?toggleConfirmDialog(i,periodTimeResponse,scheduleResponse):null" [class] = "periodTimeResponse.status?'btn btn-danger':'btn btn-success'"class="btn btn-success">{{convertTimeService.intToTime(periodTimeResponse.startAt)+"-"+convertTimeService.intToTime(periodTimeResponse.endAt)}}</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>  
+    </div>
+    <div class="row" *ngIf="!isLoading">
+        <div class="col-lg-12 frame-border padding-15px margin-bottom">
             <div class="row">
-                <div class="col-lg-4">
-                    <table>
+                <div class="col-lg-4 " *ngIf="doctor!=null">
+                    <img class="image-width" src="assets/images/doctor1.jpg" alt="">
+                    <label class="name-doctor">Dr. {{data.doctor.account.name}}</label>
+                    <table class="text-left">
                         <tr>
+                            <th>
+                                Specialist:
+                            </th>
                             <td>
-                                <button type="button" class="btn btn-success"></button>
-                            </td>
-                            <td>
-                                Available
+                                {{data.doctor.major}}
                             </td>
                         </tr>
                         <tr>
+                            <th>
+                                Birthday:
+                            </th>
                             <td>
-                                <button type="button" class="btn btn-danger"></button>
+                                {{data.doctor.account.birthday | date: 'd, MMM, y'}}
                             </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Experience:
+                            </th>
                             <td>
-                                Busy
+                                {{data.doctor.experiences}} {{data.doctor.experiences>1?'years':'year'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Address:
+                            </th>
+                            <td>
+                                {{data.doctor.account.address.addressLine}}, {{data.doctor.account.address.ward}}, {{data.doctor.account.address.locality}}, {{data.doctor.account.address.city}}, {{data.doctor.account.address.country}}
                             </td>
                         </tr>
                     </table>
-                </div>  
-                 <div class="col-lg-8 btn-update" *ngIf="ROLE=='ROLE_DOCTOR'">
-                    <button type="button" class="btn btn-primary" (click)="toggleUpdateDialog()">Update your schedule</button>
+                </div>
+
+                <div class="col-lg-8 ">
+
+                    <div class="row">
+                        <div class="col-lg-6 text-center" *ngIf="message!=null">
+                            <span class="badge badge-warning">{{message}}</span>
+                        </div>
+                        <div class="col-lg-6 text-center" *ngIf="message!=null">
+                            <button type="button" class="btn btn-primary" (click)="toggleUpdateDialog()">Set your
+                                schedule</button>
+                        </div>
+                    </div>
+                    <div class="row margin-bottom " *ngIf="message==null">
+                        <div class="col-lg-5">
+                            <select class="form-control" [(ngModel)]="weekSelected" (change)="changeWeek($event.target.value)">
+                                <option value="{{i}}" *ngFor="let week of weeks; let i = index">{{week}}</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-5" *ngIf="ROLE=='ROLE_DOCTOR'">
+                            <select class="form-control" [(ngModel)]="actionType" (change)="changeActionType($event.target.value)">
+                                <option value="default">Default</option>
+                                <option value="busy">Busy</option>
+                                <option value="cancel">Cancel</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2" *ngIf="ROLE=='ROLE_DOCTOR'">
+                            <button type="button" class="btn btn-primary" (click)="addTimeBusy()">Action</button>
+                        </div>
+                    </div>
+
+                    <table class="col-lg-12" *ngIf="message==null">
+                        <tr>
+                            <th class="w-15">
+                                Time
+                            </th>
+                            <th class="w-15" *ngFor="let name of dayName">
+                                {{name}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td *ngFor="let date of dates">
+                                <small>{{date | date:'M/d/yy'}}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr *ngFor="let time of times">
+                                        <td>
+                                            {{convertTimeService.intToTime(time)}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td *ngFor="let schedule of schedules">
+                                <table>
+                                    <tr *ngFor="let time of schedule.timeResponses">
+                                        <td>
+                                            <button (click)="toggleConfirmDialog(time)" [disabled]="time.status!='available'" *ngIf="ROLE=='ROLE_PATIENT'" [class]="time.status!='available'?'btn btn-danger':'btn btn-success'">
+
+
+                                            </button>
+                                            <label [for]="time.startTime" *ngIf="ROLE=='ROLE_DOCTOR'" [class]="time.status=='available'?'btn btn-success':
+                                                        time.status=='default'?'btn btn-warning':time.status=='busy'?'btn btn-danger':'btn btn-info'">
+
+
+                                            </label>
+                                            <input type="checkbox" *ngIf="ROLE=='ROLE_DOCTOR'" [id]="time.startTime" (click)="addTime(time)">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row" *ngIf="message==null">
+                        <div class="col-lg-4">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <button type="button" class="btn btn-success"></button>
+                                    </td>
+                                    <td>
+                                        Available
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button type="button" class="btn btn-danger"></button>
+                                    </td>
+                                    <td>
+                                        Busy
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- 
+                                    
+                                 -->
+                    </div>
                 </div>
             </div>
         </div>
-       
+
+
     </div>
 </div>
-<app-confirm-dialog *ngIf="open_confirm" (book)="bookAppointment()" (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" [thatDay] = "thatDay" [time_period] = time_period ></app-confirm-dialog>
+<app-confirm-dialog *ngIf="open_confirm" (book)="bookAppointment()" (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" [timeBook]="timeBook"></app-confirm-dialog>
 <app-notif-dialog (closeDialog)="setOpenConfirm($event)" [open]="open_notif"></app-notif-dialog>
 <app-update-schedule *ngIf="ROLE=='ROLE_DOCTOR'" (closeDialog)="setOpenUpdate($event)" (updated)="ngOnInit()" [open]="open_update"></app-update-schedule>
