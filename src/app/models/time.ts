@@ -1,15 +1,17 @@
 export class Time{
     private startTime:number;
     private endTime:number;
-    private type:string;
+    private status:string;
+    private dayOfWeek:number;
 
 
-	constructor($startTime: number, $endTime: number, $type: string) {
+
+	constructor($startTime: number, $endTime: number, $status: string, $dayOfWeek: number) {
 		this.startTime = $startTime;
 		this.endTime = $endTime;
-		this.type = $type;
+		this.status = $status;
+		this.dayOfWeek = $dayOfWeek;
 	}
-
 
     /**
      * Getter $startTime
@@ -28,11 +30,19 @@ export class Time{
 	}
 
     /**
-     * Getter $type
+     * Getter $status
      * @return {string}
      */
-	public get $type(): string {
-		return this.type;
+	public get $status(): string {
+		return this.status;
+	}
+
+    /**
+     * Getter $dayOfWeek
+     * @return {number}
+     */
+	public get $dayOfWeek(): number {
+		return this.dayOfWeek;
 	}
 
     /**
@@ -52,11 +62,20 @@ export class Time{
 	}
 
     /**
-     * Setter $type
+     * Setter $status
      * @param {string} value
      */
-	public set $type(value: string) {
-		this.type = value;
+	public set $status(value: string) {
+		this.status = value;
 	}
 
+    /**
+     * Setter $dayOfWeek
+     * @param {number} value
+     */
+	public set $dayOfWeek(value: number) {
+		this.dayOfWeek = value;
+	}
+	
+	
 }

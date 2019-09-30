@@ -1,3 +1,3 @@
-<app-check-up (result)="getResult($event)" *ngIf="data==null" (imageName) = "setImageName($event)" ></app-check-up>
-<app-result-check-up *ngIf="data!=null" [data] = "data" [imageName]="imageName" (TryAgain)="tryAgain()"></app-result-check-up>
-<app-doctors-recommending *ngIf="data!=null" ></app-doctors-recommending>
+<app-check-up (result)="getResult($event)" *ngIf="data==null" (imageName)="setImageName($event)"></app-check-up>
+<app-result-check-up *ngIf="data!=null" [data]="data" [imageName]="imageName" (TryAgain)="tryAgain()"></app-result-check-up>
+<app-doctors-recommending *ngIf="data!=null"></app-doctors-recommending>

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders } from '@angular/common/http'
 import {Observable } from 'rxjs';
 import { Schedule } from 'src/app/models/schedule';
 import { BookingRequest } from 'src/app/models/bookingRequest';
+import { Time } from 'src/app/models/time';
 
 let httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,8 +20,8 @@ export class ScheduleService {
     private http: HttpClient,
   ) { }
 
-  public getScheduleByUsername(username) : Observable<any>{
-    return this.http.get<any>(this.API+"utility/schedules/"+username,httpOptions);
+  public getScheduleByUsername(username,week) : Observable<any>{
+    return this.http.get<any>(this.API+"utility/schedules/"+username+"/"+week+"/",httpOptions);
   }
 
   public getSchedule(week:number) : Observable<any>{
@@ -41,19 +42,19 @@ export class ScheduleService {
     httpOptions);
   }
 
-  public getScheduleUpdate() : Observable<any>{
+  public setTimeBusy(type,times:Time[]){
     if(httpOptions.headers.get("Authorization")==null){
       var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
       httpOptions.headers = httpOptions.headers.append("Authorization",token);
     }
-    return this.http.get<any>(this.API+"doctor/schedule/update/",httpOptions);
+    return this.http.post<any>(this.API+"doctor/schedule/update/"+type+"/",times,httpOptions);
   }
 
-  public bookAppointment(id:number,bookingRequest:BookingRequest){
+  public bookAppointment(usernameDoctor:string,bookingRequest:BookingRequest){
     if(httpOptions.headers.get("Authorization")==null){
       var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
       httpOptions.headers = httpOptions.headers.append("Authorization",token);
     }
-    return this.http.put<any>(this.API+"patient/schedules/"+id+"/book/",bookingRequest,httpOptions);
+    return this.http.put<any>(this.API+"patient/schedules/"+usernameDoctor+"/book/",bookingRequest,httpOptions);
   }
 }

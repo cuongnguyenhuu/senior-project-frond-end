@@ -1,63 +1,62 @@
-.col-lg-12{
-    text-align: center;
-}
-.title{
-    color: #1155cc;
-    font-weight: bold;
-    font-size: 150%;
-}
-.note{
-    color:red;
+.note {
+    color: red;
     font-weight: normal;
     font-size: 80%;
 }
-.color-bar-1{
+
+.color-bar-1 {
     background: #F21B1B;
     padding: 2px 50px;
     border-radius: 10px;
 }
-.color-bar-2{
+
+.color-bar-2 {
     background: #F99704;
     padding: 2px 50px;
     border-radius: 10px;
 }
-.color-bar-3{
+
+.color-bar-3 {
     background: #FEED01;
     padding: 2px 50px;
     border-radius: 10px;
 }
-.color-bar-4{
+
+.color-bar-4 {
     background: #3EF92E;
     padding: 2px 50px;
     border-radius: 10px;
 }
-.color-bar-5{
+
+.color-bar-5 {
     background: #342AF3;
     padding: 2px 50px;
     border-radius: 10px;
 }
-.color-bar-6{
+
+.color-bar-6 {
     background: #6F24F7;
     padding: 2px 50px;
     border-radius: 10px;
 }
-.color-bar-7{
+
+.color-bar-7 {
     background: #9425F9;
     padding: 2px 50px;
     border-radius: 10px;
 }
-.label-diseases{
+
+.label-diseases {
     /* margin-top: auto; */
     margin-bottom: auto;
 }
-.name_disease{
+
+.name_disease {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.box_name:hover{
+
+.box_name:hover {
     cursor: pointer;
-}
-.img-thumbnail{
-    max-width: 70%;
 }

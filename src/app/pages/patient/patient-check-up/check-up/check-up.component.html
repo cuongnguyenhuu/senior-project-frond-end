@@ -1,19 +1,19 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <p class="title">CHECK-UP</p>
+            <label class="title-feature frame-border">CHECK-UP</label>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12">
-            <label for="file_upload"><img
+        <div class="col-lg-12 frame-border margin-bottom">
+            <label class="label-image" for="file_upload"><img
                 [src] = "image!=null?URL+image:'assets/images/no-image.png'"
                  width="600px" height="500px" class="" alt="" ></label>
-            <input type="file" id="file_upload" (change) = "uploadImage($event.target.files[0])">
-            
-            <button type="button" class="btn btn-primary" (click)="checkUp()" [disabled]="disabled" >
+            <input type="file" id="file_upload" (change)="uploadImage($event.target.files[0])">
+
+            <button type="button" class="btn btn-primary" (click)="checkUp()" [disabled]="disabled">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isloading"></span>
-                Diagnose {{isloading?'...':''}}
+                {{isloading?'Diagnosing ...':'Diagnose'}}
             </button>
         </div>
     </div>
