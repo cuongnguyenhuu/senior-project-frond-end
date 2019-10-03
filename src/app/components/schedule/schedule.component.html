@@ -6,14 +6,17 @@
     </div>
     <div class="row">
         <div class="col-lg-12 text-center ">
-            <label class="title-feature frame-border">SCHEDULE</label>
+            <label class="title-feature">SCHEDULE</label>
         </div>
     </div>
     <div class="row" *ngIf="!isLoading">
         <div class="col-lg-12 frame-border padding-15px margin-bottom">
-            <div class="row">
-                <div class="col-lg-4 " *ngIf="doctor!=null">
+            <div class="row" *ngIf="doctor!=null">
+                <div class="col-lg-4">
                     <img class="image-width" src="assets/images/doctor1.jpg" alt="">
+
+                </div>
+                <div class="col-lg-8">
                     <label class="name-doctor">Dr. {{data.doctor.account.name}}</label>
                     <table class="text-left">
                         <tr>
@@ -51,7 +54,7 @@
                     </table>
                 </div>
 
-                <div class="col-lg-8 ">
+                <div class="col-lg-12 padding-15px">
 
                     <div class="row">
                         <div class="col-lg-6 text-center" *ngIf="message!=null">
@@ -72,79 +75,75 @@
                             <select class="form-control" [(ngModel)]="actionType" (change)="changeActionType($event.target.value)">
                                 <option value="default">Default</option>
                                 <option value="busy">Busy</option>
-                                <option value="cancel">Cancel</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="col-lg-2" *ngIf="ROLE=='ROLE_DOCTOR'">
-                            <button type="button" class="btn btn-primary" (click)="addTimeBusy()">Action</button>
+                            <button type="button" [disabled]="timeSelected.length==0" class="btn btn-primary" (click)="addTimeBusy()">ACTION</button>
                         </div>
                     </div>
 
-                    <table class="col-lg-12" *ngIf="message==null">
+                    <table class="col-lg-12 table-bordered schedule" *ngIf="message==null">
                         <tr>
                             <th class="w-15">
                                 Time
                             </th>
-                            <th class="w-15" *ngFor="let name of dayName">
+                            <th class="w-15" *ngFor="let name of dayName; let i = index">
                                 {{name}}
+                                <br>
+                                <small>({{dates[i] | date:'MMM d'}})</small>
                             </th>
                         </tr>
-                        <tr>
+                        <tr *ngFor="let schedule of schedules">
                             <td>
-
+                                {{schedule.timeResponses[0].startTime+7*60*60*1000 | date:'HH:mm'}}
                             </td>
-                            <td *ngFor="let date of dates">
-                                <small>{{date | date:'M/d/yy'}}</small>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr *ngFor="let time of times">
-                                        <td>
-                                            {{convertTimeService.intToTime(time)}}
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td *ngFor="let schedule of schedules">
-                                <table>
-                                    <tr *ngFor="let time of schedule.timeResponses">
-                                        <td>
-                                            <button (click)="toggleConfirmDialog(time)" [disabled]="time.status!='available'" *ngIf="ROLE=='ROLE_PATIENT'" [class]="time.status!='available'?'btn btn-danger':'btn btn-success'">
+                            <td *ngFor="let time of schedule.timeResponses">
+                                <button (click)="toggleConfirmDialog(time)" [disabled]="time.status!='available'" *ngIf="ROLE=='ROLE_PATIENT'" [class]="time.status!='available'?'btn btn-danger btn-block padding-15px':'btn btn-success btn-block padding-15px'">
+                                </button>
+                                <input style="display: none" class="checkbox-schedule" type="checkbox" *ngIf="ROLE=='ROLE_DOCTOR'" [id]="time.startTime" (click)="addTime(time)">
+                                <label [for]="time.startTime" *ngIf="ROLE=='ROLE_DOCTOR'" [class]="time.status=='available'?' btn btn-success btn-block padding-15px label-checkbox-chedule':
+                                                    time.status=='default'?'label-checkbox-chedule btn btn-warning btn-block padding-15px':
+                                                    time.status=='busy'?'label-checkbox-chedule btn btn-danger btn-block padding-15px':
+                                                    time.status=='patient'?'label-checkbox-chedule btn btn-primary btn-block padding-15px':
+                                                    'label-checkbox-chedule btn btn-info btn-block padding-15px'">
 
 
-                                            </button>
-                                            <label [for]="time.startTime" *ngIf="ROLE=='ROLE_DOCTOR'" [class]="time.status=='available'?'btn btn-success':
-                                                        time.status=='default'?'btn btn-warning':time.status=='busy'?'btn btn-danger':'btn btn-info'">
-
-
-                                            </label>
-                                            <input type="checkbox" *ngIf="ROLE=='ROLE_DOCTOR'" [id]="time.startTime" (click)="addTime(time)">
-                                        </td>
-                                    </tr>
-                                </table>
+                                </label>
                             </td>
                         </tr>
                     </table>
                     <div class="row" *ngIf="message==null">
-                        <div class="col-lg-4">
-                            <table>
+                        <div class="col-lg-4 padding-15px">
+                            <table class="text-left">
                                 <tr>
                                     <td>
-                                        <button type="button" class="btn btn-success"></button>
-                                    </td>
-                                    <td>
-                                        Available
+                                        <button type="button" class="btn btn-success margin-right-15px"></button>
+                                        <label>Available</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <button type="button" class="btn btn-danger"></button>
+                                        <button type="button" class="btn btn-danger margin-right-15px"></button>
+                                        <label>Busy</label>
                                     </td>
+                                </tr>
+                                <tr>
                                     <td>
-                                        Busy
+                                        <button type="button" class="btn btn-info margin-right-15px"></button>
+                                        <label>Cancel</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button type="button" class="btn btn-warning margin-right-15px"></button>
+                                        <label>Default</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button type="button" class="btn btn-primary margin-right-15px"></button>
+                                        <label>Busy</label>
                                     </td>
                                 </tr>
                             </table>
