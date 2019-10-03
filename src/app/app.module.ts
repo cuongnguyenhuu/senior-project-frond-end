@@ -11,6 +11,8 @@ import { LocalServicesService } from './services/local-services/local-services.s
 import { ImageServicesService } from './services/image-servives/image-services.service';
 import { ScheduleService } from './services/schedule-services/schedule.service';
 import { ConvertTimeService } from './services/convertTimeServices/convert-time.service';
+import { AppointmentService } from './services/appointment-services/appointment.service';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ConvertTimeService } from './services/convertTimeServices/convert-time.
     LocalServicesService,
     ImageServicesService,
     ScheduleService,
-    ConvertTimeService
+    ConvertTimeService,
+    AppointmentService,
   ],
   bootstrap: [AppComponent],
 })

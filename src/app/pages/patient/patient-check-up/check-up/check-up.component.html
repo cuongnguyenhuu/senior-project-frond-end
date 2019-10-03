@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <label class="title-feature frame-border">CHECK-UP</label>
+            <label class="title-feature">CHECK-UP</label>
         </div>
     </div>
     <div class="row">
@@ -13,7 +13,7 @@
 
             <button type="button" class="btn btn-primary" (click)="checkUp()" [disabled]="disabled">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isloading"></span>
-                {{isloading?'Diagnosing ...':'Diagnose'}}
+                {{isloading?'DIAGNOSING...':'DIAGNOSE'}}
             </button>
         </div>
     </div>

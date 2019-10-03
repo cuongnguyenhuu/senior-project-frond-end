@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-patient-body',
@@ -8,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class PatientBodyComponent implements OnInit {
 
   private ROLE:string = "PATIENT";
-  
+  private data;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  public getDetailAppointment(data){
+    this.data = data;
+  }
 }

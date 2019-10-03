@@ -1,18 +1,15 @@
-.container{
-    padding-top: 10px;
-}
-.input{
+.input {
     width: 65%;
 }
-.title{
+
+.title {
     width: 35%;
 }
-table{
+
+table {
     width: 100%;
 }
-.button-search{
-    text-align: end;
-}
-.doctor-recommending{
-    padding: 10px 100px;
+
+.button-search {
+    text-align: left;
 }

@@ -24,6 +24,11 @@
     align-items: center;
 }
 
+.center-horizontal {
+    display: flex;
+    justify-content: center;
+}
+
 .padding-15px {
     padding: 15px;
 }
@@ -42,4 +47,9 @@
 
 .text-size-sm {
     font-size: 80%;
+}
+
+.align-right {
+    display: flex;
+    justify-content: flex-end;
 }
