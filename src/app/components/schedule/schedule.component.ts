@@ -58,8 +58,8 @@ export class ScheduleComponent implements OnInit {
           this.message = "Not found schedule";
         }
         else {
-          for (let index = 0; index < data.dayResponses.length; index++) {
-            this.dates[index] = data.dayResponses[index].timeResponses[0].startTime;
+          for (let index = 0; index < data.dayResponses[0].timeResponses.length; index++) {
+            this.dates[index] = data.dayResponses[0].timeResponses[index].startTime;
           }
           for (let index = 0; index < data.scheduleEntity.preBooking; index++) {
             if (index == 0)
@@ -93,8 +93,8 @@ export class ScheduleComponent implements OnInit {
           this.message = "Not found schedule";
         }
         else {
-          for (let index = 0; index < data.dayResponses.length; index++) {
-            this.dates[index] = data.dayResponses[index].timeResponses[0].startTime;
+          for (let index = 0; index < data.dayResponses[0].timeResponses.length; index++) {
+            this.dates[index] = data.dayResponses[0].timeResponses[index].startTime;
           }
           for (let index = 0; index < data.scheduleEntity.preBooking; index++) {
             if (index == 0)

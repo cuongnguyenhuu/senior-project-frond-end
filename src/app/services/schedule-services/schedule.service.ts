@@ -57,4 +57,18 @@ export class ScheduleService {
     }
     return this.http.put<any>(this.API+"patient/schedules/"+usernameDoctor+"/book/",bookingRequest,httpOptions);
   }
+
+  public getFindingDoctors(textSearch,speciallist,country,city,district) : Observable<any>{
+    if (httpOptions.headers.get("Authorization") == null) {
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization", token);
+    }
+    return this.http.get<any>(this.API + "patient/findDoctor/", { headers: httpOptions.headers, params : {
+        "textSearch": textSearch,
+        "speciallist": speciallist,
+        "country": country,
+        "city": city,
+        "district": district
+      }});
+  }
 }

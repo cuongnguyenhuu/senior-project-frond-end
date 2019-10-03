@@ -1,82 +1,93 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-4 box-image">
-            <img src="assets/images/doctor1.jpg" alt="">
-            <br>
-            <label class="name-doctor">
-                Dr. Adam Brain
-            </label>
-            <label class="specialist">
-                Cardiologist
-            </label>
-        </div>
-        <div class="col-lg-4">
-            <table>
-                <tr>
-                    <th>
-                        Create at:
-                    </th>
-                    <td>
-                        13/09/2019 at 15:32
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        Date:
-                    </th>
-                    <td>
-                        14/09/2019
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        Start at:
-                    </th>
-                    <td>
-                        7:00
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        End at:
-                    </th>
-                    <td>
-                        8:00
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        Place:
-                    </th>
-                    <td>
-                        Hoang Dieu 455, Hai Chau, Da Nang, Viet Nam
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        Status:
-                    </th>
-                    <td>
-                        Pending
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        Disease reference:
-                    </th>
-                    <td>
-                        Abcasadas
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        <button type="button" class="btn btn-danger">Cancel</button>
-                    </th>
-                    <td>
-                       
-                    </td>
-                </tr>
-            </table>
+        <div class="col-lg-12 text-center">
+            <label class="title-feature"> DETAIL APPOINTMENT</label>
         </div>
     </div>
+    <div class="row margin-bottom">
+        <div class="col-lg-12 frame-border">
+            <div class="row center-horizontal padding-15px">
+                <div class="col-lg-4 box-image">
+                    <img src="assets/images/doctor1.jpg" alt="">
+                    <br>
+                    <label class="name-doctor">
+                        {{ROLE=='ROLE_PATIENT'?'Dr. '+data.doctor.account.name:data.patient.profilePatient.name}}
+                    </label>
+                    <label class="specialist" *ngIf="ROLE=='ROLE_PATIENT'">
+                        {{data.doctor.major}}
+                    </label>
+                </div>
+                <div class="col-lg-4">
+                    <table>
+                        <tr>
+                            <th>
+                                Create at:
+                            </th>
+                            <td>
+                                {{data.create_at | date:'MMM d, y h:mm:ss a'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Date:
+                            </th>
+                            <td>
+                                {{data.start_at | date:'MMM d, y'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Start at:
+                            </th>
+                            <td>
+                                {{data.start_at +7*60*60*1000 | date:'HH:mm'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                End at:
+                            </th>
+                            <td>
+                                {{data.end_at +7*60*60*1000 | date:'HH:mm'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Place:
+                            </th>
+                            <td>
+                                {{data.doctor.account.address.addressLine}}, {{data.doctor.account.address.ward}}, {{data.doctor.account.address.locality}}, {{data.doctor.account.address.city}}, {{data.doctor.account.address.country}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Status:
+                            </th>
+                            <td>
+                                {{data.status == 1?'Canceled':data.start_at>currentTime?'Waiting':'Done'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Disease reference:
+                            </th>
+                            <td>
+                                {{data.disease}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <button type="button" class="btn btn-danger" *ngIf="data.status == 0 && data.start_at>currentTime" (click)="showDialog(data)">Cancel</button>
+                            </th>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+<app-confirm-cancel-dialog *ngIf="open_confirm" (cancel)="cancelAppointment($event)" (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" [timeCancel]="timeCancel"></app-confirm-cancel-dialog>

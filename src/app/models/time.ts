@@ -1,16 +1,25 @@
-export class Time{
-    private startTime:number;
-    private endTime:number;
-    private status:string;
-    private dayOfWeek:number;
+export class Time {
+    private id: number;
+    private startTime: number;
+    private endTime: number;
+    private status: string;
+    private dayOfWeek: number;
 
 
-
-	constructor($startTime: number, $endTime: number, $status: string, $dayOfWeek: number) {
+	constructor($id: number, $startTime: number, $endTime: number, $status: string, $dayOfWeek: number) {
+		this.id = $id;
 		this.startTime = $startTime;
 		this.endTime = $endTime;
 		this.status = $status;
 		this.dayOfWeek = $dayOfWeek;
+	}
+
+    /**
+     * Getter $id
+     * @return {number}
+     */
+	public get $id(): number {
+		return this.id;
 	}
 
     /**
@@ -46,6 +55,14 @@ export class Time{
 	}
 
     /**
+     * Setter $id
+     * @param {number} value
+     */
+	public set $id(value: number) {
+		this.id = value;
+	}
+
+    /**
      * Setter $startTime
      * @param {number} value
      */
@@ -76,6 +93,6 @@ export class Time{
 	public set $dayOfWeek(value: number) {
 		this.dayOfWeek = value;
 	}
-	
-	
+
+
 }

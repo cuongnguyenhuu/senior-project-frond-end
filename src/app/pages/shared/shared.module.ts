@@ -21,7 +21,7 @@ import { ScheduleComponent } from './../../components/schedule/schedule.componen
 import { NotifDialogComponent } from './../../components/notif-dialog/notif-dialog.component';
 import { ConfirmDialogComponent } from './../../components/confirm-dialog/confirm-dialog.component';
 import { UpdateScheduleComponent } from './../../components/update-schedule/update-schedule.component';
-
+import { ConfirmCancelDialogComponent } from './../../components/confirm-cancel-dialog/confirm-cancel-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import { UpdateScheduleComponent } from './../../components/update-schedule/upda
     NotifDialogComponent,
     ConfirmDialogComponent,
     UpdateScheduleComponent,
+    ConfirmCancelDialogComponent
 
   ],
   imports: [

@@ -1,0 +1,30 @@
+<div class="confirm-dialog" *ngIf="open">
+    <div class="background" (click)="toggleConfirmDialog()">
+
+    </div>
+    <div class="dialog">
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="badge badge-warning" *ngIf="messageError!=null">{{messageError}}</p>
+                <p>
+                    Are you sure to CANCEL an appointment at <span class="hight-light">{{timeCancel.startTime+7*60*60*1000 | date:'HH:mm'}}</span> to <span class="hight-light">{{timeCancel.endTime+7*60*60*1000 | date:'HH:mm'}}</span> on <span class="hight-light">{{timeCancel.startTime | date:'MMMM d, y'}}</span>?
+                </p>
+
+            </div>
+            <div class="col-lg-12 text-left">
+                <div class="form-group">
+                    <label for="" class="badge badge-warning">Leave a message</label>
+                    <input type="text" [(ngModel)]="message" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Type your message here">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <button type="button" class="btn btn-primary" (click)="confirmOK()">Confirm</button>
+            </div>
+            <div class="col-lg-6">
+                <button type="button" (click)="toggleConfirmDialog()" class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

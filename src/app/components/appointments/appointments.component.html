@@ -1,36 +1,105 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
-            <h3> <span class="badge badge-info">Filter</span></h3>
+        <div class="col-lg-12 text-center">
+            <label class="title-feature">APPOINTMENTS</label>
         </div>
-        <div class="col-lg-12">
+    </div>
+    <div class="row margin-bottom">
+        <div class="col-lg-12 frame-border padding-15px">
             <div class="row">
-                <div class="col-lg-6">
-                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search...">
+                <div class="col-lg-12">
+                    <h3> <span class="badge badge-info">Filter</span></h3>
                 </div>
-                <div class="col-lg-3">
-                    <table>
-                        <tr>
-                            <td>
-                                <span>Status:</span>
-                            </td>
-                            <td>
-                                <select class="form-control">
-                                    <option>Done</option>
-                                </select>
-                            </td>
-                        </tr>
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input type="text" [(ngModel)]="search" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Type doctoc's name...">
+                        </div>
+                        <div class="col-lg-2">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <span>Status:</span>
+                                    </td>
+                                    <td>
+                                        <select class="form-control" [(ngModel)]="status" (change)="changeStatus($event.target.value)">
+                                            <option value="{{status}}" *ngFor="let status of statuses">{{status}}
+                                            </option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-lg-2">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <span>Sort by:</span>
+                                    </td>
+                                    <td>
+                                        <select class="form-control" [(ngModel)]="sortBy" (change)="changeSortBy($event.target.value)">
+                                            <option value="{{sortBy}}" *ngFor="let sortBy of sortByList">{{sortBy}}
+                                            </option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-lg-2 align-right">
+                            <button type="button" class="btn btn-primary" (click)="filter()">FILTER</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row margin-bottom">
+        <div class="col-lg-12 frame-border padding-15px">
+            <div class="row" *ngIf="appointments.length==0">
+                <div class="col-lg-12 text-center">
+                    <span class="badge badge-warning">No record matched</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table text-center table-hover" *ngIf="appointments.length>0">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">{{ROLE=='ROLE_PATIENT'?"Doctor’s name":"Patient's name"}}</th>
+                                <th scope="col">Create at</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let appointment of appointments; let i = index">
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{ROLE=='ROLE_PATIENT'?'Dr. '+appointment.doctor.account.name:appointment.patient.profilePatient.name}}</td>
+                                <td>{{appointment.create_at | date:'MMM d, y h:mm:ss a'}}</td>
+                                <td>
+                                    <span class="badge badge-success badge-pill">{{appointment.status ==1?'Cancel':appointment.start_at > currentTime?'Waiting':'Done'}}</span>
+                                </td>
+                                <td>
+                                    <button type="button" (click)="moveToDetail(appointment)" class="btn btn-info">Detail</button>
+                                    <button *ngIf="appointment.start_at > currentTime && appointment.status==0" type="button" class="btn btn-danger" (click)="showDialog(appointment)">Cancel</button>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
-                <div class="col-lg-3">
+            </div>
+            <div class="row page-number" *ngIf="totalPages!=null">
+                <div class="col-lg-12 text-right" *ngIf="appointments.length>0">
                     <table>
                         <tr>
                             <td>
-                                <span>Sort by:</span>
+                                <span>Page:</span>
                             </td>
                             <td>
-                                <select class="form-control">
-                                    <option>Newest</option>
+                                <select class="form-control" [(ngModel)]="currentPage" (change)="getAppointmentByPageIndex($event.target.value)">
+                                    <option value="{{i}}" *ngFor="let page of totalPages; let i = index">{{i+1}} of
+                                        {{totalPages.length}}</option>
                                 </select>
                             </td>
                         </tr>
@@ -39,65 +108,5 @@
             </div>
         </div>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-lg-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Doctor’s name</th>
-                        <th scope="col">Create at</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Dr. ABC</td>
-                        <td>13/09/2019 at 15:10</td>
-                        <td><button type="button" class="btn btn-primary">Pending</button></td>
-                        <td>
-                            <button type="button" class="btn btn-info">Detail</button>
-                            <button type="button" class="btn btn-danger">Cancel</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Dr. ABC</td>
-                        <td>13/09/2019 at 15:10</td>
-                        <td><button type="button" class="btn btn-primary">Pending</button></td>
-                        <td>
-                            <button type="button" class="btn btn-info">Detail</button>
-                            <button type="button" class="btn btn-danger">Cancel</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Dr. ABC</td>
-                        <td>13/09/2019 at 15:10</td>
-                        <td><button type="button" class="btn btn-primary">Done</button></td>
-                        <td>
-                            <button [routerLink]="['/patient/appointments/detail']" type="button" class="btn btn-info">Detail</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row page-number">
-        <table>
-            <tr>
-                <td>
-                    <span>Page:</span>
-                </td>
-                <td>
-                    <select class="form-control">
-                        <option>1 of 1</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-    </div>
 </div>
+<app-confirm-cancel-dialog *ngIf="open_confirm" (cancel)="cancelAppointment($event)" (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" [timeCancel]="timeCancel"></app-confirm-cancel-dialog>

@@ -1,17 +1,15 @@
-.row{
-    justify-content: center;
-    margin: 20px 0px;
-}
-.box-image{
+.box-image {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.name-doctor{
+
+.name-doctor {
     font-family: Playfair Display, Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 130%;
 }
-.specialist{
+
+.specialist {
     color: gray;
 }
