@@ -20,36 +20,36 @@
 
                 <div class="col-lg-6 label-diseases">
                     <div class="row margin-bottom" style="padding: 50px" *ngIf="imageName!=null" style="margin-bottom: 30px;">
-                        <div class="col-lg-12 chart">
+                        <div class="col-lg-12 chart" style="padding: 0px 50px">
                             <canvas baseChart width="500" height="500" [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
                             </canvas>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 ">
-                    <img [src]="'http://localhost:8080/api/utility/image/'+imageName" class="img-fluid img-thumbnail" alt="">
+                <div class="col-lg-6 " style="padding: 0px 50px">
+                    <img [src]="imageName" class="img-fluid img-thumbnail" alt="">
                 </div>
 
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="row" *ngFor="let disease of diseases; let i = index">
+                    <div class="row" *ngFor="let disease of top3; let i = index">
                         <div class="col-lg-12 box_name " data-toggle="collapse" [attr.data-target]="'#collapse'+i" aria-expanded="false" [attr.aria-controls]="'collapse'+i">
                             <div class="row">
-                                <div class="col-lg-10 name_disease">
+                                <div class="col-lg-10 name_disease" style="padding: 0px 50px">
                                     <span [class]="'color-bar-'+(i+1) + ' margin-right-15px'"></span>
                                     <span>
-                                        {{disease.name}}
+                                        {{diseases[disease].name}}
                                     </span>
                                 </div>
-                                <div class="col-lg-2">
+                                <!-- <div class="col-lg-2">
                                     <i class="fas fa-chevron-down"> </i>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
-                        <div class="col-lg-12 collapse" [id]="'collapse'+i">
+                        <div class="col-lg-12 collapse" style="padding: 0px 50px" [id]="'collapse'+i">
                             <p class="text-left padding-15px">
-                                {{disease.description}}
+                                {{diseases[disease].description}}
                             </p>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppointmentService } from './../../services/appointment-services/appointment.service';
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 @Component({
   selector: 'app-appointment',
   templateUrl: './appointment.component.html',
@@ -17,23 +17,49 @@ export class AppointmentComponent implements OnInit {
   private appointmentCancel: any;
 
   private ROLE;
-
+  private id;
   constructor(
     private appointmentService: AppointmentService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.ROLE = JSON.parse(localStorage.getItem("token")).role[0].authority;
-    this.data = this.appointmentService.getDetailAppointment();
-    if (this.data == null) {
-      if (this.ROLE == 'ROLE_PATIENT')
-        this.router.navigateByUrl("/patient/appointments");
-      if (this.ROLE == 'ROLE_DOCTOR')
-        this.router.navigateByUrl("/doctor/appointments");
-    }
+    // this.data = this.appointmentService.getDetailAppointment();
+    this.id = this.route.paramMap.subscribe(params=>{
+      this.id = params.get("id");
+      this.getdata();
+    });
+    console.log(this.id);
+    
+    
   }
 
+  public getdata(){
+    if (this.ROLE == 'ROLE_PATIENT'){
+      this.appointmentService.getDetailAppointmentByPatient(this.id).subscribe(data => {
+        console.log(data);
+        this.data = data;
+        if(data==null){
+          this.router.navigateByUrl("/patient/appointments");
+        }
+      }, error => {
+        console.log(error);
+      })
+    }
+    else if (this.ROLE == 'ROLE_DOCTOR'){
+      this.appointmentService.getDetailAppointmentByDoctor(this.id).subscribe(data => {
+        console.log(data);
+        this.data = data;
+        if(data==null){
+          this.router.navigateByUrl("/doctor/appointments");
+        }
+      }, error => {
+        console.log(error);
+      })
+    }
+  }
   public cancelAppointment(message) {
     if (this.ROLE == 'ROLE_PATIENT') {
       this.appointmentService.patientCancelAppointment(this.appointmentCancel.id, message).subscribe(data => {

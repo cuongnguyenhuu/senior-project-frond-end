@@ -24,7 +24,8 @@
                                     <td class="input">
                                         <select class="form-control" [(ngModel)]="specialistSelected" (change)="specialistOption($event.target.value)">
                                             <option value="all">All</option>
-                                            <option value="{{i}}" *ngFor="let specialist of specialists; let i = index">{{specialist.name}}</option>
+                                            <option value="{{i}}" *ngFor="let specialist of specialists; let i = index">
+                                                {{specialist.name}}</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -55,7 +56,8 @@
                                     <td class="input">
                                         <select class="form-control" [(ngModel)]="provinceSelected" (change)="provinceOption($event.target.value)">
                                             <option value="all">All</option>
-                                            <option value="{{i}}" *ngFor="let province of provinces; let i = index">{{changeWordToUnsigned(province.name)}}</option>
+                                            <option value="{{i}}" *ngFor="let province of provinces; let i = index">
+                                                {{changeWordToUnsigned(province.name)}}</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -70,7 +72,8 @@
                                     <td class="input">
                                         <select class="form-control" [(ngModel)]="districtSelected" (change)="districtOption($event.target.value)">
                                             <option value="all">All</option>
-                                            <option value="{{i}}" *ngFor="let district of districts; let i = index">{{changeWordToUnsigned(district.name)}}</option>
+                                            <option value="{{i}}" *ngFor="let district of districts; let i = index">
+                                                {{changeWordToUnsigned(district.name)}}</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -85,13 +88,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 padding-15px frame-border" *ngIf="doctors!=null">
+        <div class="col-lg-12 padding-15px frame-border">
             <div class="row doctor-recommending">
-                <div class="col-lg-12 text-center" *ngIf="doctors.length ==0">
-                    <label class="badge badge-warning">No record matched!</label>
+                <div class="col-lg-12 text-center" *ngIf="isLoading">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
                 </div>
-                <div class="col-lg-12">
-                    <table>
+
+                <div class="col-lg-12" *ngIf="!isLoading">
+                    <div class="col-lg-12 text-center" *ngIf="doctors.length ==0">
+                        <label class="badge badge-warning">No record matched!</label>
+                    </div>
+                    <table *ngIf="doctors.length>0">
                         <tr class="d-flex" *ngFor="let doctor of doctors">
                             <td class="col-1">
                                 <img src="assets/images/doctor.jpg" width="50px" alt="">

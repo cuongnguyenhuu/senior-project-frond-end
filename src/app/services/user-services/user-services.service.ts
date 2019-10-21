@@ -51,4 +51,36 @@ export class UserServicesService {
   public doctorRegister(data:doctorRegsiter){
     return this.http.post<any>(this.API+"utility/doctor/register",data,httpOptions);
   }
+
+  public getPatientProfile(){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.get<any>(this.API+"patient/profile/",httpOptions);
+  }
+
+  public updatePatientProfile(updatePatientProfile){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.put<any>(this.API+"patient/profile/",updatePatientProfile,httpOptions);
+  }
+
+  public getDoctorProfile(){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.get<any>(this.API+"doctor/profile/",httpOptions);
+  }
+
+  public updateDoctorProfile(updateDoctorProfile){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.put<any>(this.API+"doctor/profile/",updateDoctorProfile,httpOptions);
+  }
 }

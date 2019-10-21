@@ -17,7 +17,7 @@ export class CheckUpComponent implements OnInit {
   
   private image:string;
   private errorMessage;
-  private URL:string = "http://localhost:8080/api/utility/image/";
+  // private URL:string = "http://localhost:8080/api/utility/image/";
   private isloading:boolean =false;
   private disabled:boolean = true;
   private diseases:any;
@@ -38,8 +38,9 @@ export class CheckUpComponent implements OnInit {
 
   public uploadImage(file:File){
     this.imageServicesService.uploadImage(file).subscribe(data=>{
-      if(data.success==true){
-        this.image = data.message;
+      if(data!==null){
+        console.log(data)
+        this.image = data.image;
         this.disabled=false;
       }else{
         this.errorMessage = data.message;
@@ -53,10 +54,10 @@ export class CheckUpComponent implements OnInit {
 
   public checkUp(){
     this.isloading=true;
-    this.patientCheckUpService.checkUp(this.URL+this.image).subscribe(data=>{
+    this.patientCheckUpService.checkUp(this.image).subscribe(data=>{
       console.log(data);
       this.isloading = false;
-      var temp = JSON.parse(data);
+      var temp = data;
       for(var i = 0; i<temp.length; i++){
         this.result_text +=this.diseases[i].name +", "+temp[i]+"%; "; 
       }

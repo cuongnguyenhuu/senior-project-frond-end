@@ -6,9 +6,9 @@
     </div>
     <div class="row margin-bottom">
         <div class="col-lg-12 frame-border">
-            <div class="row center-horizontal padding-15px">
+            <div class="row center-horizontal padding-15px" *ngIf="data!=null">
                 <div class="col-lg-4 box-image">
-                    <img src="assets/images/doctor1.jpg" alt="">
+                    <img src="assets/images/doctor1.jpg" alt="" style="width: inherit">
                     <br>
                     <label class="name-doctor">
                         {{ROLE=='ROLE_PATIENT'?'Dr. '+data.doctor.account.name:data.patient.profilePatient.name}}
@@ -77,7 +77,7 @@
                         </tr>
                         <tr>
                             <th>
-                                <button type="button" class="btn btn-danger" *ngIf="data.status == 0 && data.start_at>currentTime" (click)="showDialog(data)">Cancel</button>
+                                <button type="button" class="btn btn-danger" *ngIf="data.status == 0 && data.start_at+7*60*60*1000>currentTime" (click)="showDialog(data)">Cancel</button>
                             </th>
                             <td>
 

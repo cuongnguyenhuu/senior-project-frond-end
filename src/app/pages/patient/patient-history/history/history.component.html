@@ -4,93 +4,60 @@
             <label class="title-feature">HISTORY</label>
         </div>
     </div>
-    <div class="row frame-border padding-15px margin-bottom">
-        <div class="col-lg-12">
-            <h3> <span class="badge badge-info">Filter</span></h3>
+    <div class="row frame-border padding-15px margin-bottom" *ngIf="data!=null">
+        <div class="col-lg-12 text-center" *ngIf="data.length==0">
+            <span class="badge badge-warning">Not found</span>
         </div>
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-6">
-                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search...">
-                </div>
-                <div class="col-lg-4">
-                    <table>
-                        <tr>
-                            <th class="title">
-                                <span>Sort by:</span>
-                            </th>
-                            <td class="input">
-                                <select class="form-control">
-                                    <option>Newest</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-lg-2">
-                    <button type="button" class="btn btn-primary">SEARCH</button>
-                </div>
-            </div>
+        <div class="col-lg-12 margin-bottom" *ngIf="data.length>0">
+            <table>
+                <tr>
+                    <th class="title">
+                        <span>Sort by:</span>
+                    </th>
+                    <td class="input">
+                        <select class="form-control" [(ngModel)]="sortBy" (change)="changeSortBy($event.target.value)">
+                            <option value="newest">Newest</option>
+                            <option value="lastest">Lastest</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
         </div>
-    </div>
-    <div class="row frame-border padding-15px margin-bottom">
-        <div class="col-lg-12">
+        <div class="col-lg-12" *ngIf="data.length>0">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Create at</th>
-                        <th scope="col">Result</th>
-                        <th scope="col">Action</th>
+                    <tr class="d-flex">
+                        <th class="col-1">#</th>
+                        <th class="col-2">Image</th>
+                        <th class="col-3">Create at</th>
+                        <th class="col-4">Result</th>
+                        <th class="col-2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>
-                            <img src="assets/images/doctor1.jpg" width="100px" alt="">
+                    <tr class="d-flex" *ngFor="let history of data; let i = index">
+                        <th class="col-1" scope="row">{{i+1}}</th>
+                        <td class="col-2">
+                            <img src="{{history.imageUploaded}}" width="100px" alt="">
                         </td>
-                        <td>13/09/2019 at 15:10</td>
-                        <td>sadaaaaaaaaaaaaaaaaaaaaaaadddddddddddddddddddddddd</td>
-                        <td>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>
-                            <img src="assets/images/doctor1.jpg" width="100px" alt="">
-                        </td>
-                        <td>13/09/2019 at 15:10</td>
-                        <td>sadaaaaaaaaaaaaaaaaaaaaaaadddddddddddddddddddddddd</td>
-                        <td>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>
-                            <img src="assets/images/doctor1.jpg" width="100px" alt="">
-                        </td>
-                        <td>13/09/2019 at 15:10</td>
-                        <td>sadaaaaaaaaaaaaaaaaaaaaaaadddddddddddddddddddddddd</td>
-                        <td>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                        <td class="col-3">{{history.createAt | date: 'dd-MMM-y HH:mm a'}}</td>
+                        <td class="col-4">{{history.result}}</td>
+                        <td class="col-2">
+                            <button type="button" class="btn btn-danger" (click)="confirmDelete(history)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12" *ngIf="data.length>0">
             <table>
                 <tr>
                     <td>
                         <span>Page:</span>
                     </td>
                     <td>
-                        <select class="form-control">
-                            <option>1 of 1</option>
+                        <select class="form-control" [(ngModel)]="pageIndex" (change)="changePage($event.target.value)">
+                            <option value="{{i}}" *ngFor="let page of totalPages; let i= index">{{i+1}} of {{totalPages.length}}</option>
                         </select>
                     </td>
                 </tr>
@@ -98,3 +65,4 @@
         </div>
     </div>
 </div>
+<app-confirm-dialog *ngIf="open_confirm" (ok)="deleteHistory()" (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" [message]="messageConfirm"></app-confirm-dialog>
