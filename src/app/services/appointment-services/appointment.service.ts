@@ -84,4 +84,12 @@ export class AppointmentService {
     }
     return this.http.get<any>(this.API+"patient/appointment/"+id+"/",httpOptions)
   }
+
+  public getAppointmentOverview(){
+    if (httpOptions.headers.get("Authorization") == null) {
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization", token);
+    }
+    return this.http.get<any>(this.API+"admin/overview/",httpOptions);
+  }
 }
