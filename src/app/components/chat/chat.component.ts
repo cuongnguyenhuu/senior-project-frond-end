@@ -23,6 +23,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   private text_message = '';
   private isLoadingList:boolean = true;
   private isLoadingMessages:boolean;
+  private message;
   private allChatsSubscription: Subscription = new Subscription();
   constructor(
     private firebaseService: FirebaseService
@@ -85,6 +86,11 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             
           }
         })
+        if(data.length == 0){
+          this.isLoadingList = false;
+          this.listChats = [];
+          this.message = "No message!"
+        }
         console.log("AAA" + temp.length)
       }
       // if(this.listChats.length>0)

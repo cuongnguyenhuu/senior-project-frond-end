@@ -138,20 +138,22 @@ export class RegisterDialogComponent implements OnInit {
       this.errorMessages = "Please type all fields."
     }else if(!this.comparePassword()){
       this.errorMessages = "Confirm password not match."
-    }else if(!this.isEmailValidated()){
-      this.errorMessages = "Email is not valid."
-    }else if(!this.isPhoneNumberValidated()){
+    }
+    // else if(!this.isEmailValidated()){
+    //   this.errorMessages = "Email is not valid."
+    // }
+    else if(!this.isPhoneNumberValidated()){
       this.errorMessages = "Phone number is not valid."
     }else{
       if(!this.isDoctor){
         this.toggleRegisterDialog();
         this.spinner.show();
-        var birthday = Date.parse(this.birthday+"");
+        // var birthday = Date.parse(this.birthday+"");
         var data:patientRegister = new patientRegister(this.username,this.password
-          ,this.email,this.phoneNumber, this.name, birthday, this.gender,
-          this.country, this.firstUppercaseSentence(this.provinces[this.provinceSelected].name),
-          this.firstUppercaseSentence(this.districts[this.districtSelected].name), 
-          this.firstUppercaseSentence(this.wards[this.wardSelected].name),
+          ,this.email,this.phoneNumber, this.name, null, this.gender,
+          this.country,"",
+          "", 
+          "",
           this.street);
         this.userServicesService.patientRegister(data).subscribe(data=>{
           this.spinner.hide();
@@ -168,16 +170,16 @@ export class RegisterDialogComponent implements OnInit {
           console.log(error);
         })
       }else{
-        if(this.isExperiencesValidated()){
+        // if(this.isExperiencesValidated()){
           this.toggleRegisterDialog();
           this.spinner.show();
-          var birthday = Date.parse(this.birthday+"");
+          // var birthday = Date.parse(this.birthday+"");
           var dataDoctor:doctorRegsiter = new doctorRegsiter(this.username,this.password
-            ,this.email,this.phoneNumber, this.name, birthday, this.gender,
-            this.country, this.firstUppercaseSentence(this.provinces[this.provinceSelected].name),
-              this.firstUppercaseSentence(this.districts[this.districtSelected].name), 
-              this.firstUppercaseSentence(this.wards[this.wardSelected].name),
-            this.street,this.specialists[this.specialistSelected].name,this.experiences, this.certificate);
+            ,this.email,this.phoneNumber, this.name, null, this.gender,
+            this.country, "",
+              "", 
+              "",
+            this.street,"",0, this.certificate);
           this.userServicesService.doctorRegister(dataDoctor).subscribe(data=>{
             this.spinner.hide();
             if(data.success==false){
@@ -192,7 +194,7 @@ export class RegisterDialogComponent implements OnInit {
             this.errorMessages = error.status;
             console.log(error);
           })
-        }
+        // }
       }  
     }
   }
@@ -222,56 +224,56 @@ export class RegisterDialogComponent implements OnInit {
       this.errorField[2] = false;
       status =false;
     }
-    if(this.email.trim()===""){
-      this.errorField[3] = false;
-      status =false;
-    }
+    // if(this.email.trim()===""){
+    //   this.errorField[3] = false;
+    //   status =false;
+    // }
     if(this.phoneNumber.trim()==""){
       this.errorField[4] = false;
       status =false;
     }
-    if(this.country==="default"){
-      this.errorField[8] = false;
-      status =false;
-    }
-    if(this.provinceSelected==="default"){
-      this.errorField[9] = false;
-      status =false;
-    }
-    if(this.districtSelected==="default"){
-      this.errorField[10] = false;
-      status =false;
-    }
-    if(this.wardSelected==="default"){
-      this.errorField[11] = false;
-      status =false;
-    }
-    if(this.street.trim()===""){
-      this.errorField[12] = false;
-      status =false;
-    }
-    if(this.birthday==null){
-      this.errorField[5] = false;
-      status =false;
-    }
+    // if(this.country==="default"){
+    //   this.errorField[8] = false;
+    //   status =false;
+    // }
+    // if(this.provinceSelected==="default"){
+    //   this.errorField[9] = false;
+    //   status =false;
+    // }
+    // if(this.districtSelected==="default"){
+    //   this.errorField[10] = false;
+    //   status =false;
+    // }
+    // if(this.wardSelected==="default"){
+    //   this.errorField[11] = false;
+    //   status =false;
+    // }
+    // if(this.street.trim()===""){
+    //   this.errorField[12] = false;
+    //   status =false;
+    // }
+    // if(this.birthday==null){
+    //   this.errorField[5] = false;
+    //   status =false;
+    // }
     if(this.name.trim()===""){
       this.errorField[6] = false;
       status =false;
     }
     
     if(this.isDoctor){
-      if(this.specialistSelected==="default"){
-        this.errorField[13] = false;
-        status =false;
-      }
+      // if(this.specialistSelected==="default"){
+      //   this.errorField[13] = false;
+      //   status =false;
+      // }
       if(this.certificate===""){
         this.errorField[15] = false;
         status =false;
       }
-      if(this.experiences==null){
-        this.errorField[14] = false;
-        status =false;
-      }
+      // if(this.experiences==null){
+      //   this.errorField[14] = false;
+      //   status =false;
+      // }
     }
     return status;
   }
@@ -296,11 +298,8 @@ export class RegisterDialogComponent implements OnInit {
   public uploadImage(file:File){
       // console.log(file.size);
     this.imageServicesService.uploadImage(file).subscribe(data=>{
-      if(data.success==true){
-        this.certificate = data.message;
-      }
-      else{
-        this.errorMessages=data.message;
+      if(data!=null){
+        this.certificate = data.image;
       }
     },
     error=>{

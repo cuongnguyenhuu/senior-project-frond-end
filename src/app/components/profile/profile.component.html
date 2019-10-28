@@ -27,7 +27,7 @@
                                 <input type="text" class="form-control" [(ngModel)]="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.name:dataEdit.account.name" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
-                                {{ROLE=='ROLE_PATIENT'?data.profilePatient.name:data.account.name}}
+                                {{profile.name!=""?profile.name:'-'}}
                             </td>
                         </tr>
                         <tr class="d-flex">
@@ -38,7 +38,7 @@
                                 <input type="text" class="form-control" [(ngModel)]="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.email:dataEdit.account.email" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
-                                {{ROLE=='ROLE_PATIENT'?data.profilePatient.email:data.account.email}}
+                                {{profile.email!=""?profile.email:'-'}}
                             </td>
                         </tr>
                         <tr class="d-flex">
@@ -50,7 +50,7 @@
                                     aria-describedby="helpId" placeholder="">
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
-                                {{ROLE=='ROLE_PATIENT'?data.profilePatient.birthday:data.account.birthday | date:'MM-dd-y'}}
+                                {{profile.birthday!=null?(profile.birthday | date:'MMM-dd-y'):'-'}}
                             </td>
                         </tr>
                         <tr class="d-flex">
@@ -65,7 +65,7 @@
                                 </select>
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
-                                {{ROLE=='ROLE_PATIENT'?data.profilePatient.gender:data.account.gender}}
+                                {{ROLE=='ROLE_PATIENT'?changeWordToUnsigned(data.profilePatient.gender):changeWordToUnsigned(data.account.gender)}}
                             </td>
                         </tr>
                         <tr class="d-flex">
@@ -101,7 +101,8 @@
                                 </select>
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
-                                {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.city:data.account.address.city}}
+                                <!-- {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.city:data.account.address.city}} -->
+                                {{profile.address.city!=""?profile.address.city:'-'}}
                             </td>
                         </tr>
                         <tr class="d-flex">
@@ -116,7 +117,8 @@
                                 </select>
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
-                                {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.locality:data.account.address.locality}}
+                                <!-- {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.locality:data.account.address.locality}} -->
+                                {{profile.address.locality!=""?profile.address.locality:'-'}}
                             </td>
                         </tr>
                         <tr class="d-flex">
@@ -131,7 +133,8 @@
                                 </select>
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
-                                {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.ward:data.account.address.ward}}
+                                <!-- {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.ward:data.account.address.ward}} -->
+                                {{profile.address.ward!=""?profile.address.ward:'-'}}
                             </td>
                         </tr>
                         <tr class="d-flex">
@@ -142,7 +145,8 @@
                                 <input type="text" class="form-control" [(ngModel)]="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.address.addressLine:dataEdit.account.address.addressLine" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
-                                {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.addressLine:data.account.address.addressLine}}
+                                <!-- {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.addressLine:data.account.address.addressLine}} -->
+                                {{profile.address.addressLine!=""?profile.address.addressLine:'-'}}
                             </td>
                         </tr>
                     </table>
@@ -160,7 +164,7 @@
                                 <input type="text" class="form-control" [(ngModel)]="dataEdit.history_diseases" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
-                                {{data.history_diseases}}
+                                {{data.history_diseases!=""?data.history_diseases:'-'}}
                             </td>
                         </tr>
                         <tr class="d-flex" *ngIf="ROLE =='ROLE_DOCTOR'">
@@ -175,7 +179,8 @@
                                 </select>
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
-                                {{data.major}}
+                                <!-- {{data.major}} -->
+                                {{data.major!=""?data.major:'-'}}
                             </td>
                         </tr>
                         <tr class="d-flex" *ngIf="ROLE =='ROLE_DOCTOR'">

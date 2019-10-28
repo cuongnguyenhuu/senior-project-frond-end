@@ -20,9 +20,7 @@
 
 .dialog {
     position: absolute;
-    width: fit-content;
-    min-width: 25%;
-    max-width: 80%;
+    width: 25%;
     height: max-content;
     margin: auto;
     left: 0;

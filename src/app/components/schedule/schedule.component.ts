@@ -71,7 +71,7 @@ export class ScheduleComponent implements OnInit {
         console.log(data);
         this.doctor = data.doctor;
         if (data.scheduleEntity == null) {
-          this.message = "Not found schedule";
+          this.message = "No schedule!";
         }
         else {
           for (let index = 0; index < data.dayResponses[0].timeResponses.length; index++) {
@@ -110,7 +110,7 @@ export class ScheduleComponent implements OnInit {
         this.member2 = this.doctor.account.account.username;
 
         if (data.scheduleEntity == null) {
-          this.message = "Not found schedule";
+          this.message = "No schedule!";
         }
         else {
           for (let index = 0; index < data.dayResponses[0].timeResponses.length; index++) {

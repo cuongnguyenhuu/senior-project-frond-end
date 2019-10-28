@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
 
   private ROLE;
   private data;
+  private profile;
   private dataEdit;
   private isEditing = false;
   //infor
@@ -42,6 +43,7 @@ export class ProfileComponent implements OnInit {
       this.userServices.getDoctorProfile().subscribe(dataInput => {
         console.log(dataInput);
         this.data = dataInput;
+        this.profile = dataInput.account;
         this.data.account.birthday = this.datePipe.transform(this.data.account.birthday, 'yyyy-MM-dd');
         this.provinceName = this.data.account.address.city;
         this.districtName = this.data.account.address.locality;
@@ -55,6 +57,7 @@ export class ProfileComponent implements OnInit {
       this.userServices.getPatientProfile().subscribe(dataInput => {
         console.log(dataInput);
         this.data = dataInput;
+        this.profile = dataInput.profilePatient;
         this.data.profilePatient.birthday = this.datePipe.transform(this.data.profilePatient.birthday, 'yyyy-MM-dd');
         this.provinceName = this.data.profilePatient.address.city;
         this.districtName = this.data.profilePatient.address.locality;
@@ -75,20 +78,32 @@ export class ProfileComponent implements OnInit {
 
   public changeToEdit() {
     this.dataEdit = this.data;
+    if(this.provinceName==""){
+      this.provinceIndex = 0
+    }else
     for (let index = 0; index < this.dataLocal.length; index++) {
       if (this.changeWordToUnsigned(this.dataLocal[index].name) == this.provinceName) {
         this.provinceIndex = index;
       }
     }
+    if(this.districtName==""){
+      this.districtIndex = 0
+    }else
     for (let index = 0; index < this.dataLocal[this.provinceIndex].districts.length; index++) {
       if (this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[index].name) == this.districtName) {
         this.districtIndex = index;
       }
     }
+    if(this.wardName==""){
+      this.wardIndex=0
+    }else
     for (let index = 0; index < this.dataLocal[this.provinceIndex].districts[this.districtIndex].wards.length; index++) {
       if (this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[this.districtIndex].wards[index].name) == this.wardName) {
         this.wardIndex = index;
       }
+    }
+    if(this.data.major==""){
+      this.specialistIndex = 0;
     }
     for (let index = 0; index < this.specialists.length; index++) {
       if (this.specialists[index].name == this.data.major) {

@@ -1,10 +1,15 @@
 <div class="container padding-15px">
-    <div class="row center" *ngIf="isLoadingList">
+    <div class="row center" style="height: inherit;" *ngIf="isLoadingList">
         <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    <div class="row box-messages" *ngIf="!isLoadingList">
+    <div class="row" class="row center" style="height: inherit;" *ngIf="!isLoadingList&&listChats.length==0">
+        <!-- <div class="col-lg-12 "> -->
+        <span class="badge badge-pill badge-warning">{{message}}</span>
+        <!-- </div> -->
+    </div>
+    <div class="row box-messages" *ngIf="!isLoadingList&&listChats.length>0">
         <div class="col-3">
             <div class="row">
                 <div class="col-12 title">
@@ -22,7 +27,8 @@
                                 </div>
                                 <div class="col-12 last-message">
                                     <!-- <span>{{chat.lastMessage}}</span> -->
-                                    <i [class]="(chat.isOnline )==true?'fas fa-circle online':'fas fa-circle offline'"> {{(chat.isOnline)==true?"Online":"Offline"}}</i> <span *ngIf="!chat.isRead" style="float: right" class="badge badge-danger">New</span>
+                                    <i [class]="(chat.isOnline )==true?'fas fa-circle online':'fas fa-circle offline'">
+                                        {{(chat.isOnline)==true?"Online":"Offline"}}</i> <span *ngIf="!chat.isRead" style="float: right" class="badge badge-danger">New</span>
                                 </div>
                             </div>
                         </div>

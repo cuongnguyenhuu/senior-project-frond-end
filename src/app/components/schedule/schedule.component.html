@@ -68,9 +68,12 @@
                         <div class="col-lg-6 text-center" *ngIf="message!=null">
                             <span class="badge badge-warning">{{message}}</span>
                         </div>
-                        <div class="col-lg-6 text-center" *ngIf="message!=null">
-                            <button type="button" class="btn btn-primary" (click)="toggleUpdateDialog()">Set your
-                                schedule</button>
+                        <div class="col-lg-6 text-center" *ngIf="message!=null&&ROLE=='ROLE_DOCTOR'">
+                            <span class="badge badge-pill badge-warning" *ngIf="!doctor.account.account.is_approved">Your account hasn't been verified.</span>
+                            <br>
+                            <button type="button" [disabled]="!doctor.account.account.is_approved" class="btn btn-primary" (click)="toggleUpdateDialog()">
+                                SET SCHEDULE
+                            </button>
                         </div>
                     </div>
                     <div class="row margin-bottom " *ngIf="message==null">

@@ -1,0 +1,31 @@
+<div class="row" *ngIf="errorMessage!=''">
+    <div class="col-lg-12">
+        <span class="badge badge-warning">{{errorMessage}}</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 username">
+        <input type="text" [class]="errorField.length==0?'form-control':errorField[0]==false?'form-control is-invalid':'form-control is-valid'" [(ngModel)]="username" name="" id="username" aria-describedby="helpId" placeholder="Username">
+        <i class="fas fa-user"></i>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 password">
+        <input [type]="isCoverPassword?'password':'text'" [class]="errorField.length==0?'form-control':errorField[1]==false?'form-control is-invalid':'form-control is-valid'" class="form-control" [(ngModel)]="password" name="" id="password" aria-describedby="helpId"
+            placeholder="Password">
+        <i class="fas fa-key"></i>
+        <i class="fas fa-eye-slash" *ngIf="isCoverPassword" (click)="toggleCoverPassword()"></i>
+        <i class="fas fa-eye" *ngIf="!isCoverPassword" (click)="toggleCoverPassword()"></i>
+    </div>
+</div>
+<!-- <div class="row">
+    <div class="col-lg-12 forgot-password">
+        <p><a href="javascript:void(0)" (click)="toggleRegisterDialog()">Do you have account?</a> Or <a href="">forgot
+                password?</a></p>
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-lg-12">
+        <button type="button" class="btn btn-primary" (click)="login()">LOGIN</button>
+    </div>
+</div>
