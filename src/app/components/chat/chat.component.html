@@ -1,98 +1,125 @@
 <div class="container padding-15px">
-    <div class="row box-messages">
-        <div class="col-lg-3">
+    <div class="row center" style="height: inherit;" *ngIf="isLoadingList">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="row" class="row center" style="height: inherit;" *ngIf="!isLoadingList&&listChats.length==0">
+        <!-- <div class="col-lg-12 "> -->
+        <span class="badge badge-pill badge-warning">{{message}}</span>
+        <!-- </div> -->
+    </div>
+    <div class="row box-messages" *ngIf="!isLoadingList&&listChats.length>0">
+        <div class="col-3">
             <div class="row">
-                <div class="col-lg-12 title">
+                <div class="col-12 title">
                     <p>List messages</p>
                 </div>
-                <div class="col-lg-12">
-                    <div class="row conversation">
-                        <div class="col-lg-3">
+                <div class="col-12">
+                    <div class="row conversation" *ngFor="let chat of listChats; let i = index" (click)="pickChat(i)">
+                        <div class="col-3">
                             <img src="assets/images/doctor1.jpg" width="50px" height="50px" class="rounded-circle" alt="">
                         </div>
-                        <div class="col-lg-9">
-                            <div class="col-lg-12 name">
-                                <span>Name doctor</span>
-                            </div>
-                            <div class="col-lg-12 last-message">
-                                <span>You: Thanks!</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row conversation">
-                        <div class="col-lg-3">
-                            <img src="assets/images/doctor1.jpg" width="50px" height="50px" class="rounded-circle" alt="">
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="col-lg-12 name">
-                                <span>Name doctor</span>
-                            </div>
-                            <div class="col-lg-12 last-message">
-                                <span>You: Thanks!</span>
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-12 name title_chat">
+                                    <span>{{chat.title}}</span>
+                                </div>
+                                <div class="col-12 last-message">
+                                    <!-- <span>{{chat.lastMessage}}</span> -->
+                                    <i [class]="(chat.isOnline )==true?'fas fa-circle online':'fas fa-circle offline'">
+                                        {{(chat.isOnline)==true?"Online":"Offline"}}</i> <span *ngIf="!chat.isRead" style="float: right" class="badge badge-danger">New</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 box-chat">
+        <div class="col-6 box-chat" *ngIf="indexSelectedChat!=null">
             <div class="row">
-                <div class="col-lg-12 title">
+                <div class="col-12 title">
                     <p>Chat</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-1">
+                <div class="col-1">
                     <img src="assets/images/doctor1.jpg" width="30px" height="30px" class="rounded-circle" alt="">
                 </div>
-                <div class="col-lg-11 name-chat">
-                    <p>Name doctor</p>
+                <div class="col-11 name-chat">
+                    <p>{{listChats[indexSelectedChat].title}}</p>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-12">
                     <hr>
                 </div>
             </div>
-            <div class="row message">
-                <div class="col-lg-1">
-                    <img src="assets/images/doctor1.jpg" width="30px" height="30px" class="rounded-circle" alt="">
-                </div>
-                <div class="col-lg-7 text-message">
-                    <p>asdasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasddddddd</p>
+            <div class="row center" *ngIf="isLoadingMessages">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <div class="row message my-message">
-                <div class="col-lg-7 text-message">
-                    <p>asdasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasddddddd</p>
+            <div #scrollMe class="row" style="height: 70%;
+            overflow: auto; align-items: flex-end;" *ngIf="!isLoadingMessages">
+
+                <div class="col-12" *ngFor="let message of chatBox">
+                    <div class="row message" *ngIf="message.sender!=currentMember">
+                        <div class="col-1">
+                            <img src="assets/images/doctor1.jpg" width="30px" height="30px" class="rounded-circle" alt="">
+                        </div>
+                        <div class="col-7 text-message">
+                            <p>{{message.text_message}}</p>
+                            <small>{{message.create_at | date:'dd-MM-y HH:mm:ss a'}}</small>
+                        </div>
+                    </div>
+                    <div class="row message my-message" *ngIf="message.sender==currentMember">
+                        <div class="col-7 text-message">
+                            <p>{{message.text_message}}</p>
+                            <small>{{message.create_at | date:'dd-MM-y HH:mm:ss a'}}</small>
+                        </div>
+                        <!-- <div class="col-1">
+                            <img src="assets/images/doctor1.jpg" width="30px" height="30px" class="rounded-circle" alt="">
+                        </div> -->
+                    </div>
                 </div>
-                <div class="col-lg-1">
-                    <img src="assets/images/doctor1.jpg" width="30px" height="30px" class="rounded-circle" alt="">
+                <div class="col-12" *ngIf="listChats[indexSelectedChat].isTyping">
+                    <div class="row message">
+                        <div class="col-1">
+                            <img src="assets/images/doctor1.jpg" width="30px" height="30px" class="rounded-circle" alt="">
+                        </div>
+                        <div class="col-7 text-message">
+                            <small style="font-style: italic;
+                            color: gray;">{{listChats[indexSelectedChat].title}} is typing something...</small>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div class="row input-box ">
-                <div class="col-lg-12">
+                <div class="col-12">
                     <div class="row">
-                        <div class="col-lg-1 upload-image">
+                        <div class="col-1 upload-image">
                             <label for="upload"><i class="fas fa-image"></i></label>
                             <input type="file" id="upload" style="display: none">
                         </div>
-                        <div class="col-lg-9">
-                            <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Type your message here">
+                        <div class="col-9">
+                            <input type="text" class="form-control" [(ngModel)]="text_message" (focusout)="onFocusOut($event)" (focus)="onFocus($event)" name="" id="" aria-describedby="helpId" placeholder="Type your message here">
                         </div>
-                        <div class="col-lg-2 button-send">
-                            <button type="button" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                        <div class="col-2 button-send">
+                            <button type="button" class="btn btn-primary" (click)="sendMessage()"><i
+                                    class="fas fa-paper-plane"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 information">
+        <div class="col-3 information" style="z-index: -999;">
             <div class="row">
-                <div class="col-lg-12 title">
+                <div class="col-12 title">
                     <p>Information</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-12">
                     <img src="assets/images/doctor1.jpg" width="100px" height="100px" class="rounded-circle" alt="">
                     <p class="name">Dr. Abc</p>
                     <p class="specialist">specialist</p>

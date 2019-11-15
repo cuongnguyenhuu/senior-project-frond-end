@@ -10,11 +10,11 @@ export class ConfirmDialogComponent implements OnInit {
 
   @Input() open : boolean;
 
-  @Input() timeBook:any;
+  @Input() message:any;
 
   @Output() closeDialog = new EventEmitter();
 
-  @Output() book = new EventEmitter();
+  @Output() ok = new EventEmitter();
   constructor(
     private convertTimeService:ConvertTimeService
   ) { }
@@ -29,7 +29,7 @@ export class ConfirmDialogComponent implements OnInit {
   }
 
   public confirmOK(){
-    this.book.emit();
+    this.ok.emit();
     this.toggleConfirmDialog();
   }
 

@@ -1,106 +1,93 @@
-
-    <div class="row">
-        <div class="col-lg-12">
-            <h3> <span class="badge badge-info">Filter</span></h3>
-        </div>
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-6">
-                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search...">
-                </div>
-                <div class="col-lg-3">
-                    <table>
-                        <tr>
-                            <td>
-                                <span>Role:</span>
-                            </td>
-                            <td>
-                                <select class="form-control">
-                                    <option>All</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-lg-3">
-                    <table>
-                        <tr>
-                            <td>
-                                <span>Banded:</span>
-                            </td>
-                            <td>
-                                <select class="form-control">
-                                    <option>None</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+<div class="row">
+    <div class="col-lg-12">
+        <h3> <span class="badge badge-info">Filter</span></h3>
+    </div>
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-4">
+                <input type="text" class="form-control" [(ngModel)]="textSearch" name="" id="" aria-describedby="helpId" placeholder="Search...">
+            </div>
+            <div class="col-lg-3">
+                <table>
+                    <tr>
+                        <td>
+                            <span>Role:</span>
+                        </td>
+                        <td>
+                            <select class="form-control" [(ngModel)]="role" (change)="setRole($event.target.value)">
+                                <option value="all">All</option>
+                                <option value="patient">Patient</option>
+                                <option value="doctor">Doctor</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3">
+                <table>
+                    <tr>
+                        <td>
+                            <span>Status:</span>
+                        </td>
+                        <td>
+                            <select class="form-control" [(ngModel)]="status" (change)="setStatus($event.target.value)">
+                                <option value="all">All</option>
+                                <option value="false">Active</option>
+                                <option value="true">Banned</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-primary" (click)="search()">SEARCH</button>
             </div>
         </div>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-lg-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Fullname</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Banded</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>abc</td>
-                        <td>Dr. Abc</td>
-                        <td><span class="badge badge-warning">Doctor</span></td>
-                        <td><span class="badge badge-success">No</span></td>
-                        <td>
-                            <button type="button" class="btn btn-info">Detail</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>abc</td>
-                        <td>Abc</td>
-                        <td><span class="badge badge-primary">Patient</span></td>
-                        <td><span class="badge badge-danger">Yes</span></td>
-                        <td>
-                            <button type="button" class="btn btn-info">Detail</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>abc</td>
-                        <td>Dr. Abc</td>
-                        <td><span class="badge badge-warning">Doctor</span></td>
-                        <td><span class="badge badge-danger">Yes</span></td>
-                        <td>
-                            <button type="button" class="btn btn-info">Detail</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row page-number">
-        <div class="col-lg-2">
-            <table>
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table">
+            <thead>
                 <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Create at</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let account of data; let i =index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{account.username}}</td>
+                    <td>{{account.create_at | date:'MMM-dd-y'}}</td>
+                    <td><span class="badge badge-success">{{account.roles[0].role_name=="ROLE_DOCTOR"?'DOCTOR':'PATIENT'}}</span></td>
+                    <td><span class="badge badge-warning">{{account.is_banded?'Banned':'Active'}}</span></td>
                     <td>
-                        <span>Page:</span>
-                    </td>
-                    <td>
-                        <select class="form-control">
-                            <option>1 of 1</option>
-                        </select>
+                        <button type="button" *ngIf="account.roles[0].role_name=='ROLE_DOCTOR'" class="btn btn-info" [routerLink]="['doctor/'+account.username+'/detail']" routerLinkActive="router-link-active">Detail</button>
+                        <button type="button" *ngIf="account.roles[0].role_name=='ROLE_PATIENT'" class="btn btn-info" [routerLink]="['patient/'+account.username+'/detail']" routerLinkActive="router-link-active">Detail</button>
                     </td>
                 </tr>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
+</div>
+<div class="row page-number">
+    <div class="col-lg-2">
+        <table>
+            <tr>
+                <td>
+                    <span>Page:</span>
+                </td>
+                <td>
+                    <select class="form-control">
+                        <option>{{currentPage+1}} of {{totalPages}}</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

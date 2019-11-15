@@ -51,6 +51,14 @@
                                 {{data.doctor.account.address.addressLine}}, {{data.doctor.account.address.ward}}, {{data.doctor.account.address.locality}}, {{data.doctor.account.address.city}}, {{data.doctor.account.address.country}}
                             </td>
                         </tr>
+                        <tr *ngIf="ROLE=='ROLE_PATIENT'">
+                            <th>
+                                <button type="button" class="btn btn-primary" (click)="sendMessage()">SEND</button>
+                            </th>
+                            <td>
+                                <textarea class="form-control" [(ngModel)]="messageChat" name="" id="" cols="30" rows="3" placeholder="Leave any question"></textarea>
+                            </td>
+                        </tr>
                     </table>
                 </div>
 
@@ -60,9 +68,12 @@
                         <div class="col-lg-6 text-center" *ngIf="message!=null">
                             <span class="badge badge-warning">{{message}}</span>
                         </div>
-                        <div class="col-lg-6 text-center" *ngIf="message!=null">
-                            <button type="button" class="btn btn-primary" (click)="toggleUpdateDialog()">Set your
-                                schedule</button>
+                        <div class="col-lg-6 text-center" *ngIf="message!=null&&ROLE=='ROLE_DOCTOR'">
+                            <span class="badge badge-pill badge-warning" *ngIf="!doctor.account.account.is_approved">Your account hasn't been verified.</span>
+                            <br>
+                            <button type="button" [disabled]="!doctor.account.account.is_approved" class="btn btn-primary" (click)="toggleUpdateDialog()">
+                                SET SCHEDULE
+                            </button>
                         </div>
                     </div>
                     <div class="row margin-bottom " *ngIf="message==null">
@@ -73,8 +84,9 @@
                         </div>
                         <div class="col-lg-5" *ngIf="ROLE=='ROLE_DOCTOR'">
                             <select class="form-control" [(ngModel)]="actionType" (change)="changeActionType($event.target.value)">
-                                <option value="default">Default</option>
+                                <option value="available">Available</option>
                                 <option value="busy">Busy</option>
+                                <option value="default">Default</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
@@ -82,26 +94,53 @@
                             <button type="button" [disabled]="timeSelected.length==0" class="btn btn-primary" (click)="addTimeBusy()">ACTION</button>
                         </div>
                     </div>
-
-                    <table class="col-lg-12 table-bordered schedule" *ngIf="message==null">
+                    <div class="row" *ngIf="message==null">
+                        <div class="col-lg-12 padding-15px">
+                            <table class="table-responsive">
+                                <tr class="d-flex">
+                                    <td class="col-2">
+                                        <span class="btn btn-success margin-right-15px"></span>
+                                        <label>Available</label>
+                                    </td>
+                                    <td class="col-2">
+                                        <span class="btn btn-danger margin-right-15px"></span>
+                                        <label>Busy</label>
+                                    </td>
+                                    <td class="col-2" *ngIf="ROLE=='ROLE_DOCTOR'">
+                                        <span class="btn btn-info margin-right-15px"></span>
+                                        <label>Other</label>
+                                    </td>
+                                    <td class="col-2" *ngIf="ROLE=='ROLE_DOCTOR'">
+                                        <span class=" btn btn-warning margin-right-15px "></span>
+                                        <label>Default</label>
+                                    </td>
+                                    <td class="col-2 " *ngIf="ROLE=='ROLE_DOCTOR'">
+                                        <span class="btn btn-primary margin-right-15px"></span>
+                                        <label>Booked</label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <table class="col-lg-12 table-bordered schedule text-center" *ngIf="message==null">
                         <tr>
                             <th class="w-15">
                                 Time
                             </th>
-                            <th class="w-15" *ngFor="let name of dayName; let i = index">
+                            <th class="w-15 colunm-day" *ngFor="let name of dayName; let i = index" (click)="pickColunm(i)">
                                 {{name}}
                                 <br>
                                 <small>({{dates[i] | date:'MMM d'}})</small>
                             </th>
                         </tr>
-                        <tr *ngFor="let schedule of schedules">
-                            <td>
-                                {{schedule.timeResponses[0].startTime+7*60*60*1000 | date:'HH:mm'}}
+                        <tr *ngFor="let schedule of schedules; let i = index">
+                            <td (click)="pickRow(i)" class="row-time">
+                                {{schedule.timeResponses[0].startTime | date:'HH:mm'}}
                             </td>
                             <td *ngFor="let time of schedule.timeResponses">
-                                <button (click)="toggleConfirmDialog(time)" [disabled]="time.status!='available'" *ngIf="ROLE=='ROLE_PATIENT'" [class]="time.status!='available'?'btn btn-danger btn-block padding-15px':'btn btn-success btn-block padding-15px'">
+                                <button (click)="toggleConfirmDialog(time)" [disabled]="time.status!='available'||currentTime>time.startTime" *ngIf="ROLE=='ROLE_PATIENT'" [class]="time.status!='available'?'btn btn-danger btn-block padding-15px':'btn btn-success btn-block padding-15px'">
                                 </button>
-                                <input style="display: none" class="checkbox-schedule" type="checkbox" *ngIf="ROLE=='ROLE_DOCTOR'" [id]="time.startTime" (click)="addTime(time)">
+                                <input style="display: none" class="checkbox-schedule" type="checkbox" *ngIf="ROLE=='ROLE_DOCTOR'" [checked]="timeSelected.indexOf(time)!=-1" [id]="time.startTime" (click)="addTime(time)">
                                 <label [for]="time.startTime" *ngIf="ROLE=='ROLE_DOCTOR'" [class]="time.status=='available'?' btn btn-success btn-block padding-15px label-checkbox-chedule':
                                                     time.status=='default'?'label-checkbox-chedule btn btn-warning btn-block padding-15px':
                                                     time.status=='busy'?'label-checkbox-chedule btn btn-danger btn-block padding-15px':
@@ -113,45 +152,6 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="row" *ngIf="message==null">
-                        <div class="col-lg-4 padding-15px">
-                            <table class="text-left">
-                                <tr>
-                                    <td>
-                                        <button type="button" class="btn btn-success margin-right-15px"></button>
-                                        <label>Available</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <button type="button" class="btn btn-danger margin-right-15px"></button>
-                                        <label>Busy</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <button type="button" class="btn btn-info margin-right-15px"></button>
-                                        <label>Cancel</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <button type="button" class="btn btn-warning margin-right-15px"></button>
-                                        <label>Default</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <button type="button" class="btn btn-primary margin-right-15px"></button>
-                                        <label>Busy</label>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <!-- 
-                                    
-                                 -->
-                    </div>
                 </div>
             </div>
         </div>
@@ -159,6 +159,6 @@
 
     </div>
 </div>
-<app-confirm-dialog *ngIf="open_confirm" (book)="bookAppointment()" (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" [timeBook]="timeBook"></app-confirm-dialog>
+<app-confirm-dialog *ngIf="open_confirm" (ok)="bookAppointment()" (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" [message]="messageConfirm"></app-confirm-dialog>
 <app-notif-dialog (closeDialog)="setOpenConfirm($event)" [open]="open_notif"></app-notif-dialog>
 <app-update-schedule *ngIf="ROLE=='ROLE_DOCTOR'" (closeDialog)="setOpenUpdate($event)" (updated)="ngOnInit()" [open]="open_update"></app-update-schedule>

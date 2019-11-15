@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { ContributeComponent } from './contribute/contribute.component';
 
@@ -9,7 +10,8 @@ import { ContributeComponent } from './contribute/contribute.component';
     ContributeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class DoctorContributeModule { }

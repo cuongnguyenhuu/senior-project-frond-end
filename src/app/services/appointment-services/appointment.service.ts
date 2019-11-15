@@ -11,7 +11,7 @@ let httpOptions = {
 })
 export class AppointmentService {
 
-  private API: string = "http://localhost:8080/api/";
+  private API: string = "http://ec2-13-229-134-141.ap-southeast-1.compute.amazonaws.com:8080/api/";
   private appointment;
 
   constructor(
@@ -67,5 +67,29 @@ export class AppointmentService {
       httpOptions.headers = httpOptions.headers.append("Authorization", token);
     }
     return this.http.put<any>(this.API + "doctor/appointment/"+id+"/", message, httpOptions)
+  }
+
+  public getDetailAppointmentByDoctor(id){
+    if (httpOptions.headers.get("Authorization") == null) {
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization", token);
+    }
+    return this.http.get<any>(this.API+"doctor/appointment/"+id+"/",httpOptions)
+  }
+
+  public getDetailAppointmentByPatient(id){
+    if (httpOptions.headers.get("Authorization") == null) {
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization", token);
+    }
+    return this.http.get<any>(this.API+"patient/appointment/"+id+"/",httpOptions)
+  }
+
+  public getAppointmentOverview(){
+    if (httpOptions.headers.get("Authorization") == null) {
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization", token);
+    }
+    return this.http.get<any>(this.API+"admin/overview/",httpOptions);
   }
 }

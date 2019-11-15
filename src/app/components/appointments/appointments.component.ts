@@ -74,9 +74,9 @@ export class AppointmentsComponent implements OnInit {
   public moveToDetail(data) {
     this.appointmentService.setDetailAppointment(data);
     if (this.ROLE == 'ROLE_PATIENT')
-      this.router.navigateByUrl("patient/appointments/detail");
+      this.router.navigateByUrl("patient/appointments/detail/"+data.id);
     if (this.ROLE == 'ROLE_DOCTOR')
-      this.router.navigateByUrl("doctor/appointments/detail");
+      this.router.navigateByUrl("doctor/appointments/detail/"+data.id);
   }
 
   public cancelAppointment(message) {

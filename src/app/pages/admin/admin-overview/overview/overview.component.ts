@@ -2,13 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-
+import { AppointmentService } from './../../../../services/appointment-services/appointment.service';
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit {
+
+  private appointment;
+  private doctor;
+  private patient;
+  private totalDoctors;
+  private totalPatients;
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -31,13 +37,29 @@ export class OverviewComponent implements OnInit {
   public pieChartPlugins = [pluginDataLabels];
   public pieChartColors = [
     {
-      backgroundColor: ['#F21B1B', '#F99704', '#FEED01','#3EF92E','#342AF3','#6F24F7','#9425F9'],
+      backgroundColor: ['rgba(255,0,0,0.3)','rgba(0,255,0,0.3)'],
     },
   ];
 
-  constructor() { }
+  constructor(
+
+    private appointmentService : AppointmentService
+  ) { }
 
   ngOnInit() {
+    this.appointmentService.getAppointmentOverview().subscribe(data=>{
+      console.log(data);
+      if(data!=null){
+        this.appointment = data.appointment;
+        this.doctor = data.doctor;
+        this.patient = data.patient;
+        this.totalDoctors = data.totalDoctors;
+        this.totalPatients = data.totalPatient;
+        this.pieChartData = [this.totalPatients,this.totalDoctors];
+      }
+    },error=>{
+      console.log(error);
+    })
   }
 
   // events

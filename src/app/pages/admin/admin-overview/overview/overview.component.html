@@ -5,15 +5,15 @@
                 <h3> <span class="badge badge-info">GROWTH</span></h3>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="totalDoctors!=null">
             <div class="col-lg-4">
-                <app-line-chart></app-line-chart>
+                <app-line-chart [data]="patient" [type]="'patient'"></app-line-chart>
             </div>
             <div class="col-lg-4">
-                <app-line-chart></app-line-chart>
+                <app-line-chart [data]="doctor" [type]="'doctor'"></app-line-chart>
             </div>
             <div class="col-lg-4">
-            <app-line-chart></app-line-chart>
+                <app-line-chart [data]="appointment" [type]="'appointment'"></app-line-chart>
             </div>
         </div>
         <div class="row">
@@ -23,15 +23,8 @@
         </div>
         <div class="row">
             <div class="col-lg-8 chart">
-            <canvas baseChart
-                [data]="pieChartData"
-                [labels]="pieChartLabels"
-                [chartType]="pieChartType"
-                [options]="pieChartOptions"
-                [plugins]="pieChartPlugins"
-                [colors]="pieChartColors"
-                [legend]="pieChartLegend">
-            </canvas>
+                <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
             </div>
             <div class="col-lg-4 label-users">
                 <div class="row">

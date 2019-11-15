@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-line-chart',
@@ -10,12 +11,16 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 })
 export class LineChartComponent implements OnInit {
 
+  @Input() data;
+
+  @Input() type:String;
+
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Patient' },
+    // { data: [65, 59, 80, 81, 56, 55, 40], label: 'Patient' },
     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
     // { data: [180, 480, 770, 90, 1000, 270, 400], label: 'Series C', yAxisID: 'y-axis-1' }
   ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels: Label[] = [];
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
     scales: {
@@ -88,9 +93,43 @@ export class LineChartComponent implements OnInit {
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
-  constructor() { }
+  constructor(
+    private dataPipe: DatePipe
+  ) { }
 
+  private dt = [];
   ngOnInit() {
+    console.log(this.data);
+    if (this.data != null) {
+      this.data.forEach(element => {
+        this.dt[this.dt.length] = element.numbers;
+        if(this.type =="appointment"){
+          this.lineChartLabels[this.lineChartLabels.length] = this.dataPipe.transform(element.month, 'MMM d');
+        }else{
+          this.lineChartLabels[this.lineChartLabels.length] = this.dataPipe.transform(element.month, 'MMM');
+        }
+      });
+      if (this.type == "appointment") {
+        console.log(this.dt);
+        this.lineChartData[0] = { data: this.dt, label: 'Appointments' }
+      }
+      if (this.type == "patient") {
+        console.log(this.dt);
+        this.lineChartData[0] = { data: this.dt, label: 'Patients' }
+      }
+      if (this.type == "doctor") {
+        console.log(this.dt);
+        this.lineChartData[0] = { data: this.dt, label: 'Doctors' }
+      }
+      console.log(this.lineChartData)
+    }
   }
 
+  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
 }

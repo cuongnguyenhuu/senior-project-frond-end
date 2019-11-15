@@ -1,15 +1,24 @@
-img{
+img {
     width: inherit;
 }
-.image{
+
+.image {
     position: relative;
 }
-.fa-times-circle{
+
+.fa-times-circle {
     position: absolute;
     top: -10px;
     right: 5px;
-    font-size: 150%;
+    color: gray;
+    /* font-size: 150%; */
 }
-table{
+
+.fa-times-circle:hover {
+    cursor: pointer;
+    color: black;
+}
+
+table {
     width: 100%;
 }

@@ -11,7 +11,7 @@ import { LocalServicesService } from './../../../../services/local-services/loca
 })
 export class ResultCheckUpComponent implements OnInit {
 
-  @Input() data;
+  @Input() private data;
 
   @Input() imageName;
   
@@ -23,6 +23,12 @@ export class ResultCheckUpComponent implements OnInit {
       labels: {
         fontColor: 'white', // legend color (can be hexadecimal too)
       },
+    },
+    tooltips:{
+      enabled:false,
+      mode: 'index',
+      position:'nearest',
+      custom: null
     },
     plugins: {
       datalabels: {
@@ -40,34 +46,44 @@ export class ResultCheckUpComponent implements OnInit {
   public pieChartPlugins = [pluginDataLabels];
   public pieChartColors = [
     {
-      backgroundColor: ['#F21B1B', '#F99704', '#FEED01','#3EF92E','#342AF3','#6F24F7','#9425F9'],
+      backgroundColor: ['#F4AFAF', '#B7F3BB', '#B0B1FC'],
     },
   ];
 
   private diseases:any[];
   private indexDetail:number = 0;
-
+  // private percentages;
+  private top3:any[] = [];
+  private temp:any[];
   constructor(
     private localServicesService:LocalServicesService,
-  ) { }
+  ) {
+    
+   }
 
   ngOnInit() {
-    this.data = JSON.parse(this.data);
-    for(var i = 0; i<this.data.length; i++){
-      this.pieChartData[i] = Math.round((Number) (this.data[i]*100)*10)/10;
+    //this.data = JSON.parse(this.data);
+    // this.percentages = this.data;
+    this.temp = [...this.data];
+    console.log(this.temp)
+    this.temp = this.temp.sort((a,b)=>b-a).slice(0,3);
+    console.log(this.data)
+
+    for(var i = 0; i<this.temp.length; i++){
+      this.pieChartData[i] = Math.round((Number) (this.temp[i]*100)*10)/10;
     }
 
 
     this.localServicesService.getDiseases().subscribe(data=>{
       this.diseases = data;
-      for(var i = 0; i<this.diseases.length; i++){
+      console.log(this.data);
+      for(var i = 0; i<3; i++){
         // var index = (""+this.diseases[i].name).indexOf(" ");
         // var name = (""+this.diseases[i].name).substring(0,index);
-        if(this.pieChartData[i]>5)
-        this.pieChartLabels[i]= this.diseases[i].name;
-        else
-        this.pieChartLabels[i]= "";
+        this.pieChartLabels[i]= this.pieChartData[i]+"%";
+        this.top3[i] = this.data.indexOf(this.temp[i])
       }
+      console.log(this.top3)
     },
     error=>{
       console.log(error);
@@ -93,7 +109,7 @@ export class ResultCheckUpComponent implements OnInit {
     console.log(event, active);
   }
 
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
+  // public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+  //   console.log(event, active);
+  // }
 }

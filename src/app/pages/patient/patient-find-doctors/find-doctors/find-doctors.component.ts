@@ -20,6 +20,7 @@ export class FindDoctorsComponent implements OnInit {
   private specialistSelected:any = 'all';
   private countrySelected = 'Viet Nam';
   private doctors:any;
+  private isLoading:boolean;
 
   constructor(
     private localServicesService: LocalServicesService,
@@ -36,6 +37,7 @@ export class FindDoctorsComponent implements OnInit {
       }
     })
     this.getSpecialists();
+    this.searchDoctors();
   }
 
   public changeWordToUnsigned(str:String){
@@ -98,6 +100,7 @@ export class FindDoctorsComponent implements OnInit {
   }
 
   public searchDoctors(){
+    this.isLoading = true;
     var specialist, province, district;
     if(this.specialistSelected=='all'){
       specialist ='';
@@ -116,6 +119,7 @@ export class FindDoctorsComponent implements OnInit {
     }
     this.scheduleService.getFindingDoctors(this.textSearch,specialist,this.countrySelected,province,district).subscribe(data=>{
       console.log(data);
+      this.isLoading = false;
       this.doctors = data;
     }
     ,error=>{

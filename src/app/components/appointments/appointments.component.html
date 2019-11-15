@@ -45,8 +45,8 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-lg-2 align-right">
-                            <button type="button" class="btn btn-primary" (click)="filter()">FILTER</button>
+                        <div class="col-lg-2">
+                            <button type="button" class="btn btn-primary" (click)="filter()">SEARCH</button>
                         </div>
                     </div>
                 </div>
@@ -78,11 +78,11 @@
                                 <td>{{ROLE=='ROLE_PATIENT'?'Dr. '+appointment.doctor.account.name:appointment.patient.profilePatient.name}}</td>
                                 <td>{{appointment.create_at | date:'MMM d, y h:mm:ss a'}}</td>
                                 <td>
-                                    <span class="badge badge-success badge-pill">{{appointment.status ==1?'Cancel':appointment.start_at > currentTime?'Waiting':'Done'}}</span>
+                                    <span [class]="appointment.status ==1?'badge-status badge badge-danger badge-pill':appointment.start_at+7*60*60*1000 > currentTime?'badge-status badge badge-warning badge-pill':' badge-status badge badge-success badge-pill'">{{appointment.status ==1?'Cancel':appointment.start_at+7*60*60*1000 > currentTime?'Waiting':'Done'}}</span>
                                 </td>
                                 <td>
-                                    <button type="button" (click)="moveToDetail(appointment)" class="btn btn-info">Detail</button>
-                                    <button *ngIf="appointment.start_at > currentTime && appointment.status==0" type="button" class="btn btn-danger" (click)="showDialog(appointment)">Cancel</button>
+                                    <button type="button" (click)="moveToDetail(appointment)" class="btn btn-info btn-action">Detail</button>
+                                    <button *ngIf="appointment.start_at+7*60*60*1000 > currentTime && appointment.status==0" type="button" class="btn btn-action btn-danger" (click)="showDialog(appointment)">Cancel</button>
                                 </td>
                             </tr>
                         </tbody>

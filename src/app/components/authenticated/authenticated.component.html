@@ -1,27 +1,55 @@
 <nav class="nav justify-content-end">
     <a class="nav-link " [routerLink]="[messagesURL]" *ngIf="ROLE!='ADMIN'">
-        <i class="fab fa-facebook-messenger">
-
+        <i class="fab fa-facebook-messenger icon-messager">
+            <span class="badge badge-pill badge-danger amount_new" *ngIf="total_new_messages!=0">{{total_new_messages}}</span>
         </i>
     </a>
     <a class="nav-link " href="javascript:void(0)" *ngIf="ROLE!='ADMIN'">
         <div class="btn-group">
-            <i class="far fa-bell dropdown-toggle" width="50px" height="50px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <i class="far fa-bell dropdown-toggle icon-bell" width="50px" height="50px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="badge badge-pill badge-danger amount_new"
+                    *ngIf="number_new_notification!=0">{{number_new_notification}}</span>
+            </i>
+
             <!-- <label class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></label> -->
-            <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="button"><i class="fas fa-exclamation-triangle"></i> Dr. Ads have canceled your appointment.</button>
-                <hr>
-                <button class="dropdown-item" type="button"><i class="fas fa-exclamation-triangle"></i> Dr. Ads have canceled your appointment.</button>
+            <div class="notification-box dropdown-menu dropdown-menu-right frame-border">
+                <div class="title-notification" (click)="$event.stopPropagation()">
+                    <strong>Notifications</strong>
+                    <small style="float: right;"><a href="javascript:void(0)" (click)="setAllAsRead()">Make All As Read</a></small>
+                </div>
+                <div class="list-notifications" *ngIf="total_notification!=null">
+                    <div class="title-notification text-center" *ngIf="total_notification.length==0">
+                        <span class="badge badge-info">You have no notification.</span>
+                    </div>
+                    <div class="dropdown-item " [style.background]="notification.payload.doc.data().is_read==false?'lightcyan':null" *ngFor="let notification of total_notification" (click)="moveToDetail(notification)">
+                        <table>
+                            <tr>
+                                <td>
+                                    <i class="fas fa-calendar-check"></i>
+                                </td>
+                                <td>
+                                    <tr>
+                                        <span>{{notification.payload.doc.data().text_notification}}</span>
+                                    </tr>
+                                    <tr>
+                                        <small>{{notification.payload.doc.data().create_at | date:'dd/MM/y HH:mm:ss a'}}</small>
+                                    </tr>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </a>
     <a class="last-nav-link " href="javascript:void(0)">
         <div class="btn-group">
             <!-- <img src="assets/images/doctor1.jpg" class="rounded-circle dropdown-toggle" width="40px" height="40px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt=""> -->
-            <label class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <a href="#" class="badge badge-primary">{{data!=null?data.name:''}}</a>
-                <img src="assets/images/doctor1.jpg" class="rounded-circle" width="40px" height="40px" alt="">
-                
+            <label class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="nameAndAvatar!=null">
+                <a href="#" class="badge badge-primary">{{nameAndAvatar!=null?nameAndAvatar.name:'Loading'}}</a>
+                <img [src]="nameAndAvatar.avatar!=''&&nameAndAvatar.avatar!=null?nameAndAvatar.avatar:'assets/images/doctor1.jpg'" class="rounded-circle" width="40px" height="40px" alt="">
+
             </label>
             <div class="dropdown-menu dropdown-menu-right">
                 <button class="dropdown-item" [routerLink]="[profileURL]" type="button" *ngIf="ROLE!='ADMIN'">Profile</button>

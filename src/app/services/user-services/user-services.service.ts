@@ -14,7 +14,7 @@ let httpOptions = {
   providedIn: 'root'
 })
 export class UserServicesService {
-  private API:string = "http://localhost:8080/api/";
+  private API:string = "http://ec2-13-229-134-141.ap-southeast-1.compute.amazonaws.com:8080/api/";
   constructor(
     private http: HttpClient,
     private router: Router
@@ -50,5 +50,92 @@ export class UserServicesService {
 
   public doctorRegister(data:doctorRegsiter){
     return this.http.post<any>(this.API+"utility/doctor/register",data,httpOptions);
+  }
+
+  public getPatientProfile(){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.get<any>(this.API+"patient/profile/",httpOptions);
+  }
+
+  public updatePatientProfile(updatePatientProfile){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.put<any>(this.API+"patient/profile/",updatePatientProfile,httpOptions);
+  }
+
+  public getDoctorProfile(){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.get<any>(this.API+"doctor/profile/",httpOptions);
+  }
+
+  public updateDoctorProfile(updateDoctorProfile){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.put<any>(this.API+"doctor/profile/",updateDoctorProfile,httpOptions);
+  }
+
+  public getAllUsers(textSearch, role, status, pageIndex):Observable<any>{
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.get<any>(this.API+"admin/users/",{
+      headers: httpOptions.headers,
+      params:{
+        "textsearch": textSearch,
+        "role": role,
+        "status": status,
+        "pageIndex": pageIndex
+      }
+    });
+  }
+
+  public getUserByUsername(username, role):Observable<any>{
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.get<any>(this.API+"admin/users/"+role+"/"+username,httpOptions);
+  }
+
+  public toggleStatusAccount(username){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.post<any>(this.API+"admin/users/"+username+"/band",httpOptions);
+  }
+
+  public getApprovingAccounts(textSearch,sortBy,pageIndex){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.get<any>(this.API+"admin/approvings/",{
+      headers: httpOptions.headers,
+      params:{
+        "textSearch": textSearch,
+        "sortBy": sortBy,
+        "pageIndex": pageIndex
+      }
+    });
+  }
+
+  public setApprovingAccount(username){
+    if(httpOptions.headers.get("Authorization")==null){
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization",token);
+    }
+    return this.http.post<any>(this.API+"admin/approving/"+username,httpOptions);
   }
 }

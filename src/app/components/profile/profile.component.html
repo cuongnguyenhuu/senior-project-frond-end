@@ -4,13 +4,14 @@
             <label class="title-feature">PROFILE</label>
         </div>
     </div>
-    <div class="row center-horizontal padding-15px frame-border margin-bottom">
-        <div class="col-lg-6">
-            <label for="upload" id="label-upload"><img src="assets/images/doctor1.jpg" class="rounded-circle"
+    <div class="row center-horizontal padding-15px frame-border margin-bottom" *ngIf="data!=null">
+        <div class="col-lg-4" style="height: fit-content">
+            <label for="upload" id="label-upload"><img
+                    [src]="profile.avatar!=''?profile.avatar:'assets/images/doctor1.jpg'" class="rounded-circle"
                     width="300px" height="300px" alt=""></label>
-            <input type="file" id="upload" style="display: none">
+            <input type="file" id="upload" style="display: none" (change)="updateAvatar($event.target.files[0])">
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div class="row">
                 <div class="col-lg-12 title">
                     <p>Information</p>
@@ -23,58 +24,195 @@
                             <th class="col-4">
                                 Name
                             </th>
-                            <td class="col-4">
-                                ABC
+                            <td class="col-6" *ngIf="isEditing">
+                                <input type="text" class="form-control" *ngIf="ROLE=='ROLE_PATIENT'" [(ngModel)]="dataEdit.profilePatient.name" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" class="form-control" *ngIf="ROLE!='ROLE_PATIENT'" [(ngModel)]="dataEdit.account.name" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
-                            <td class="col-4">
-                                <i class="fas fa-pencil-alt"></i>
-                            </td>
-                        </tr>
-                        <tr class="d-flex">
-                            <th class="col-4">
-                                Birthday
-                            </th>
-                            <td class="col-4">
-                                31/12/1997
-                            </td>
-                            <td class="col-4">
-                                <i class="fas fa-pencil-alt"></i>
+                            <td class="col-6" *ngIf="!isEditing">
+                                {{profile.name!=""?profile.name:'-'}}
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th class="col-4">
                                 Email
                             </th>
-                            <td class="col-4">
-                                abc@gmail.com
+                            <td class="col-6" *ngIf="isEditing">
+                                <input type="text" class="form-control" *ngIf="ROLE=='ROLE_PATIENT'" [(ngModel)]="dataEdit.profilePatient.email" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" class="form-control" *ngIf="ROLE!='ROLE_PATIENT'" [(ngModel)]="dataEdit.account.email" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
-                            <td class="col-4">
-                                <i class="fas fa-pencil-alt"></i>
+                            <td class="col-6" *ngIf="!isEditing">
+                                {{profile.email!=""?profile.email:'-'}}
+                            </td>
+                        </tr>
+                        <tr class="d-flex">
+                            <th class="col-4">
+                                Birthday
+                            </th>
+                            <td class="col-6" *ngIf="isEditing">
+                                <input type="date" class="form-control" *ngIf="ROLE=='ROLE_PATIENT'" [(ngModel)]="dataEdit.profilePatient.birthday" value="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.birthday:dataEdit.account.birthday | date: 'y-MM-dd'" name="" id="" aria-describedby="helpId"
+                                    placeholder="">
+                                <input type="date" class="form-control" *ngIf="ROLE!='ROLE_PATIENT'" [(ngModel)]="dataEdit.account.birthday" value="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.birthday:dataEdit.account.birthday | date: 'y-MM-dd'" name="" id="" aria-describedby="helpId"
+                                    placeholder="">
+                            </td>
+                            <td class="col-6" *ngIf="!isEditing">
+                                {{profile.birthday!=null?(profile.birthday | date:'MMM-dd-y'):'-'}}
+                            </td>
+                        </tr>
+                        <tr class="d-flex">
+                            <th class="col-4">
+                                Gender
+                            </th>
+                            <td class="col-6" *ngIf="isEditing">
+                                <select name="" *ngIf="ROLE=='ROLE_PATIENT'" id="" class="form-control" [(ngModel)]="dataEdit.profilePatient.gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <select name="" *ngIf="ROLE!='ROLE_PATIENT'" id="" class="form-control" [(ngModel)]="dataEdit.account.gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </td>
+                            <td class="col-6" *ngIf="!isEditing">
+                                {{ROLE=='ROLE_PATIENT'?changeWordToUnsigned(data.profilePatient.gender):changeWordToUnsigned(data.account.gender)}}
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th class="col-4">
                                 Phone number
                             </th>
-                            <td class="col-4">
-                                +84133234532
+                            <td class="col-6" *ngIf="isEditing">
+                                <input type="text" class="form-control" *ngIf="ROLE=='ROLE_PATIENT'" [(ngModel)]="dataEdit.profilePatient.phoneNumber" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" class="form-control" *ngIf="ROLE!='ROLE_PATIENT'" [(ngModel)]="dataEdit.account.phoneNumber" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
-                            <td class="col-4">
-                                <i class="fas fa-pencil-alt"></i>
+                            <td class="col-6" *ngIf="!isEditing">
+                                {{ROLE=='ROLE_PATIENT'?data.profilePatient.phoneNumber:data.account.phoneNumber}}
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th class="col-4">
-                                Address
+                                Country
                             </th>
-                            <td class="col-4">
-                                asdasd
+                            <td class="col-6" *ngIf="isEditing">
+                                <input type="text" class="form-control" [(ngModel)]="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.address.country:dataEdit.account.address.country" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
-                            <td class="col-4">
-                                <i class="fas fa-pencil-alt"></i>
+                            <td class="col-6" *ngIf="!isEditing">
+                                {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.country:data.account.address.country}}
+                            </td>
+                        </tr>
+                        <tr class="d-flex">
+                            <th class="col-4">
+                                City/Province
+                            </th>
+                            <td class="col-6" *ngIf="isEditing">
+                                <select name="" id="" class="form-control" [(ngModel)]="provinceIndex">
+                                    <option value="{{i}}" *ngFor="let province of dataLocal;let i = index">
+                                        {{changeWordToUnsigned(province.name)}}</option>
+                                </select>
+                            </td>
+                            <td class="col-6" *ngIf="!isEditing">
+                                <!-- {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.city:data.account.address.city}} -->
+                                {{profile.address.city!=""?profile.address.city:'-'}}
+                            </td>
+                        </tr>
+                        <tr class="d-flex">
+                            <th class="col-4">
+                                District
+                            </th>
+                            <td class="col-6" *ngIf="isEditing">
+                                <select name="" id="" class="form-control" [(ngModel)]="districtIndex">
+                                    <option value="{{i}}"
+                                        *ngFor="let district of dataLocal[provinceIndex].districts;let i = index">
+                                        {{changeWordToUnsigned(district.name)}}</option>
+                                </select>
+                            </td>
+                            <td class="col-6" *ngIf="!isEditing">
+                                <!-- {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.locality:data.account.address.locality}} -->
+                                {{profile.address.locality!=""?profile.address.locality:'-'}}
+                            </td>
+                        </tr>
+                        <tr class="d-flex">
+                            <th class="col-4">
+                                Ward
+                            </th>
+                            <td class="col-6" *ngIf="isEditing">
+                                <select name="" id="" class="form-control" [(ngModel)]="wardIndex">
+                                    <option value="{{i}}"
+                                        *ngFor="let ward of dataLocal[provinceIndex].districts[districtIndex].wards;let i = index">
+                                        {{changeWordToUnsigned(ward.name)}}</option>
+                                </select>
+                            </td>
+                            <td class="col-6" *ngIf="!isEditing">
+                                <!-- {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.ward:data.account.address.ward}} -->
+                                {{profile.address.ward!=""?profile.address.ward:'-'}}
+                            </td>
+                        </tr>
+                        <tr class="d-flex">
+                            <th class="col-4">
+                                Address line
+                            </th>
+                            <td class="col-6" *ngIf="isEditing">
+                                <input type="text" *ngIf="ROLE=='ROLE_PATIENT'" class="form-control" [(ngModel)]="dataEdit.profilePatient.address.addressLine" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" *ngIf="ROLE!='ROLE_PATIENT'" class="form-control" [(ngModel)]="dataEdit.account.address.addressLine" name="" id="" aria-describedby="helpId" placeholder="">
+                            </td>
+                            <td class="col-6" *ngIf="!isEditing">
+                                <!-- {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.addressLine:data.account.address.addressLine}} -->
+                                {{profile.address.addressLine!=""?profile.address.addressLine:'-'}}
                             </td>
                         </tr>
                     </table>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12 center-horizontal">
+                    <table class=" table table-borderless table-responsive">
+                        <tr class="d-flex" *ngIf="ROLE =='ROLE_PATIENT'">
+                            <th class="col-4">
+                                History disease
+                            </th>
+                            <td class="col-6" *ngIf="isEditing">
+                                <input type="text" class="form-control" [(ngModel)]="dataEdit.history_diseases" name="" id="" aria-describedby="helpId" placeholder="">
+                            </td>
+                            <td class="col-6" *ngIf="!isEditing">
+                                {{data.history_diseases!=""?data.history_diseases:'-'}}
+                            </td>
+                        </tr>
+                        <tr class="d-flex" *ngIf="ROLE =='ROLE_DOCTOR'">
+                            <th class="col-4">
+                                Specialist
+                            </th>
+                            <td class="col-6" *ngIf="isEditing">
+                                <select name="" id="" class="form-control" [(ngModel)]="specialistIndex">
+                                    <option value="{{i}}" *ngFor="let specialist of specialists;let i = index">
+                                        {{changeWordToUnsigned(specialist.name)}}</option>
+                                </select>
+                            </td>
+                            <td class="col-6" *ngIf="!isEditing">
+                                <!-- {{data.major}} -->
+                                {{data.major!=""?data.major:'-'}}
+                            </td>
+                        </tr>
+                        <tr class="d-flex" *ngIf="ROLE =='ROLE_DOCTOR'">
+                            <th class="col-4">
+                                Years of experiences
+                            </th>
+                            <td class="col-6" *ngIf="isEditing">
+                                <input type="text" class="form-control" [(ngModel)]="dataEdit.experiences" name="" id="" aria-describedby="helpId" placeholder="">
+                            </td>
+                            <td class="col-6" *ngIf="!isEditing">
+                                {{data.experiences}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 center-horizontal">
+                    <button type="button" class="btn btn-primary" *ngIf="!isEditing" (click)="changeToEdit()">Edit</button>
+                    <button type="button" class="btn btn-primary margin-right-15px" (click)="update()" *ngIf="isEditing">Update</button>
+                    <button type="button" class="btn btn-danger" *ngIf="isEditing" (click)="cancel()">Cancel</button>
                 </div>
             </div>
         </div>

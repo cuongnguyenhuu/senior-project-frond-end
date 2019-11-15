@@ -1,74 +1,106 @@
-.container{
+.container {
     height: 70vh;
 }
-.box-messages{
+
+.box-messages {
     height: 100%;
 }
-.box-chat{
+
+.box-chat {
     height: 100%;
 }
-.title{
+
+.title {
     font-weight: bold;
     font-size: 150%;
     text-align: center;
 }
-.name{
+
+.name {
     color: black;
 }
-.last-message{
+
+.last-message {
     color: gray;
     font-size: 80%;
 }
-.conversation{
+
+.conversation {
     background-color: #80808029;
     padding: 5px;
     border-radius: 10px;
     margin: 5px 0px;
 }
-.name-chat{
+
+.name-chat {
     font-weight: bold;
 }
-hr{
+
+hr {
     padding: 0;
     margin: 0;
 }
-.message{
+
+.message {
     padding: 5px;
     border-radius: 10px;
     margin: 5px 0px;
 }
-p{
+
+p {
     word-break: break-all;
 }
-.text-message{
+
+.text-message {
     background-color: #80808029;
     /* padding: 5px; */
     border-radius: 10px;
     margin: 0px 10px;
 }
-.my-message{
+
+.my-message {
     justify-content: flex-end;
 }
-.my-message > .text-message{
+
+.my-message>.text-message {
     background-color: #0E99FF;
     color: white;
 }
-.upload-image{
+
+.upload-image {
     color: #0E99FF;
     font-size: 150%;
 }
-.input-box{
+
+.input-box {
     position: absolute;
-    width: 570px;
+    width: 100%;
     bottom: 0;
 }
-.button-send{
+
+.button-send {
     justify-content: flex-end;
     display: flex;
 }
-.information{
+
+.information {
     text-align: center;
 }
-.specialist{
+
+.specialist {
     color: gray;
+}
+
+.title_chat {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.online {
+    color: green;
+}
+
+.offline {
+    color: red;
 }

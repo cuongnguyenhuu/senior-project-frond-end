@@ -6,6 +6,7 @@ import { AdminUsersModule } from './admin-users/admin-users.module';
 import { AdminUserModule } from './admin-user/admin-user.module';
 import { AdminRequirementsModule } from './admin-requirements/admin-requirements.module';
 import { SharedModule } from './../shared/shared.module';
+import { FormsModule} from '@angular/forms';
 
 import { BodyAdminComponent } from './body-admin/body-admin.component';
 import { SideBarAdminComponent } from './side-bar-admin/side-bar-admin.component';
@@ -34,7 +35,7 @@ const routes: Routes = [
         component: UsersComponent,
       },
       {
-        path: 'users/detail',
+        path: 'users/:role/:username/detail',
         component: UserComponent,
       },
       {
@@ -58,6 +59,7 @@ const routes: Routes = [
     AdminUserModule,
     AdminRequirementsModule,
     SharedModule,
+    FormsModule,
     RouterModule.forChild(routes)
   ]
 })

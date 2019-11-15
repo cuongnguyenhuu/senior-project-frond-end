@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ScheduleService } from './../../services/schedule-services/schedule.service';
 import { ConvertTimeService } from './../../services/convertTimeServices/convert-time.service';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BookingRequest } from 'src/app/models/bookingRequest';
 import { Schedule } from 'src/app/models/schedule';
 import { Time } from 'src/app/models/time';
+import { DatePipe } from '@angular/common';
+import { FirebaseService } from './../../services/firebase-services/firebase.service';
+import { Chat } from 'src/app/models/chat';
+import { Message } from 'src/app/models/message';
 
 @Component({
   selector: 'app-schedule',
@@ -19,7 +23,10 @@ export class ScheduleComponent implements OnInit {
   constructor(
     private scheduleService: ScheduleService,
     private convertTimeService: ConvertTimeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private datePipe:DatePipe,
+    private router:Router,
+    private firebaseService:FirebaseService
   ) { }
   private dayName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   private dates: number[] = [];
@@ -29,6 +36,7 @@ export class ScheduleComponent implements OnInit {
 
   private userdoctor: string;
   private currentDate: number;
+  private currentTime: number;
 
   private scheduleResponse: any;
   private message: string;
@@ -42,9 +50,17 @@ export class ScheduleComponent implements OnInit {
   private timeSelected: Time[] = [];
   private timeBook:any;
   private doctor:any;
+
+  private messageConfirm;
+
+  private member1;
+  private member2;
+  private messageChat = '';
+
   ngOnInit() {
     this.message = null;
     var date = new Date();
+    this.currentTime = date.getTime();
     var dateToInt = new Date((date.getMonth() + 1) + "/" + date.getDay() + "/" + date.getFullYear()).getTime();
     this.currentDate = new Date().getDay();
 
@@ -55,7 +71,7 @@ export class ScheduleComponent implements OnInit {
         console.log(data);
         this.doctor = data.doctor;
         if (data.scheduleEntity == null) {
-          this.message = "Not found schedule";
+          this.message = "No schedule!";
         }
         else {
           for (let index = 0; index < data.dayResponses[0].timeResponses.length; index++) {
@@ -89,8 +105,12 @@ export class ScheduleComponent implements OnInit {
       this.scheduleService.getScheduleByUsername(this.userdoctor,this.weekSelected).subscribe(data => {
         console.log(data);
         this.doctor = data.doctor;
+        
+        this.member1 = JSON.parse(localStorage.getItem('token')).username;
+        this.member2 = this.doctor.account.account.username;
+
         if (data.scheduleEntity == null) {
-          this.message = "Not found schedule";
+          this.message = "No schedule!";
         }
         else {
           for (let index = 0; index < data.dayResponses[0].timeResponses.length; index++) {
@@ -109,7 +129,7 @@ export class ScheduleComponent implements OnInit {
             this.times[i] = data.scheduleEntity.startAt + data.scheduleEntity.timePerAppointment * i;
           }
           this.schedules = data.dayResponses;
-          console.log(this.schedules);
+          console.log(this.schedules); 
         }
         this.data = data;
         this.isLoading = false;
@@ -121,7 +141,7 @@ export class ScheduleComponent implements OnInit {
     }
     this.isLoading = false;
 
-    console.log(this.currentDate);
+    console.log("currentTime: "+this.currentDate);
 
     console.log(this.dayName);
   }
@@ -139,10 +159,11 @@ export class ScheduleComponent implements OnInit {
   }
 
   public toggleConfirmDialog(time) {
-    this.timeBook = null;
+    if(time!=null)
+    this.timeBook = time;
     this.open_confirm = !this.open_confirm;
     if(time!=null){
-      this.timeBook = time;
+      this.messageConfirm ='Are you sure to book an appointment at '+this.datePipe.transform(time.startTime,'HH:mm')+' to '+this.datePipe.transform(time.endTime,'HH:mm') +' on '+this.datePipe.transform(time.startTime,'MMM-dd-y')+'?';
     }
   }
 
@@ -160,6 +181,7 @@ export class ScheduleComponent implements OnInit {
 
   public bookAppointment() {
     var bookingRequest = new BookingRequest(null,this.timeBook);
+    console.log(this.timeBook);
     this.scheduleService.bookAppointment(this.doctor.account.account.username,bookingRequest).subscribe(data=>{
       // console.log(data);
       this.ngOnInit();
@@ -191,5 +213,32 @@ export class ScheduleComponent implements OnInit {
       error => {
         console.log(error);
       })
+  }
+
+  public sendMessage(){
+    var messageObject = new Message(this.member1,null,this.messageChat);
+    var chat  = new Chat(this.member1,this.member2);
+    console.log(chat);
+    this.firebaseService.sendToDoctor(chat,messageObject, this.ROLE)
+    // console.log(m);
+    // this.firebaseService.setUnRead(this.member2, this.ROLE);
+    // this.firebaseService.getAllChats(messageObject);
+    this.messageChat='';
+    
+    // this.router.navigateByUrl("/patient/messages");
+  }
+
+  public pickRow(indexRow){
+    this.schedules[indexRow].timeResponses.forEach(element => {
+      this.addTime(element);
+    });
+    console.log(this.timeSelected)
+  }
+
+  public pickColunm(indexColunm){
+    this.schedules.forEach(element=>{
+      this.addTime(element.timeResponses[indexColunm])
+    })
+    console.log(this.timeSelected)
   }
 }

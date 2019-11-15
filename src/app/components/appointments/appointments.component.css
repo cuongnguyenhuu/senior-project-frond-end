@@ -1,6 +1,11 @@
-.container{
-    padding-top: 10px;
-}
-.page-number{
+.page-number {
     justify-content: flex-end;
+}
+
+.badge-status {
+    width: 70%;
+}
+
+.btn-action {
+    margin: 0px 5px;
 }

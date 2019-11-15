@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from'@angular/forms';
 import { RequirementComponent } from './requirement/requirement.component';
 
 @NgModule({
@@ -8,7 +8,8 @@ import { RequirementComponent } from './requirement/requirement.component';
     RequirementComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class AdminRequirementsModule { }

@@ -1,64 +1,78 @@
-.intro{
+.intro {
     margin: 0;
 }
-.intro1{
+
+.intro1 {
     background-image: url("/assets/images/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 780px;;
+    height: 780px;
+    ;
     position: relative;
 }
-.intro2{
+
+.intro2 {
     background-image: url("/assets/images/background-intro2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     justify-content: center;
 }
-.intro3{
+
+.intro3 {
     justify-content: center;
 }
-.box-text{
+
+.box-text {
     width: 20%;
     position: absolute;
     right: 20%;
-    bottom: 50%;
+    bottom: 40%;
 }
-.title{
+
+.title {
     font-family: Playfair Display, Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 150%;
 }
-.description{
+
+.description {
     color: gray;
 }
-.box-statistic{
+
+.box-statistic {
     background-color: white;
     margin: 50px 30px;
     padding: 30px 10px;
 }
-.title-statistic{
+
+.title-statistic {
     font-weight: bold;
     font-size: 120%;
     font-family: Arial, Helvetica, sans-serif;
 }
-.description-statistic{
+
+.description-statistic {
     font-size: 100%;
     color: gray;
 }
-.box-top-doctor{
+
+.box-top-doctor {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.name-doctor{
+
+.name-doctor {
     font-family: Playfair Display, Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 130%;
 }
-.specialist{
+
+.specialist {
     color: gray;
 }
-.intro3 img{
+
+.intro3 img {
     width: inherit;
 }
