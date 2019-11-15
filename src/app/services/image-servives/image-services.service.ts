@@ -10,11 +10,19 @@ let httpOptions = {
 })
 export class ImageServicesService {
 
-  private API:string = "http://localhost:8080/api/";
+  private API:string = "http://ec2-13-229-134-141.ap-southeast-1.compute.amazonaws.com:8080/api/";
 
   constructor(
     private http: HttpClient,
   ) { }
+
+  public updateAvatar(image): Observable<any>{
+    if (httpOptions.headers.get("Authorization") == null) {
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization", token);
+    }
+    return this.http.post<any>(this.API+"utility/updateAvatar", image, httpOptions);
+  }
 
   public uploadImage(file:File):Observable<any>{
     var fromdata = new FormData();

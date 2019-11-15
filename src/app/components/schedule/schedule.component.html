@@ -135,10 +135,10 @@
                         </tr>
                         <tr *ngFor="let schedule of schedules; let i = index">
                             <td (click)="pickRow(i)" class="row-time">
-                                {{schedule.timeResponses[0].startTime+7*60*60*1000 | date:'HH:mm'}}
+                                {{schedule.timeResponses[0].startTime | date:'HH:mm'}}
                             </td>
                             <td *ngFor="let time of schedule.timeResponses">
-                                <button (click)="toggleConfirmDialog(time)" [disabled]="time.status!='available'||currentTime>time.startTime+7*60*60*1000" *ngIf="ROLE=='ROLE_PATIENT'" [class]="time.status!='available'?'btn btn-danger btn-block padding-15px':'btn btn-success btn-block padding-15px'">
+                                <button (click)="toggleConfirmDialog(time)" [disabled]="time.status!='available'||currentTime>time.startTime" *ngIf="ROLE=='ROLE_PATIENT'" [class]="time.status!='available'?'btn btn-danger btn-block padding-15px':'btn btn-success btn-block padding-15px'">
                                 </button>
                                 <input style="display: none" class="checkbox-schedule" type="checkbox" *ngIf="ROLE=='ROLE_DOCTOR'" [checked]="timeSelected.indexOf(time)!=-1" [id]="time.startTime" (click)="addTime(time)">
                                 <label [for]="time.startTime" *ngIf="ROLE=='ROLE_DOCTOR'" [class]="time.status=='available'?' btn btn-success btn-block padding-15px label-checkbox-chedule':

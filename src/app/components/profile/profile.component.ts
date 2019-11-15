@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { LocalServicesService } from './../../services/local-services/local-services.service';
 import { PatientUpdateResponse } from 'src/app/models/patientUpdateResponse';
 import { DoctorUpdateResponse } from 'src/app/models/doctorUpdateResponse';
+import { ImageServicesService } from 'src/app/services/image-servives/image-services.service';
 
 @Component({
   selector: 'app-profile',
@@ -34,7 +35,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private userServices: UserServicesService,
     private datePipe: DatePipe,
-    private localServices: LocalServicesService
+    private localServices: LocalServicesService,
+    private imageServices: ImageServicesService
   ) { }
 
   ngOnInit() {
@@ -78,31 +80,31 @@ export class ProfileComponent implements OnInit {
 
   public changeToEdit() {
     this.dataEdit = this.data;
-    if(this.provinceName==""){
+    if (this.provinceName == "") {
       this.provinceIndex = 0
-    }else
-    for (let index = 0; index < this.dataLocal.length; index++) {
-      if (this.changeWordToUnsigned(this.dataLocal[index].name) == this.provinceName) {
-        this.provinceIndex = index;
+    } else
+      for (let index = 0; index < this.dataLocal.length; index++) {
+        if (this.changeWordToUnsigned(this.dataLocal[index].name) == this.provinceName) {
+          this.provinceIndex = index;
+        }
       }
-    }
-    if(this.districtName==""){
+    if (this.districtName == "") {
       this.districtIndex = 0
-    }else
-    for (let index = 0; index < this.dataLocal[this.provinceIndex].districts.length; index++) {
-      if (this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[index].name) == this.districtName) {
-        this.districtIndex = index;
+    } else
+      for (let index = 0; index < this.dataLocal[this.provinceIndex].districts.length; index++) {
+        if (this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[index].name) == this.districtName) {
+          this.districtIndex = index;
+        }
       }
-    }
-    if(this.wardName==""){
-      this.wardIndex=0
-    }else
-    for (let index = 0; index < this.dataLocal[this.provinceIndex].districts[this.districtIndex].wards.length; index++) {
-      if (this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[this.districtIndex].wards[index].name) == this.wardName) {
-        this.wardIndex = index;
+    if (this.wardName == "") {
+      this.wardIndex = 0
+    } else
+      for (let index = 0; index < this.dataLocal[this.provinceIndex].districts[this.districtIndex].wards.length; index++) {
+        if (this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[this.districtIndex].wards[index].name) == this.wardName) {
+          this.wardIndex = index;
+        }
       }
-    }
-    if(this.data.major==""){
+    if (this.data.major == "") {
       this.specialistIndex = 0;
     }
     for (let index = 0; index < this.specialists.length; index++) {
@@ -113,6 +115,28 @@ export class ProfileComponent implements OnInit {
     this.isEditing = true;
   }
 
+  public updateAvatar(file) {
+    this.imageServices.uploadImage(file).subscribe(data => {
+      console.log(data);
+      if (data != null) {
+        this.imageServices.updateAvatar(data.image).subscribe(data => {
+          if (data != null) {
+            this.profile = data;
+            var token = JSON.parse(localStorage.getItem("token"));
+            token.avatar = this.profile.avatar;
+            localStorage.setItem("token", JSON.stringify(token));
+          }
+        })
+      }
+    }, error => {
+      console.log(error);
+    })
+  }
+
+  public printName(){
+    console.log(this.dataEdit.profilePatient.name);
+  }
+
   public update() {
     // console.log(new Date(this.data.account.birthday).getTime());
     // console.log(this.data.account.gender);
@@ -120,17 +144,18 @@ export class ProfileComponent implements OnInit {
     // console.log(this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[this.districtIndex].name));
     // console.log(this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[this.districtIndex].wards[this.wardIndex].name));
     // console.log(this.specialists[this.specialistIndex].name);
+    console.log(this.dataEdit);
     if (this.ROLE == 'ROLE_PATIENT') {
       var updatePatientProfile: PatientUpdateResponse = new PatientUpdateResponse(
-        this.dataEdit.profilePatient.name, this.dataEdit.profilePatient.email, new Date(this.dataEdit.profilePatient.birthday ).getTime(),
+        this.dataEdit.profilePatient.name, this.dataEdit.profilePatient.email, new Date(this.dataEdit.profilePatient.birthday).getTime(),
         this.dataEdit.profilePatient.gender, this.dataEdit.profilePatient.phoneNumber, this.dataEdit.profilePatient.address.country,
         this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].name), this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[this.districtIndex].name),
         this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[this.districtIndex].wards[this.wardIndex].name),
         this.dataEdit.profilePatient.address.addressLine, this.dataEdit.history_diseases);
-      this.userServices.updatePatientProfile(updatePatientProfile).subscribe(data=>{
+      this.userServices.updatePatientProfile(updatePatientProfile).subscribe(data => {
         console.log(data);
         this.ngOnInit();
-      },error=>{
+      }, error => {
         console.log(error);
       });
     }
@@ -141,12 +166,12 @@ export class ProfileComponent implements OnInit {
         this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].name), this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[this.districtIndex].name),
         this.changeWordToUnsigned(this.dataLocal[this.provinceIndex].districts[this.districtIndex].wards[this.wardIndex].name),
         this.dataEdit.account.address.addressLine, this.specialists[this.specialistIndex].name, this.dataEdit.experiences);
-        this.userServices.updateDoctorProfile(updateDoctorProfile).subscribe(data=>{
-          console.log(data);
-          this.ngOnInit();
-        },error=>{
-          console.log(error);
-        });
+      this.userServices.updateDoctorProfile(updateDoctorProfile).subscribe(data => {
+        console.log(data);
+        this.ngOnInit();
+      }, error => {
+        console.log(error);
+      });
     }
     this.isEditing = false;
   }

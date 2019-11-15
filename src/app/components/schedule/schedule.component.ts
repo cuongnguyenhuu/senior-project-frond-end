@@ -129,7 +129,7 @@ export class ScheduleComponent implements OnInit {
             this.times[i] = data.scheduleEntity.startAt + data.scheduleEntity.timePerAppointment * i;
           }
           this.schedules = data.dayResponses;
-          console.log(this.schedules);
+          console.log(this.schedules); 
         }
         this.data = data;
         this.isLoading = false;
@@ -163,7 +163,7 @@ export class ScheduleComponent implements OnInit {
     this.timeBook = time;
     this.open_confirm = !this.open_confirm;
     if(time!=null){
-      this.messageConfirm ='Are you sure to book an appointment at '+this.datePipe.transform(time.startTime+7*60*60*1000,'HH:mm')+' to '+this.datePipe.transform(time.endTime+7*60*60*1000,'HH:mm') +' on '+this.datePipe.transform(time.startTime,'MMM-dd-y')+'?';
+      this.messageConfirm ='Are you sure to book an appointment at '+this.datePipe.transform(time.startTime,'HH:mm')+' to '+this.datePipe.transform(time.endTime,'HH:mm') +' on '+this.datePipe.transform(time.startTime,'MMM-dd-y')+'?';
     }
   }
 

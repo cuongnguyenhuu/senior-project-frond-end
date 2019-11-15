@@ -46,9 +46,9 @@
     <a class="last-nav-link " href="javascript:void(0)">
         <div class="btn-group">
             <!-- <img src="assets/images/doctor1.jpg" class="rounded-circle dropdown-toggle" width="40px" height="40px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt=""> -->
-            <label class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <a href="#" class="badge badge-primary">{{data!=null?data.name:''}}</a>
-                <img src="assets/images/doctor1.jpg" class="rounded-circle" width="40px" height="40px" alt="">
+            <label class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="nameAndAvatar!=null">
+                <a href="#" class="badge badge-primary">{{nameAndAvatar!=null?nameAndAvatar.name:'Loading'}}</a>
+                <img [src]="nameAndAvatar.avatar!=''&&nameAndAvatar.avatar!=null?nameAndAvatar.avatar:'assets/images/doctor1.jpg'" class="rounded-circle" width="40px" height="40px" alt="">
 
             </label>
             <div class="dropdown-menu dropdown-menu-right">

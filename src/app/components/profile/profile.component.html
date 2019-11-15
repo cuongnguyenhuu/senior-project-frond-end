@@ -6,9 +6,10 @@
     </div>
     <div class="row center-horizontal padding-15px frame-border margin-bottom" *ngIf="data!=null">
         <div class="col-lg-4" style="height: fit-content">
-            <label for="upload" id="label-upload"><img src="assets/images/doctor1.jpg" class="rounded-circle"
+            <label for="upload" id="label-upload"><img
+                    [src]="profile.avatar!=''?profile.avatar:'assets/images/doctor1.jpg'" class="rounded-circle"
                     width="300px" height="300px" alt=""></label>
-            <input type="file" id="upload" style="display: none">
+            <input type="file" id="upload" style="display: none" (change)="updateAvatar($event.target.files[0])">
         </div>
         <div class="col-lg-8">
             <div class="row">
@@ -24,7 +25,8 @@
                                 Name
                             </th>
                             <td class="col-6" *ngIf="isEditing">
-                                <input type="text" class="form-control" [(ngModel)]="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.name:dataEdit.account.name" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" class="form-control" *ngIf="ROLE=='ROLE_PATIENT'" [(ngModel)]="dataEdit.profilePatient.name" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" class="form-control" *ngIf="ROLE!='ROLE_PATIENT'" [(ngModel)]="dataEdit.account.name" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
                                 {{profile.name!=""?profile.name:'-'}}
@@ -35,7 +37,8 @@
                                 Email
                             </th>
                             <td class="col-6" *ngIf="isEditing">
-                                <input type="text" class="form-control" [(ngModel)]="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.email:dataEdit.account.email" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" class="form-control" *ngIf="ROLE=='ROLE_PATIENT'" [(ngModel)]="dataEdit.profilePatient.email" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" class="form-control" *ngIf="ROLE!='ROLE_PATIENT'" [(ngModel)]="dataEdit.account.email" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
                                 {{profile.email!=""?profile.email:'-'}}
@@ -46,8 +49,10 @@
                                 Birthday
                             </th>
                             <td class="col-6" *ngIf="isEditing">
-                                <input type="date" class="form-control" [(ngModel)]="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.birthday:dataEdit.account.birthday" value="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.birthday:dataEdit.account.birthday | date: 'y-MM-dd'" name="" id=""
-                                    aria-describedby="helpId" placeholder="">
+                                <input type="date" class="form-control" *ngIf="ROLE=='ROLE_PATIENT'" [(ngModel)]="dataEdit.profilePatient.birthday" value="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.birthday:dataEdit.account.birthday | date: 'y-MM-dd'" name="" id="" aria-describedby="helpId"
+                                    placeholder="">
+                                <input type="date" class="form-control" *ngIf="ROLE!='ROLE_PATIENT'" [(ngModel)]="dataEdit.account.birthday" value="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.birthday:dataEdit.account.birthday | date: 'y-MM-dd'" name="" id="" aria-describedby="helpId"
+                                    placeholder="">
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
                                 {{profile.birthday!=null?(profile.birthday | date:'MMM-dd-y'):'-'}}
@@ -58,7 +63,12 @@
                                 Gender
                             </th>
                             <td class="col-6" *ngIf="isEditing">
-                                <select name="" id="" class="form-control" [(ngModel)]="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.gender:dataEdit.account.gender">
+                                <select name="" *ngIf="ROLE=='ROLE_PATIENT'" id="" class="form-control" [(ngModel)]="dataEdit.profilePatient.gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <select name="" *ngIf="ROLE!='ROLE_PATIENT'" id="" class="form-control" [(ngModel)]="dataEdit.account.gender">
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                     <option value="other">Other</option>
@@ -73,7 +83,8 @@
                                 Phone number
                             </th>
                             <td class="col-6" *ngIf="isEditing">
-                                <input type="text" class="form-control" [(ngModel)]="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.phoneNumber:dataEdit.account.phoneNumber" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" class="form-control" *ngIf="ROLE=='ROLE_PATIENT'" [(ngModel)]="dataEdit.profilePatient.phoneNumber" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" class="form-control" *ngIf="ROLE!='ROLE_PATIENT'" [(ngModel)]="dataEdit.account.phoneNumber" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
                                 {{ROLE=='ROLE_PATIENT'?data.profilePatient.phoneNumber:data.account.phoneNumber}}
@@ -142,7 +153,8 @@
                                 Address line
                             </th>
                             <td class="col-6" *ngIf="isEditing">
-                                <input type="text" class="form-control" [(ngModel)]="ROLE=='ROLE_PATIENT'?dataEdit.profilePatient.address.addressLine:dataEdit.account.address.addressLine" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" *ngIf="ROLE=='ROLE_PATIENT'" class="form-control" [(ngModel)]="dataEdit.profilePatient.address.addressLine" name="" id="" aria-describedby="helpId" placeholder="">
+                                <input type="text" *ngIf="ROLE!='ROLE_PATIENT'" class="form-control" [(ngModel)]="dataEdit.account.address.addressLine" name="" id="" aria-describedby="helpId" placeholder="">
                             </td>
                             <td class="col-6" *ngIf="!isEditing">
                                 <!-- {{ROLE=='ROLE_PATIENT'?data.profilePatient.address.addressLine:data.account.address.addressLine}} -->
@@ -173,8 +185,7 @@
                             </th>
                             <td class="col-6" *ngIf="isEditing">
                                 <select name="" id="" class="form-control" [(ngModel)]="specialistIndex">
-                                    <option value="{{i}}"
-                                        *ngFor="let specialist of specialists;let i = index">
+                                    <option value="{{i}}" *ngFor="let specialist of specialists;let i = index">
                                         {{changeWordToUnsigned(specialist.name)}}</option>
                                 </select>
                             </td>

@@ -12,7 +12,7 @@ let httpOptions = {
 })
 export class PatientCheckUpService {
 
-  private API:string = "http://127.0.0.1:8000/predict/"
+  private API:string = "http://ec2-18-141-57-77.ap-southeast-1.compute.amazonaws.com:8000/predict/";
 
   constructor(
     private http:HttpClient,

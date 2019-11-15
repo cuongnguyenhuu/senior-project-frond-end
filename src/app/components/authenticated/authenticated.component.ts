@@ -35,6 +35,7 @@ export class AuthenticatedComponent implements OnInit, OnDestroy {
   private total_new_messages: any;
   private ROLE2;
   private username;
+  private nameAndAvatar;
 
   constructor(
     private userServicesService: UserServicesService,
@@ -45,6 +46,11 @@ export class AuthenticatedComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.username = JSON.parse(localStorage.getItem('token')).username;
+    this.username = JSON.parse(localStorage.getItem('token')).username;
+    this.firebaseService.getUserFirebaseUpdate(this.username).subscribe(data=>{
+      console.log(data);
+      this.nameAndAvatar = data;
+    })
     this.firebaseService.setOnline(this.username);
     this.ROLE2 = JSON.parse(localStorage.getItem('token')).role[0].authority;
     switch (this.ROLE) {

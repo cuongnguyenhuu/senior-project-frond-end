@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   private errorMessage: string = '';
   private isCoverPassword: boolean = true;
   private data: any;
-  private errorField: boolean[]=[];
+  private errorField: boolean[] = [];
 
   constructor(
     private userServicesService: UserServicesService,
@@ -26,6 +26,13 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  public loginAfterRegister(username, password){
+    this.username = username;
+    this.password = password;
+
+    this.login();
   }
 
   public login() {
@@ -38,22 +45,29 @@ export class LoginComponent implements OnInit {
     }
     else {
       this.userServicesService.login(this.username, this.password).subscribe(data => {
-        // console.log(data);
-        this.tranforDataLogin.emit(data);
-        this.spinner.hide();
-        localStorage.setItem("token", JSON.stringify(data));
-        for (var i = 0; i < data.role.length; i++) {
-          if (data.role[i].authority === 'ROLE_ADMIN') {
-            this.router.navigateByUrl('/admin');
-            break;
-          }
-          else if (data.role[i].authority === 'ROLE_DOCTOR') {
-            this.router.navigateByUrl('/doctor');
-            break;
-          }
-          else {
-            this.router.navigateByUrl('/patient');
-            break;
+        console.log(data);
+        if (data != null) {
+          if (data.success == true) {
+            this.tranforDataLogin.emit(data.data);
+            this.spinner.hide();
+            localStorage.setItem("token", JSON.stringify(data.data));
+            for (var i = 0; i < data.data.role.length; i++) {
+              if (data.data.role[i].authority === 'ROLE_ADMIN') {
+                this.router.navigateByUrl('/admin');
+                break;
+              }
+              else if (data.data.role[i].authority === 'ROLE_DOCTOR') {
+                this.router.navigateByUrl('/doctor');
+                break;
+              }
+              else {
+                this.router.navigateByUrl('/patient');
+                break;
+              }
+            }
+          }else{
+            this.spinner.hide();
+            this.errorMessage = data.data;
           }
         }
       },

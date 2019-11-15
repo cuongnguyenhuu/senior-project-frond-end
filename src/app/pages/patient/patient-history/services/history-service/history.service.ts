@@ -9,7 +9,7 @@ let httpOptions = {
 })
 export class HistoryService {
 
-  private API:string = "http://localhost:8080/api/";
+  private API:string = "http://ec2-13-229-134-141.ap-southeast-1.compute.amazonaws.com:8080/api/";
 
   constructor(
     private http:HttpClient,
