@@ -34,6 +34,7 @@ export class RequirementComponent implements OnInit {
 
   public setSortBy(value){
     this.sortBy = value;
+    this.search();
   }
   
   public search(){

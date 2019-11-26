@@ -7,8 +7,8 @@
     <div class="row center-horizontal padding-15px frame-border margin-bottom" *ngIf="data!=null">
         <div class="col-lg-4" style="height: fit-content">
             <label for="upload" id="label-upload"><img
-                    [src]="profile.avatar!=''?profile.avatar:'assets/images/doctor1.jpg'" class="rounded-circle"
-                    width="300px" height="300px" alt=""></label>
+                    [src]="profile.avatar!=''?profile.avatar:'assets/images/no-avatar.png'" class="rounded-circle"
+                    width="300px" height="300px" alt="" style="object-fit: cover;" ></label>
             <input type="file" id="upload" style="display: none" (change)="updateAvatar($event.target.files[0])">
         </div>
         <div class="col-lg-8">
@@ -168,7 +168,7 @@
             <div class="row">
                 <div class="col-lg-12 center-horizontal">
                     <table class=" table table-borderless table-responsive">
-                        <tr class="d-flex" *ngIf="ROLE =='ROLE_PATIENT'">
+                        <!-- <tr class="d-flex" *ngIf="ROLE =='ROLE_PATIENT'">
                             <th class="col-4">
                                 History disease
                             </th>
@@ -178,7 +178,7 @@
                             <td class="col-6" *ngIf="!isEditing">
                                 {{data.history_diseases!=""?data.history_diseases:'-'}}
                             </td>
-                        </tr>
+                        </tr> -->
                         <tr class="d-flex" *ngIf="ROLE =='ROLE_DOCTOR'">
                             <th class="col-4">
                                 Specialist

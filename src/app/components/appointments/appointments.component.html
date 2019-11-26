@@ -1,21 +1,28 @@
 <div class="container">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-lg-12 text-center">
             <label class="title-feature">APPOINTMENTS</label>
         </div>
-    </div>
-    <div class="row margin-bottom">
+    </div> -->
+    <div class="row margin-bottom margin-top">
         <div class="col-lg-12 frame-border padding-15px">
             <div class="row">
-                <div class="col-lg-12">
+                <!-- <div class="col-lg-12">
                     <h3> <span class="badge badge-info">Filter</span></h3>
-                </div>
+                </div> -->
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-6">
-                            <input type="text" [(ngModel)]="search" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Type doctoc's name...">
+                            <!-- <input type="text" [(ngModel)]="search" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Type doctoc's name..."> -->
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" [(ngModel)]="search" placeholder="Type doctoc's name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2" (click)="filter()"><i
+                                            class="fas fa-search"></i></span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <table>
                                 <tr>
                                     <td>
@@ -23,14 +30,14 @@
                                     </td>
                                     <td>
                                         <select class="form-control" [(ngModel)]="status" (change)="changeStatus($event.target.value)">
-                                            <option value="{{status}}" *ngFor="let status of statuses">{{status}}
+                                            <option value="{{status}}" *ngFor="let status of statuses">{{status!="Waiting"?status:"Booked"}}
                                             </option>
                                         </select>
                                     </td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <table>
                                 <tr>
                                     <td>
@@ -45,16 +52,16 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-lg-2">
+                        <!-- <div class="col-lg-2">
                             <button type="button" class="btn btn-primary" (click)="filter()">SEARCH</button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row margin-bottom">
-        <div class="col-lg-12 frame-border padding-15px">
+        <div class="col-lg-12 frame-border padding-15px" style="    overflow: auto;">
             <div class="row" *ngIf="appointments.length==0">
                 <div class="col-lg-12 text-center">
                     <span class="badge badge-warning">No record matched</span>
@@ -75,14 +82,15 @@
                         <tbody>
                             <tr *ngFor="let appointment of appointments; let i = index">
                                 <th scope="row">{{i+1}}</th>
-                                <td>{{ROLE=='ROLE_PATIENT'?'Dr. '+appointment.doctor.account.name:appointment.patient.profilePatient.name}}</td>
+                                <td>{{ROLE=='ROLE_PATIENT'?'Dr. '+appointment.doctor.account.name:appointment.patient.profilePatient.name}}
+                                </td>
                                 <td>{{appointment.create_at | date:'MMM d, y h:mm:ss a'}}</td>
                                 <td>
-                                    <span [class]="appointment.status ==1?'badge-status badge badge-danger badge-pill':appointment.start_at+7*60*60*1000 > currentTime?'badge-status badge badge-warning badge-pill':' badge-status badge badge-success badge-pill'">{{appointment.status ==1?'Cancel':appointment.start_at+7*60*60*1000 > currentTime?'Waiting':'Done'}}</span>
+                                    <span [class]="appointment.status ==1?'badge-status badge badge-danger badge-pill':appointment.start_at > currentTime?'badge-status badge badge-warning badge-pill':' badge-status badge badge-success badge-pill'">{{appointment.status ==1?'Cancel':appointment.start_at > currentTime?'Booked':'Done'}}</span>
                                 </td>
                                 <td>
-                                    <button type="button" (click)="moveToDetail(appointment)" class="btn btn-info btn-action">Detail</button>
-                                    <button *ngIf="appointment.start_at+7*60*60*1000 > currentTime && appointment.status==0" type="button" class="btn btn-action btn-danger" (click)="showDialog(appointment)">Cancel</button>
+                                    <button type="button" (click)="moveToDetail(appointment)" class="btn btn-info btn-action"><i class="far fa-arrow-alt-circle-right"></i></button>
+                                    <button *ngIf="appointment.start_at > currentTime && appointment.status==0" type="button" class="btn btn-action btn-danger" (click)="showDialog(appointment)"><i class="far fa-calendar-times"></i></button>
                                 </td>
                             </tr>
                         </tbody>

@@ -1,23 +1,28 @@
-.container{
-    padding: 5px 15px;
+.container {
+    padding: 15px 15px;
 }
-nav{
+
+nav {
     padding: 0;
 }
-.col-lg-10{
+
+.col-lg-10 {
     align-self: center;
 }
 
 .nav-link {
+    /* text-align: center; */
     color: #434343;
     align-self: center;
     font-size: 90%;
 }
-.nav-link:hover{
+
+.nav-link:hover {
     color: #0000ff;
     font-weight: bold;
 }
-.active{
+
+.active {
     color: #0000ff;
     font-weight: bold;
     border-bottom: 2px solid;

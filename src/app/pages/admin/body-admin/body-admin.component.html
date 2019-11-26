@@ -1,17 +1,17 @@
-<div class="container-fluid admin-page" >
+<div class="container-fluid admin-page">
     <div class="row header">
-        <div class="col-lg-6">
+        <div class="col-6">
             <app-logo [ROLE]="ROLE"></app-logo>
         </div>
-        <div class="col-lg-6">
-            <app-authenticated [ROLE] = "ROLE"></app-authenticated>
+        <div class="col-6">
+            <app-authenticated [ROLE]="ROLE"></app-authenticated>
         </div>
     </div>
     <div class="row body">
-        <div class="col-lg-2 side-bar">
-            <app-side-bar-admin ></app-side-bar-admin>
+        <div class="col-2 side-bar">
+            <app-side-bar-admin></app-side-bar-admin>
         </div>
-        <div class="col-lg-10 infor">
+        <div class="col-10 infor">
             <router-outlet></router-outlet>
             <!-- <app-overview></app-overview> -->
             <!-- <app-users></app-users> -->
@@ -20,5 +20,5 @@
         </div>
     </div>
 </div>
-    
+
 <!-- </div> -->

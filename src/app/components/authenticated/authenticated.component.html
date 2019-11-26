@@ -1,7 +1,8 @@
-<nav class="nav justify-content-end">
+<nav class="nav justify-content-end" style="justify-content: flex-end !important;">
     <a class="nav-link " [routerLink]="[messagesURL]" *ngIf="ROLE!='ADMIN'">
         <i class="fab fa-facebook-messenger icon-messager">
-            <span class="badge badge-pill badge-danger amount_new" *ngIf="total_new_messages!=0">{{total_new_messages}}</span>
+            <span class="badge badge-pill badge-danger amount_new"
+                *ngIf="total_new_messages!=0">{{total_new_messages}}</span>
         </i>
     </a>
     <a class="nav-link " href="javascript:void(0)" *ngIf="ROLE!='ADMIN'">
@@ -15,7 +16,8 @@
             <div class="notification-box dropdown-menu dropdown-menu-right frame-border">
                 <div class="title-notification" (click)="$event.stopPropagation()">
                     <strong>Notifications</strong>
-                    <small style="float: right;"><a href="javascript:void(0)" (click)="setAllAsRead()">Make All As Read</a></small>
+                    <small style="float: right;"><a href="javascript:void(0)" (click)="setAllAsRead()">Make All As
+                            Read</a></small>
                 </div>
                 <div class="list-notifications" *ngIf="total_notification!=null">
                     <div class="title-notification text-center" *ngIf="total_notification.length==0">
@@ -29,7 +31,7 @@
                                 </td>
                                 <td>
                                     <tr>
-                                        <span>{{notification.payload.doc.data().text_notification}}</span>
+                                        <span style="white-space: pre-wrap;">{{notification.payload.doc.data().text_notification}}</span>
                                     </tr>
                                     <tr>
                                         <small>{{notification.payload.doc.data().create_at | date:'dd/MM/y HH:mm:ss a'}}</small>
@@ -48,7 +50,8 @@
             <!-- <img src="assets/images/doctor1.jpg" class="rounded-circle dropdown-toggle" width="40px" height="40px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt=""> -->
             <label class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="nameAndAvatar!=null">
                 <a href="#" class="badge badge-primary">{{nameAndAvatar!=null?nameAndAvatar.name:'Loading'}}</a>
-                <img [src]="nameAndAvatar.avatar!=''&&nameAndAvatar.avatar!=null?nameAndAvatar.avatar:'assets/images/doctor1.jpg'" class="rounded-circle" width="40px" height="40px" alt="">
+                <img [src]="nameAndAvatar.avatar!=''&&nameAndAvatar.avatar!=null?nameAndAvatar.avatar:'assets/images/no-avatar.png'"
+                    style="    object-fit: cover;" class="rounded-circle" width="40px" height="40px" alt="">
 
             </label>
             <div class="dropdown-menu dropdown-menu-right">

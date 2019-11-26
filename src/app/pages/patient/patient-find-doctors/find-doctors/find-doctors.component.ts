@@ -89,14 +89,17 @@ export class FindDoctorsComponent implements OnInit {
       this.districts[i] = this.provinces[provinceIndex].districts[i];
     }
     // console.log(this.districts);
+    this.searchDoctors();
   }
 
   public districtOption(districtIndex){
     this.districtSelected = districtIndex;
+    this.searchDoctors();
   }
 
   public specialistOption(specialistIndex){
     this.specialistSelected = specialistIndex;
+    this.searchDoctors();
   }
 
   public searchDoctors(){

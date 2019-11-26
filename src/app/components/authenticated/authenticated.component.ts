@@ -18,6 +18,10 @@ export class AuthenticatedComponent implements OnInit, OnDestroy {
   beforeUnloadHander(event) {
     this.firebaseService.setOffline(this.username);
   }
+  @HostListener('window:unload', ['$event'])
+  unloadHandler(event) {
+    this.firebaseService.setOffline(this.username);
+  }
   private messagesURL: string = "";
 
   private profileURL: string = "";
@@ -42,12 +46,12 @@ export class AuthenticatedComponent implements OnInit, OnDestroy {
     private afs: AngularFirestore,
     private firebaseService: FirebaseService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.username = JSON.parse(localStorage.getItem('token')).username;
     this.username = JSON.parse(localStorage.getItem('token')).username;
-    this.firebaseService.getUserFirebaseUpdate(this.username).subscribe(data=>{
+    this.firebaseService.getUserFirebaseUpdate(this.username).subscribe(data => {
       console.log(data);
       this.nameAndAvatar = data;
     })
@@ -80,7 +84,7 @@ export class AuthenticatedComponent implements OnInit, OnDestroy {
     this.getNewMessage();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.firebaseService.setOffline(this.username);
   }
   public logout() {
@@ -90,40 +94,40 @@ export class AuthenticatedComponent implements OnInit, OnDestroy {
 
   public getNewNotificationData(username) {
 
-    this.newNotificationCollection = this.afs.collection('notifications/'+username+"/"+username,ref => ref.where('is_read', '==', false));
+    this.newNotificationCollection = this.afs.collection('notifications/' + username + "/" + username, ref => ref.where('is_read', '==', false));
     this.newNotification = this.newNotificationCollection.snapshotChanges();
   }
 
   public getAllNotification(username) {
-    this.allNotificationCollection = this.afs.collection('notifications/'+username+"/"+username, ref => ref.orderBy("create_at","desc"));
+    this.allNotificationCollection = this.afs.collection('notifications/' + username + "/" + username, ref => ref.orderBy("create_at", "desc"));
     this.allNotification = this.allNotificationCollection.snapshotChanges();
   }
 
   public setAllAsRead() {
     this.total_new_notification.forEach(element => {
-      this.setRead(element,this.username);
+      this.setRead(element, this.username);
     });
   }
 
-  public setRead(notif,username) {
-    return this.afs.collection('notifications/'+username+"/"+username)
+  public setRead(notif, username) {
+    return this.afs.collection('notifications/' + username + "/" + username)
       .doc(notif.payload.doc.id).update({ is_read: true });
   }
 
   public getNewMessage() {
-    this.firebaseService.getNewMessage(this.ROLE2,this.data.username).valueChanges().subscribe(data=>{
+    this.firebaseService.getNewMessage(this.ROLE2, this.data.username).valueChanges().subscribe(data => {
       console.log(data.length);
       this.total_new_messages = data.length;
     })
   }
 
-  public moveToDetail(notif){
-    if(this.ROLE2=="ROLE_PATIENT"){
-      this.router.navigateByUrl("/patient/appointments/detail/"+notif.payload.doc.data().id_appointment)
-      this.setRead(notif,this.username)
-    }else if(this.ROLE2=="ROLE_DOCTOR"){
-      this.router.navigateByUrl("/doctor/appointments/detail/"+notif.payload.doc.data().id_appointment)
-      this.setRead(notif,this.username)
+  public moveToDetail(notif) {
+    if (this.ROLE2 == "ROLE_PATIENT") {
+      this.router.navigateByUrl("/patient/appointments/detail/" + notif.payload.doc.data().id_appointment)
+      this.setRead(notif, this.username)
+    } else if (this.ROLE2 == "ROLE_DOCTOR") {
+      this.router.navigateByUrl("/doctor/appointments/detail/" + notif.payload.doc.data().id_appointment)
+      this.setRead(notif, this.username)
     }
   }
 }

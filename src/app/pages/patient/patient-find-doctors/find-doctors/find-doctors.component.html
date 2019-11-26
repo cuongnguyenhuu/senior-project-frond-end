@@ -1,19 +1,26 @@
 <div class="container">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-lg-12 text-center">
             <label class="title-feature"> FIND DOCTORS</label>
         </div>
-    </div>
-    <div class="row margin-bottom">
+    </div> -->
+    <div class="row margin-bottom margin-top">
         <div class="col-lg-12 margin-bottom padding-15px frame-border">
             <div class="row">
-                <div class="col-lg-12">
+                <!-- <div class="col-lg-12">
                     <h3> <span class="badge badge-info">Filter</span></h3>
-                </div>
+                </div> -->
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-9">
-                            <input type="text" [(ngModel)]="textSearch" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search...">
+                            <!-- <input type="text" [(ngModel)]="textSearch" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search..."> -->
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" [(ngModel)]="textSearch" placeholder="Type doctoc's name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2" (click)="searchDoctors()"><i
+                                                class="fas fa-search"></i></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-3">
                             <table>
@@ -82,13 +89,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-12 button-search">
                     <button type="button" class="btn btn-primary" (click)="searchDoctors()">Search</button>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <div class="col-lg-12 padding-15px frame-border">
+        <div class="col-lg-12 padding-15px frame-border" style="overflow: auto;">
             <div class="row doctor-recommending">
                 <div class="col-lg-12 text-center" *ngIf="isLoading">
                     <div class="spinner-border text-primary" role="status">
@@ -96,16 +103,16 @@
                     </div>
                 </div>
 
-                <div class="col-lg-12" *ngIf="!isLoading">
-                    <div class="col-lg-12 text-center" *ngIf="doctors.length ==0">
+                <div class="col-12" *ngIf="!isLoading">
+                    <div class="col-12 text-center" *ngIf="doctors.length ==0">
                         <label class="badge badge-warning">No record matched!</label>
                     </div>
                     <table *ngIf="doctors.length>0">
                         <tr class="d-flex" *ngFor="let doctor of doctors">
-                            <td class="col-1">
-                                <img src="assets/images/doctor.jpg" width="50px" alt="">
+                            <td class="col-lg-1 col-2">
+                                <img [src]="doctor.doctorEntity.account.avatar==''?'assets/images/doctor.jpg':doctor.doctorEntity.account.avatar" width="50px" alt="" style="border-radius: 10px;">
                             </td>
-                            <td class="col-9">
+                            <td class="col-lg-9 col-8">
                                 <p class="text-bold">Dr. {{doctor.doctorEntity.account.name}} | {{doctor.doctorEntity.account.address.addressLine}} , {{doctor.doctorEntity.account.address.ward}}, {{doctor.doctorEntity.account.address.locality}}, {{doctor.doctorEntity.account.address.city}},
                                     {{doctor.doctorEntity.account.address.country}}
                                 </p>
@@ -116,7 +123,7 @@
                                     <img src="assets/images/distance.png" width="20px" alt=""> : {{doctor.distance}} km | {{doctor.travelDuration}} minutes
                                 </p>
                             </td>
-                            <td class="col-2  text-right">
+                            <td class="col-lg-2 col-2  text-right">
                                 <button type="button" class="btn btn-primary" [routerLink]="['/patient/find-doctors/'+doctor.doctorEntity.account.account.username+'/schedule']">
                                     SEE SCHEDULE
                                 </button>

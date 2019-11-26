@@ -1,19 +1,25 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-2 col-6">
             <app-logo [ROLE]="ROLE"></app-logo>
         </div>
-        <div class="col-lg-10">
-            <nav class="nav justify-content-end">
-                <a class="nav-link" [routerLink]="['/patient/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="ROLE==='PATIENT'">HOME</a>
-                <a class="nav-link" [routerLink]="['/patient/check-up']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'">CHECK-UP</a>
-                <a class="nav-link" [routerLink]="['/patient/appointments']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'&& isLogin">APPOINTMENTS</a>
-                <a class="nav-link" [routerLink]="['/patient/find-doctors']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'&& isLogin">FIND-DOCTORS</a>
-                <a class="nav-link" [routerLink]="['/doctor/appointments']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'">APPOINTMENTS</a>
-                <a class="nav-link" [routerLink]="['/doctor/schedule']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'">SCHEDULE</a>
-                <a class="nav-link" [routerLink]="['/doctor/contribute']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'">CONTRIBUTION</a>
-                <app-unlogin (tranforDataLogin)="setDataLogin($event)" *ngIf="!isLogin"></app-unlogin>
-                <app-authenticated *ngIf="isLogin" [ROLE]="ROLE" [data]="data"></app-authenticated>
+        <div class="col-lg-10 col-6">
+            <nav class="nav navbar navbar-expand-lg justify-content-end">
+                <button style="background-color: #2a65cc;    margin-top: 10px;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <!-- <span class="navbar-toggler-icon"></span> -->
+                    <i class="fas fa-bars" style="color: white;" ></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="justify-content: flex-end;">
+                    <a class="nav-link" [routerLink]="['/patient/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="ROLE==='PATIENT'">HOME</a>
+                    <a class="nav-link" [routerLink]="['/patient/check-up']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'">CHECK-UP</a>
+                    <a class="nav-link" [routerLink]="['/patient/appointments']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'&& isLogin">APPOINTMENTS</a>
+                    <a class="nav-link" [routerLink]="['/patient/find-doctors']" routerLinkActive="active" *ngIf="ROLE==='PATIENT'&& isLogin">FIND-DOCTORS</a>
+                    <a class="nav-link" [routerLink]="['/doctor/appointments']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'">APPOINTMENTS</a>
+                    <a class="nav-link" [routerLink]="['/doctor/schedule']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'">SCHEDULE</a>
+                    <a class="nav-link" [routerLink]="['/doctor/contribute']" routerLinkActive="active" *ngIf="ROLE==='DOCTOR'">CONTRIBUTION</a>
+                    <app-unlogin (tranforDataLogin)="setDataLogin($event)" *ngIf="!isLogin"></app-unlogin>
+                    <app-authenticated *ngIf="isLogin" [ROLE]="ROLE" [data]="data"></app-authenticated>
+                </div>
             </nav>
 
         </div>

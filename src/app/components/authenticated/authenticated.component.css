@@ -53,7 +53,7 @@ i {
 }
 
 .notification-box {
-    width: 30vw;
+    width: 50vh;
 }
 
 .list-notifications {
@@ -79,4 +79,9 @@ i {
     color: #000;
     text-decoration: none;
     background-color: #d6d6d6;
+}
+
+.notification-box {
+    right: 0;
+    left: -240px;
 }

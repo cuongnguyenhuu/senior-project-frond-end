@@ -1,62 +1,72 @@
-<div class="container">
+<div class="container margin-top">
     <div class="row text-center" *ngIf="isLoading">
         <div class="col-lg-12">
             <div class="spinner-border text-info"></div>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-lg-12 text-center ">
             <label class="title-feature">SCHEDULE</label>
         </div>
-    </div>
+    </div> -->
     <div class="row" *ngIf="!isLoading">
         <div class="col-lg-12 frame-border padding-15px margin-bottom">
             <div class="row" *ngIf="doctor!=null">
                 <div class="col-lg-4">
-                    <img class="image-width" src="assets/images/doctor1.jpg" alt="">
+                    <img class="image-width" [src]="data.doctor.account.avatar==''?'assets/images/no-avatar.png':data.doctor.account.avatar" alt="" style="width: inherit; border-radius: 10px;">
 
                 </div>
                 <div class="col-lg-8">
                     <label class="name-doctor">Dr. {{data.doctor.account.name}}</label>
                     <table class="text-left">
                         <tr>
-                            <th>
+                            <td>
                                 Specialist:
-                            </th>
-                            <td>
+                            </td>
+                            <th>
                                 {{data.doctor.major}}
-                            </td>
+                            </th>
                         </tr>
                         <tr>
-                            <th>
+                            <td>
                                 Birthday:
-                            </th>
-                            <td>
+                            </td>
+                            <th>
                                 {{data.doctor.account.birthday | date: 'd, MMM, y'}}
-                            </td>
+                            </th>
                         </tr>
                         <tr>
-                            <th>
+                            <td>
                                 Experience:
-                            </th>
-                            <td>
-                                {{data.doctor.experiences}} {{data.doctor.experiences>1?'years':'year'}}
                             </td>
+                            <th>
+                                {{data.doctor.experiences}} {{data.doctor.experiences>1?'years':'year'}}
+                            </th>
                         </tr>
                         <tr>
-                            <th>
-                                Address:
-                            </th>
                             <td>
-                                {{data.doctor.account.address.addressLine}}, {{data.doctor.account.address.ward}}, {{data.doctor.account.address.locality}}, {{data.doctor.account.address.city}}, {{data.doctor.account.address.country}}
+                                Address:
                             </td>
+                            <th>
+                                {{data.doctor.account.address.addressLine}}, {{data.doctor.account.address.ward}}, {{data.doctor.account.address.locality}}, {{data.doctor.account.address.city}}, {{data.doctor.account.address.country}}
+                            </th>
                         </tr>
                         <tr *ngIf="ROLE=='ROLE_PATIENT'">
                             <th>
                                 <button type="button" class="btn btn-primary" (click)="sendMessage()">SEND</button>
                             </th>
                             <td>
-                                <textarea class="form-control" [(ngModel)]="messageChat" name="" id="" cols="30" rows="3" placeholder="Leave any question"></textarea>
+                                <textarea class="form-control" [(ngModel)]="messageChat" name="" id="" cols="30" rows="3" placeholder="Send a message to doctor"></textarea>
+                            </td>
+                        </tr>
+                        <tr *ngIf="ROLE=='ROLE_PATIENT'">
+                            <th>
+                                <!-- <button type="button" class="btn btn-primary" (click)="sendMessage()">SEND</button> -->
+                            </th>
+                            <td>
+                                <button type="button" class="btn btn-primary" (click)="sendLastestResult()">
+                                        <i class="fas fa-share"></i> SEND LASTEST RESULT
+                                </button>
                             </td>
                         </tr>
                     </table>
@@ -98,23 +108,23 @@
                         <div class="col-lg-12 padding-15px">
                             <table class="table-responsive">
                                 <tr class="d-flex">
-                                    <td class="col-2">
+                                    <td class="col-3 col-lg-2">
                                         <span class="btn btn-success margin-right-15px"></span>
                                         <label>Available</label>
                                     </td>
-                                    <td class="col-2">
+                                    <td class="col-3 col-lg-2">
                                         <span class="btn btn-danger margin-right-15px"></span>
                                         <label>Busy</label>
                                     </td>
-                                    <td class="col-2" *ngIf="ROLE=='ROLE_DOCTOR'">
+                                    <td class="col-3 col-lg-2" *ngIf="ROLE=='ROLE_DOCTOR'">
                                         <span class="btn btn-info margin-right-15px"></span>
                                         <label>Other</label>
                                     </td>
-                                    <td class="col-2" *ngIf="ROLE=='ROLE_DOCTOR'">
+                                    <td class="col-3 col-lg-2" *ngIf="ROLE=='ROLE_DOCTOR'">
                                         <span class=" btn btn-warning margin-right-15px "></span>
                                         <label>Default</label>
                                     </td>
-                                    <td class="col-2 " *ngIf="ROLE=='ROLE_DOCTOR'">
+                                    <td class="col-3 col-lg-2" *ngIf="ROLE=='ROLE_DOCTOR'">
                                         <span class="btn btn-primary margin-right-15px"></span>
                                         <label>Booked</label>
                                     </td>
