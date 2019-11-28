@@ -13,3 +13,7 @@
 .specialist {
     color: gray;
 }
+
+td {
+    white-space: nowrap;
+}

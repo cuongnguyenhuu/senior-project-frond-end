@@ -22,8 +22,8 @@ button {
     content: "UPLOAD IMAGE HERE";
     position: absolute;
     background-color: #000000b5;
-    width: 500px;
-    height: 400px;
+    width: 40vw;
+    height: 30vw;
     top: 0;
     left: 0;
     bottom: 0;
@@ -39,5 +39,5 @@ button {
 }
 
 img {
-    object-fit: contain;
+    object-fit: fill;
 }

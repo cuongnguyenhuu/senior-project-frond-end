@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppointmentService } from './../../services/appointment-services/appointment.service';
 import { Router, ActivatedRoute } from '@angular/router'
+import {Location} from '@angular/common';
+
 @Component({
   selector: 'app-appointment',
   templateUrl: './appointment.component.html',
@@ -21,7 +23,8 @@ export class AppointmentComponent implements OnInit {
   constructor(
     private appointmentService: AppointmentService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -77,6 +80,10 @@ export class AppointmentComponent implements OnInit {
         console.log(error);
       })
     }
+  }
+
+  back(){
+    this.location.back();
   }
 
   public setOpenConfirm(status) {

@@ -14,7 +14,7 @@ let httpOptions = {
 })
 export class ScheduleService {
 
-  private API:string = "http://ec2-13-229-134-141.ap-southeast-1.compute.amazonaws.com:8080/api/";
+  private API:string = "http://ec2-13-250-122-234.ap-southeast-1.compute.amazonaws.com:8080/api/";
 
   constructor(
     private http: HttpClient,

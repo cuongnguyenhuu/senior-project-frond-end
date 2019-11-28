@@ -16,7 +16,11 @@
 }
 
 .margin-bottom {
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+}
+
+.margin-top {
+    margin-top: 50px;
 }
 
 .center {
@@ -27,6 +31,11 @@
 .center-horizontal {
     display: flex;
     justify-content: center;
+}
+
+.center-vertical {
+    display: flex;
+    align-items: center;
 }
 
 .padding-15px {
@@ -52,4 +61,8 @@
 .align-right {
     display: flex;
     justify-content: flex-end;
+}
+
+img {
+    object-fit: cover;
 }

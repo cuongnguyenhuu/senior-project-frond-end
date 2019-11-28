@@ -1,22 +1,28 @@
-.side-bar{
-    border-right: 1px solid rgba(0,0,0,.1);
+.side-bar {
+    border-right: 1px solid rgba(0, 0, 0, .1);
     position: sticky;
     height: 100vh;
 }
-hr{
+
+hr {
     margin: 0;
 }
-.admin-page{
+
+.admin-page {
     position: fixed;
     height: 100%;
 }
-.header{
-    border-bottom:1px solid rgba(0,0,0,.1);
+
+.header {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding: 5px 0px;
 }
-.body{
+
+.body {
     height: 100%;
 }
-.infor{
+
+.infor {
     height: 100%;
     overflow: auto;
     padding-bottom: 200px;

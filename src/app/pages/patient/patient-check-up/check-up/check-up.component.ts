@@ -14,69 +14,69 @@ export class CheckUpComponent implements OnInit {
   @Output() result = new EventEmitter();
 
   @Output() imageName = new EventEmitter();
-  
-  private image:string;
+
+  private image: string;
   private errorMessage;
   // private URL:string = "http://localhost:8080/api/utility/image/";
-  private isloading:boolean =false;
-  private disabled:boolean = true;
-  private diseases:any;
-  private result_text:string = "";
+  private isloading: boolean = false;
+  private disabled: boolean = true;
+  private diseases: any;
+  private result_text: Array<String> = [];
 
   constructor(
     private imageServicesService: ImageServicesService,
-    private patientCheckUpService:PatientCheckUpService,
-    private patientAddResultService:PatientAddResultService,
-    private localServicesService:LocalServicesService
+    private patientCheckUpService: PatientCheckUpService,
+    private patientAddResultService: PatientAddResultService,
+    private localServicesService: LocalServicesService
   ) { }
 
   ngOnInit() {
-    this.localServicesService.getDiseases().subscribe(data=>{
+    this.localServicesService.getDiseases().subscribe(data => {
       this.diseases = data;
     })
   }
 
-  public uploadImage(file:File){
-    this.imageServicesService.uploadImage(file).subscribe(data=>{
-      if(data!==null){
+  public uploadImage(file: File) {
+    this.imageServicesService.uploadImage(file).subscribe(data => {
+      if (data !== null) {
         console.log(data)
         this.image = data.image;
-        this.disabled=false;
-      }else{
+        this.disabled = false;
+      } else {
         this.errorMessage = data.message;
       }
     },
-    error=>{
-      this.errorMessage = error;
-      console.log(error);
-    })
+      error => {
+        this.errorMessage = error;
+        console.log(error);
+      })
   }
 
-  public checkUp(){
-    this.isloading=true;
-    this.patientCheckUpService.checkUp(this.image).subscribe(data=>{
+  public checkUp() {
+    this.isloading = true;
+    this.patientCheckUpService.checkUp(this.image).subscribe(data => {
       console.log(data);
       this.isloading = false;
       var temp = data;
-      for(var i = 0; i<temp.length; i++){
-        this.result_text +=this.diseases[i].name +", "+temp[i]+"%; "; 
+      for (var i = 0; i < temp.length; i++) {
+        this.result_text.push(this.diseases[i].name + ": " + Math.round((temp[i] * 100)) + "%");
       }
 
-      if(localStorage.getItem("token")!=null)
-      this.patientAddResultService.addResult(this.image,this.result_text).subscribe(data=>{
-        console.log(data);
-        localStorage.setItem("lastest_checkup",data);
-      },
-      error=>{
-        console.log(error);
-      });
+      if (localStorage.getItem("token") != null)
+        this.patientAddResultService.addResult(this.image, JSON.stringify(this.result_text)).subscribe(data => {
+          console.log(data);
+          localStorage.setItem("lastest_checkup", data);
+        },
+          error => {
+            console.log(error);
+          });
 
       this.result.emit(data);
       this.imageName.emit(this.image);
     },
-    error=>{
-      console.log(error);
-      this.isloading = false;
-    })
+      error => {
+        console.log(error);
+        this.isloading = false;
+      })
   }
 }

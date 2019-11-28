@@ -5,6 +5,7 @@ import { ListMessages } from 'src/app/models/listMessages';
 import { Chat } from 'src/app/models/chat';
 import { Message } from 'src/app/models/message';
 import { async } from '@angular/core/testing';
+import { ImageServicesService } from 'src/app/services/image-servives/image-services.service';
 
 @Component({
   selector: 'app-chat',
@@ -24,9 +25,11 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   private isLoadingList:boolean = true;
   private isLoadingMessages:boolean;
   private message;
+  private link_image='';
   private allChatsSubscription: Subscription = new Subscription();
   constructor(
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private imageServices: ImageServicesService
   ) { }
 
   ngAfterViewChecked() {
@@ -122,16 +125,32 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     })
   }
 
+  uploadImage(file){
+    this.imageServices.uploadImage(file).subscribe(data => {
+      console.log(data);
+      if (data != null) {
+        this.link_image = data.image;
+      }
+    }, error => {
+      console.log(error);
+    })
+  }
+
+  removeImage(){
+    this.link_image = '';
+  }
+
   public sendMessage() {
     var chat;
     if (this.ROLE == 'ROLE_PATIENT')
       chat = new Chat(this.currentMember, this.listChats[this.indexSelectedChat].$username)
     else
       chat = new Chat(this.listChats[this.indexSelectedChat].$username, this.currentMember)
-    var message = new Message(this.currentMember, "", this.text_message);
+    var message = new Message(this.currentMember, this.link_image, this.text_message);
     this.firebaseService.sendToDoctor(chat, message, this.ROLE);
     // this.firebaseService.setUnRead(this.listChats[this.indexSelectedChat].$id, this.ROLE);
     this.text_message = '';
+    this.link_image='';
   }
 
   public onFocusOut() {

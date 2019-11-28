@@ -60,11 +60,16 @@ export class AppointmentsComponent implements OnInit {
   }
 
   public changeStatus(status) {
+    // if(status != "Booked")
     this.status = status;
+    // else
+    // this.status = "Waiting"
+    this.filter();
   }
 
   public changeSortBy(sortBy) {
     this.sortBy = sortBy;
+    this.filter();
   }
 
   public filter() {

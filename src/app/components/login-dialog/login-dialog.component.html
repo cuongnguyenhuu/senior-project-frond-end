@@ -10,7 +10,7 @@
     <div class="dialog">
 
         <div class="row logo">
-            <div class="col-lg-12">
+            <div class="col-12">
                 <img src="assets/images/logo.png" width="40px" class="logo" alt="">
                 <label class="name-system">HC
                     <!-- <label class="name-role">PATIENT</label> -->
@@ -20,31 +20,31 @@
             </div>
         </div>
         <div class="row sologan">
-            <div class="col-lg-12">
+            <div class="col-12">
                 <label class="text-sologan">HEALTH CARE SOLUTION</label>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-6">
                 <a href="javascript:void(0)" [class]="isLoginOpen?'tab-active':'tab-disable'" (click)="openLogin()">LOGIN</a>
             </div>
-            <div class="col-lg-6">
+            <div class="col-6">
                 <a [class]="!isLoginOpen?'tab-active':'tab-disable'" href="javascript:void(0)" (click)="openRegister()">REGISTER</a>
             </div>
         </div>
         <!-- <div class="row">
-            <div class="col-lg-12">
+            <div class="col-12">
                 <span class="badge badge-warning">{{errorMessage}}</span>
             </div>
         </div> -->
         <!-- <div class="row">
-            <div class="col-lg-12 username">
+            <div class="col-12 username">
                 <input type="text" [class]="errorField.length==0?'form-control':errorField[0]==false?'form-control is-invalid':'form-control is-valid'" [(ngModel)]="username" name="" id="username" aria-describedby="helpId" placeholder="Username">
                 <i class="fas fa-user"></i>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12 password">
+            <div class="col-12 password">
                 <input [type]="isCoverPassword?'password':'text'" [class]="errorField.length==0?'form-control':errorField[1]==false?'form-control is-invalid':'form-control is-valid'" class="form-control" [(ngModel)]="password" name="" id="password" aria-describedby="helpId"
                     placeholder="Password">
                 <i class="fas fa-key"></i>
@@ -53,12 +53,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12 forgot-password">
+            <div class="col-12 forgot-password">
                 <p><a href="javascript:void(0)" (click)="toggleRegisterDialog()">Do you have account?</a> Or <a href="">forgot password?</a></p>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-12">
                 <button type="button" class="btn btn-primary" (click)="login()">LOGIN</button>
             </div>
         </div> -->

@@ -35,10 +35,12 @@ export class UsersComponent implements OnInit {
 
   public setStatus(value){
     this.status = value;
+    this.search();
   }
 
   public setRole(value){
     this.role = value;
+    this.search();
   }
 
   public search(){

@@ -1,98 +1,116 @@
+<!-- <div class="">
+    <i class="fas fa-arrow-circle-left fa-2x" (click)="back()" style="color: #007bff;"></i>
+</div> -->
 <div class="row" *ngIf="data!=null">
     <div class="col-lg-12 text-center">
+
         <label class="title-feature"> DETAIL USER</label>
     </div>
+    <div class="col-lg-12" style="position: absolute;">
+
+        <i class="fas fa-arrow-circle-left fa-2x" (click)="back()" style="color: #007bff;"></i>
+    </div>
+
+
     <div class="col-lg-5 box-image">
-        <img src="assets/images/doctor1.jpg" alt="">
+        <img [src]="profile.avatar!=''?profile.avatar:'assets/images/no-avatar.png'" alt="" style="width: inherit; border-radius: 10px; height: 500px; object-fit: cover;">
         <br>
         <label class="name-doctor">
-               {{profile.name}}
-            </label>
+            {{profile.name}}
+        </label>
         <label class="specialist">
-                {{role=="doctor"?data.major+'':'Patient'}}
-            </label>
+            {{role=="doctor"?data.major+'':'Patient'}}
+        </label>
     </div>
     <div class="col-lg-5">
         <table>
             <tr>
-                <th>
+                <td>
                     Username:
-                </th>
-                <td>
+                </td>
+                <th>
                     {{profile.account.username}}
-                </td>
+                </th>
             </tr>
             <tr>
+                <td>
+                    Name:
+                </td>
                 <th>
+                    {{profile.name}}
+                </th>
+            </tr>
+            <tr>
+                <td>
                     Create at:
-                </th>
-                <td>
+                </td>
+                <th>
                     {{profile.account.create_at | date:'MMM-dd-y HH:mm'}}
-                </td>
+                </th>
             </tr>
-            <tr>
-                <th>
+            <!-- <tr>
+                <td>
                     Status:
-                </th>
-                <td>
+                </td>
+                <th>
                     -
-                </td>
-            </tr>
+                </th>
+            </tr> -->
             <tr>
-                <th>
+                <td>
                     Account status:
-                </th>
-                <td>
+                </td>
+                <th>
                     {{profile.account.is_banded?'Banned':'Active'}}
-                </td>
+                </th>
             </tr>
             <tr>
-                <th>
-                    Birthday:
-                </th>
                 <td>
+                    Birtdday:
+                </td>
+                <th>
                     {{profile.birthday | date:'MMM-dd-y'}}
-                </td>
+                </th>
             </tr>
             <tr *ngIf="role=='doctor'">
-                <th>
+                <td>
                     Specialist:
-                </th>
-                <td>
+                </td>
+                <th>
                     {{data.major}}
-                </td>
+                </th>
             </tr>
             <tr *ngIf="role=='doctor'">
-                <th>
+                <td>
                     Certificate:
-                </th>
-                <td>
-                    <img [src]="data.certificate" width="300px" alt="">
                 </td>
+                <th>
+                    <img [src]="data.certificate" style="width: 200px;" alt="">
+                </th>
             </tr>
             <tr>
-                <th>
-                    Place:
-                </th>
                 <td>
-                    {{profile.address.addressLine}}, {{profile.address.ward}}, {{profile.address.city}}, {{profile.address.country}}
+                    Place:
                 </td>
+                <th>
+                    {{profile.address.addressLine}}, {{profile.address.ward}}, {{profile.address.city}}, {{profile.address.country}}
+                </th>
             </tr>
             <tr *ngIf="role=='doctor'">
-                <th>
-                    Experience:
-                </th>
                 <td>
-                    {{data.experiences}} years
+                    Experience:
                 </td>
+                <th>
+                    {{data.experiences}} years
+                </th>
             </tr>
             <tr>
-                <th>
-
-                </th>
                 <td>
-                    <button type="button" class="btn btn-danger" (click)="setOpenConfirm()">{{profile.account.is_banded?'ACTIVATE ACCOUNT':'BAN ACCOUNT'}}</button>
+
                 </td>
+                <th>
+                    <button type="button" class="btn btn-danger" (click)="setOpenConfirm()">{{profile.account.is_banded?'ACTIVATE ACCOUNT':'BAN ACCOUNT'}}</button>
+                </th>
             </tr>
         </table>
     </div>

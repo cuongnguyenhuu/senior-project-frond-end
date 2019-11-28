@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserServicesService } from 'src/app/services/user-services/user-services.service';
-
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
   constructor(
     private activatedRoute:ActivatedRoute,
     private userServices:UserServicesService,
+    private _location: Location
   ) { }
 
   ngOnInit() {
@@ -34,8 +35,13 @@ export class UserComponent implements OnInit {
       if(this.role =="doctor"){
         this.profile = this.data.account;
       }
+      // console.log(this.profile);
     })
     })
+  }
+
+  back(){
+    this._location.back();
   }
   public banAccount(){
     console.log("ban");

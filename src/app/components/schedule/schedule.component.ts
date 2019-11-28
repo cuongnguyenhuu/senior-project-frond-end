@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 import { FirebaseService } from './../../services/firebase-services/firebase.service';
 import { Chat } from 'src/app/models/chat';
 import { Message } from 'src/app/models/message';
+import { HistoryService } from 'src/app/pages/patient/patient-history/services/history-service/history.service';
 
 @Component({
   selector: 'app-schedule',
@@ -24,9 +25,11 @@ export class ScheduleComponent implements OnInit {
     private scheduleService: ScheduleService,
     private convertTimeService: ConvertTimeService,
     private route: ActivatedRoute,
-    private datePipe:DatePipe,
-    private router:Router,
-    private firebaseService:FirebaseService
+    private datePipe: DatePipe,
+    private router: Router,
+    private firebaseService: FirebaseService,
+    private historyService: HistoryService
+
   ) { }
   private dayName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   private dates: number[] = [];
@@ -48,8 +51,8 @@ export class ScheduleComponent implements OnInit {
   private actionType: String = "default";
 
   private timeSelected: Time[] = [];
-  private timeBook:any;
-  private doctor:any;
+  private timeBook: any;
+  private doctor: any;
 
   private messageConfirm;
 
@@ -102,10 +105,10 @@ export class ScheduleComponent implements OnInit {
     }
     else {
       this.userdoctor = this.route.snapshot.paramMap.get("userdoctor");
-      this.scheduleService.getScheduleByUsername(this.userdoctor,this.weekSelected).subscribe(data => {
+      this.scheduleService.getScheduleByUsername(this.userdoctor, this.weekSelected).subscribe(data => {
         console.log(data);
         this.doctor = data.doctor;
-        
+
         this.member1 = JSON.parse(localStorage.getItem('token')).username;
         this.member2 = this.doctor.account.account.username;
 
@@ -129,7 +132,7 @@ export class ScheduleComponent implements OnInit {
             this.times[i] = data.scheduleEntity.startAt + data.scheduleEntity.timePerAppointment * i;
           }
           this.schedules = data.dayResponses;
-          console.log(this.schedules); 
+          console.log(this.schedules);
         }
         this.data = data;
         this.isLoading = false;
@@ -141,7 +144,7 @@ export class ScheduleComponent implements OnInit {
     }
     this.isLoading = false;
 
-    console.log("currentTime: "+this.currentDate);
+    console.log("currentTime: " + this.currentDate);
 
     console.log(this.dayName);
   }
@@ -159,11 +162,11 @@ export class ScheduleComponent implements OnInit {
   }
 
   public toggleConfirmDialog(time) {
-    if(time!=null)
-    this.timeBook = time;
+    if (time != null)
+      this.timeBook = time;
     this.open_confirm = !this.open_confirm;
-    if(time!=null){
-      this.messageConfirm ='Are you sure to book an appointment at '+this.datePipe.transform(time.startTime,'HH:mm')+' to '+this.datePipe.transform(time.endTime,'HH:mm') +' on '+this.datePipe.transform(time.startTime,'MMM-dd-y')+'?';
+    if (time != null) {
+      this.messageConfirm = 'Are you sure to book an appointment at ' + this.datePipe.transform(time.startTime, 'HH:mm') + ' to ' + this.datePipe.transform(time.endTime, 'HH:mm') + ' on ' + this.datePipe.transform(time.startTime, 'MMM-dd-y') + '?';
     }
   }
 
@@ -180,15 +183,15 @@ export class ScheduleComponent implements OnInit {
   }
 
   public bookAppointment() {
-    var bookingRequest = new BookingRequest(null,this.timeBook);
+    var bookingRequest = new BookingRequest(null, this.timeBook);
     console.log(this.timeBook);
-    this.scheduleService.bookAppointment(this.doctor.account.account.username,bookingRequest).subscribe(data=>{
+    this.scheduleService.bookAppointment(this.doctor.account.account.username, bookingRequest).subscribe(data => {
       // console.log(data);
       this.ngOnInit();
     },
-    error=>{
-      console.log(error);
-    })
+      error => {
+        console.log(error);
+      })
   }
 
   public addTime(time) {
@@ -214,29 +217,51 @@ export class ScheduleComponent implements OnInit {
         console.log(error);
       })
   }
+  sendLastestResult() {
+    this.historyService.getHistories(0, "newest").subscribe((data) => {
+      if (data != null) {
+        var image = data.result[0].imageUploaded;
+        var result = JSON.parse(data.result[0].result);
+        var text = '';
+        (result as Array<String>).forEach(element => {
 
-  public sendMessage(){
-    var messageObject = new Message(this.member1,null,this.messageChat);
-    var chat  = new Chat(this.member1,this.member2);
+          text = text + "\n" + "* " + element;
+        });
+        var messageObject = new Message(this.member1, image, text);
+        var chat = new Chat(this.member1, this.member2);
+        console.log(chat);
+        this.firebaseService.sendToDoctor(chat, messageObject, this.ROLE);
+        // console.log(m);
+        // this.firebaseService.setUnRead(this.member2, this.ROLE);
+        // this.firebaseService.getAllChats(messageObject);
+        text = '';
+        this.router.navigateByUrl("/patient/messages");
+      }
+    });
+  }
+  public sendMessage() {
+    var messageObject = new Message(this.member1, null, this.messageChat);
+    var chat = new Chat(this.member1, this.member2);
     console.log(chat);
-    this.firebaseService.sendToDoctor(chat,messageObject, this.ROLE)
+    this.firebaseService.sendToDoctor(chat, messageObject, this.ROLE);
     // console.log(m);
     // this.firebaseService.setUnRead(this.member2, this.ROLE);
     // this.firebaseService.getAllChats(messageObject);
-    this.messageChat='';
-    
+    this.messageChat = '';
+    this.router.navigateByUrl("/patient/messages");
+
     // this.router.navigateByUrl("/patient/messages");
   }
 
-  public pickRow(indexRow){
+  public pickRow(indexRow) {
     this.schedules[indexRow].timeResponses.forEach(element => {
       this.addTime(element);
     });
     console.log(this.timeSelected)
   }
 
-  public pickColunm(indexColunm){
-    this.schedules.forEach(element=>{
+  public pickColunm(indexColunm) {
+    this.schedules.forEach(element => {
       this.addTime(element.timeResponses[indexColunm])
     })
     console.log(this.timeSelected)
