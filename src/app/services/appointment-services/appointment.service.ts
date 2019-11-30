@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
-
+import { API } from './../../models/API';
 let httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -11,12 +11,15 @@ let httpOptions = {
 })
 export class AppointmentService {
 
-  private API: string = "http://ec2-13-250-122-234.ap-southeast-1.compute.amazonaws.com:8080/api/";
+  private API: string ;
   private appointment;
 
   constructor(
     private http: HttpClient,
-  ) { }
+    private api: API
+  ) { 
+    this.API = api.getLink()+ "/api/";
+  }
 
   public getPatientAppointments(pageIndex,search,status,sortBy): Observable<any> {
     if (httpOptions.headers.get("Authorization") == null) {
@@ -67,6 +70,14 @@ export class AppointmentService {
       httpOptions.headers = httpOptions.headers.append("Authorization", token);
     }
     return this.http.put<any>(this.API + "doctor/appointment/"+id+"/", message, httpOptions)
+  }
+
+  public doctorNoteAppointment(id,note) : Observable<any>{
+    if (httpOptions.headers.get("Authorization") == null) {
+      var token = "Bearer " + JSON.parse(localStorage.getItem("token")).token;
+      httpOptions.headers = httpOptions.headers.append("Authorization", token);
+    }
+    return this.http.put<any>(this.API + "doctor/appointment/note/"+id+"/", note, httpOptions)
   }
 
   public getDetailAppointmentByDoctor(id){

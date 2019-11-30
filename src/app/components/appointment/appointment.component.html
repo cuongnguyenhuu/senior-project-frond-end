@@ -8,6 +8,10 @@
         <div class="col-lg-12 frame-border">
             <div class="row padding-15px">
                 <i class="fas fa-arrow-circle-left fa-2x" (click)="back()" style="color: #007bff;"></i>
+                <i *ngIf="ROLE=='ROLE_DOCTOR'" class="far fa-plus-square fa-2x" style="position: absolute;
+                right: 0;
+                padding-right: 16px;
+                color: #067BFF;" (click)="showNote()"></i>
             </div>
             <div class="row padding-15px" *ngIf="data!=null">
                 <div class="col-lg-4 box-image">
@@ -73,6 +77,16 @@
 
                             </th>
                         </tr>
+                        <tr *ngIf="data.place!=null&&ROLE=='ROLE_DOCTOR'">
+                            <td>
+                                Note:
+                            </td>
+                            <th>
+                                <span>
+                                    {{data.place}}</span>
+
+                            </th>
+                        </tr>
                         <tr *ngIf="data.person_cancel!=null">
                             <td>
                                 Canceler:
@@ -107,3 +121,4 @@
     </div>
 </div>
 <app-confirm-cancel-dialog *ngIf="open_confirm" (cancel)="cancelAppointment($event)" (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" [timeCancel]="timeCancel"></app-confirm-cancel-dialog>
+<app-add-note-dialog *ngIf="open_note" (note)="noteAppointment($event)" (closeDialog)="setOpenNote($event)" [open]="open_note" [textNote]="textNote"></app-add-note-dialog>

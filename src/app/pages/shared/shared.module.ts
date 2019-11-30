@@ -23,6 +23,7 @@ import { ConfirmDialogComponent } from './../../components/confirm-dialog/confir
 import { UpdateScheduleComponent } from './../../components/update-schedule/update-schedule.component';
 import { ConfirmCancelDialogComponent } from './../../components/confirm-cancel-dialog/confirm-cancel-dialog.component';
 import { LoginComponent } from 'src/app/components/login/login.component';
+import { AddNoteDialogComponent } from 'src/app/components/add-note-dialog/add-note-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { LoginComponent } from 'src/app/components/login/login.component';
     ConfirmDialogComponent,
     UpdateScheduleComponent,
     ConfirmCancelDialogComponent,
-    LoginComponent
+    LoginComponent,
+    AddNoteDialogComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,30 @@
+<div class="confirm-dialog" *ngIf="open">
+    <div class="background" (click)="toggleNoteDialog()">
+
+    </div>
+    <div class="dialog">
+        <div class="row">
+            <div class="col-12">
+                <p class="badge badge-warning" *ngIf="messageError!=null">{{messageError}}</p>
+                <p>
+                    ADD NOTE
+                </p>
+
+            </div>
+            <div class="col-12 text-left">
+                <div class="form-group">
+                    <!-- <label for="" class="badge badge-warning">Write your reason here</label> -->
+                    <input type="text" [value]="textNote" [(ngModel)]="textNote" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Write your note here">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="button" [disabled]="textNote!=''?false:true" class="btn btn-primary" (click)="confirmOK()">ADD</button>
+            </div>
+            <div class="col-6">
+                <button type="button" (click)="toggleNoteDialog()" class="btn btn-danger">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>

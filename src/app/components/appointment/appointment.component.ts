@@ -18,8 +18,11 @@ export class AppointmentComponent implements OnInit {
   private timeCancel: any;
   private appointmentCancel: any;
 
+  private open_note: boolean = false;
+  private textNote;
   private ROLE;
   private id;
+  
   constructor(
     private appointmentService: AppointmentService,
     private router: Router,
@@ -44,6 +47,7 @@ export class AppointmentComponent implements OnInit {
       this.appointmentService.getDetailAppointmentByPatient(this.id).subscribe(data => {
         console.log(data);
         this.data = data;
+        // this.textNote = data.place;
         if(data==null){
           this.router.navigateByUrl("/patient/appointments");
         }
@@ -55,6 +59,7 @@ export class AppointmentComponent implements OnInit {
       this.appointmentService.getDetailAppointmentByDoctor(this.id).subscribe(data => {
         console.log(data);
         this.data = data;
+        this.textNote = data.place;
         if(data==null){
           this.router.navigateByUrl("/doctor/appointments");
         }
@@ -95,5 +100,21 @@ export class AppointmentComponent implements OnInit {
     this.appointmentCancel = appointment;
     this.timeCancel = appointment.time;
     this.open_confirm = true;
+  }
+
+  public noteAppointment(message){
+    console.log(this.id);
+    this.appointmentService.doctorNoteAppointment(this.data.id,message).subscribe(data=>{
+      this.ngOnInit();
+    });
+  }
+
+  public setOpenNote(status) {
+    this.open_note = status;
+  }
+
+  public showNote() {
+    this.open_note = true;
+    console.log(this.textNote)
   }
 }

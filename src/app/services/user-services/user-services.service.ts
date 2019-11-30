@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { patientRegister } from './../../models/patientRegister';
 import { doctorRegsiter } from 'src/app/models/doctorRegister';
+import { API } from 'src/app/models/API';
 
 let httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,11 +15,15 @@ let httpOptions = {
   providedIn: 'root'
 })
 export class UserServicesService {
-  private API:string = "http://ec2-13-250-122-234.ap-southeast-1.compute.amazonaws.com:8080/api/";
+  private API:string;
   constructor(
     private http: HttpClient,
-    private router: Router
-  ) { }
+    private router: Router,
+    private api: API
+  ) {
+    console.log(api.getLink())
+    this.API = api.getLink()+ "/api/";
+   }
 
   public login(username, password): Observable<any>{
     return this.http.post<any>(this.API+'utility/login',{username,password},httpOptions);

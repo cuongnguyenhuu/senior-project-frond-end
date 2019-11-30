@@ -196,7 +196,7 @@ export class RegisterDialogComponent implements OnInit {
             this.errorMessages = data.message;
             this.toggleRegisterDialog();
           } else {
-            this.errorMessages = "Admin notification of user awaiting approval.";
+            this.errorMessages = "Please wait for approving by Admin.";
             this.moveToLoginForm();
           }
         },
