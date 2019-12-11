@@ -32,7 +32,7 @@
                                 Birthday:
                             </td>
                             <th>
-                                {{data.doctor.account.birthday | date: 'd, MMM, y'}}
+                                {{data.doctor.account.birthday | date: 'MMM-d-y'}}
                             </th>
                         </tr>
                         <tr>
@@ -151,7 +151,7 @@
                                 <button (click)="toggleConfirmDialog(time)" [disabled]="time.status!='available'||currentTime>time.startTime" *ngIf="ROLE=='ROLE_PATIENT'" [class]="time.status!='available'?'btn btn-danger btn-block padding-15px':'btn btn-success btn-block padding-15px'">
                                 </button>
                                 <input style="display: none" class="checkbox-schedule" type="checkbox" *ngIf="ROLE=='ROLE_DOCTOR'" [checked]="timeSelected.indexOf(time)!=-1" [id]="time.startTime" (click)="addTime(time)">
-                                <label [for]="time.startTime" *ngIf="ROLE=='ROLE_DOCTOR'" [class]="time.status=='available'?' btn btn-success btn-block  label-checkbox-chedule':
+                                <label data-toggle="tooltip" data-placement="bottom" [title]='time.note!=null&&time.note!="null"?time.note:""' [for]="time.startTime" *ngIf="ROLE=='ROLE_DOCTOR'" [class]="time.status=='available'?' btn btn-success btn-block  label-checkbox-chedule':
                                                     time.status=='default'?'label-checkbox-chedule btn btn-warning btn-block ':
                                                     time.status=='busy'?'label-checkbox-chedule btn btn-danger btn-block ':
                                                     time.status=='patient'?'label-checkbox-chedule btn btn-primary btn-block ':

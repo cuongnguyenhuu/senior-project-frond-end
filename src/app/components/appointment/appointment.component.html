@@ -29,18 +29,18 @@
                     <table>
                         <tr>
                             <td>
-                                Create at:
+                                Created date:
                             </td>
                             <th>
-                                {{data.create_at | date:'MMM d, y h:mm:ss a'}}
+                                {{data.create_at | date:'MMM-d-y h:mm:ss a'}}
                             </th>
                         </tr>
                         <tr>
                             <td>
-                                Date:
+                                Date of appointment:
                             </td>
                             <th>
-                                {{data.start_at | date:'MMM d, y'}}
+                                {{data.start_at | date:'MMM-d-y'}}
                             </th>
                         </tr>
                         <tr>
@@ -61,7 +61,7 @@
                         </tr>
                         <tr>
                             <td>
-                                Place:
+                                Office address:
                             </td>
                             <th>
                                 {{data.doctor.account.address.addressLine}}, {{data.doctor.account.address.ward}}, {{data.doctor.account.address.locality}}, {{data.doctor.account.address.city}}, {{data.doctor.account.address.country}}

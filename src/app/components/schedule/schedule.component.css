@@ -18,6 +18,7 @@ table {
 .btn-block {
     height: 100%;
     min-width: 100%;
+    max-width: 0;
 }
 
 .btn-update {
@@ -27,7 +28,11 @@ table {
 .schedule label {
     opacity: 1;
     margin: 0;
-    padding: 15px;
+    /* padding: 15px; */
+    font-size: small;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 label:hover {
