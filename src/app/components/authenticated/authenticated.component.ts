@@ -122,7 +122,10 @@ export class AuthenticatedComponent implements OnInit, OnDestroy {
   }
 
   public moveToDetail(notif) {
-    if (this.ROLE2 == "ROLE_PATIENT") {
+    if(notif.payload.doc.data().id_appointment==-1){
+      this.setRead(notif, this.username)
+    }
+    else if (this.ROLE2 == "ROLE_PATIENT") {
       this.router.navigateByUrl("/patient/appointments/detail/" + notif.payload.doc.data().id_appointment)
       this.setRead(notif, this.username)
     } else if (this.ROLE2 == "ROLE_DOCTOR") {

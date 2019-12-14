@@ -8,6 +8,10 @@
         <div class="col-lg-12 frame-border">
             <div class="row padding-15px">
                 <i class="fas fa-arrow-circle-left fa-2x" (click)="back()" style="color: #007bff;"></i>
+                <i *ngIf="ROLE=='ROLE_DOCTOR'" class="far fa-plus-square fa-2x" style="position: absolute;
+                right: 0;
+                padding-right: 16px;
+                color: #067BFF;" (click)="showNote()"></i>
             </div>
             <div class="row padding-15px" *ngIf="data!=null">
                 <div class="col-lg-4 box-image">
@@ -25,18 +29,18 @@
                     <table>
                         <tr>
                             <td>
-                                Create at:
+                                Created date:
                             </td>
                             <th>
-                                {{data.create_at | date:'MMM d, y h:mm:ss a'}}
+                                {{data.create_at | date:'MMM-d-y h:mm:ss a'}}
                             </th>
                         </tr>
                         <tr>
                             <td>
-                                Date:
+                                Date of appointment:
                             </td>
                             <th>
-                                {{data.start_at | date:'MMM d, y'}}
+                                {{data.start_at | date:'MMM-d-y'}}
                             </th>
                         </tr>
                         <tr>
@@ -57,7 +61,7 @@
                         </tr>
                         <tr>
                             <td>
-                                Place:
+                                Office address:
                             </td>
                             <th>
                                 {{data.doctor.account.address.addressLine}}, {{data.doctor.account.address.ward}}, {{data.doctor.account.address.locality}}, {{data.doctor.account.address.city}}, {{data.doctor.account.address.country}}
@@ -70,6 +74,16 @@
                             <th>
                                 <span [class]="data.status ==1?'badge-status badge badge-danger badge-pill':data.start_at > currentTime?'badge-status badge badge-warning badge-pill':' badge-status badge badge-success badge-pill'">
                                     {{data.status == 1?'Canceled':data.start_at>currentTime?'Booked':'Done'}}</span>
+
+                            </th>
+                        </tr>
+                        <tr *ngIf="data.place!=null&&ROLE=='ROLE_DOCTOR'">
+                            <td>
+                                Note:
+                            </td>
+                            <th>
+                                <span>
+                                    {{data.place}}</span>
 
                             </th>
                         </tr>
@@ -107,3 +121,4 @@
     </div>
 </div>
 <app-confirm-cancel-dialog *ngIf="open_confirm" (cancel)="cancelAppointment($event)" (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" [timeCancel]="timeCancel"></app-confirm-cancel-dialog>
+<app-add-note-dialog *ngIf="open_note" (note)="noteAppointment($event)" (closeDialog)="setOpenNote($event)" [open]="open_note" [textNote]="textNote"></app-add-note-dialog>

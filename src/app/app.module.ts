@@ -17,10 +17,13 @@ import { DatePipe } from '@angular/common'
 import { FirebaseService } from './services/firebase-services/firebase.service';
 
 import { environment } from './../environments/environment';
+import { API } from './models/API';
+// import { AddNoteDialogComponent } from './components/add-note-dialog/add-note-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    // AddNoteDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { environment } from './../environments/environment';
     AngularFirestoreModule
   ],
   providers: [
+    API,
     UserServicesService,
     LocalServicesService,
     ImageServicesService,

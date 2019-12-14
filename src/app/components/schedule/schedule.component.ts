@@ -21,6 +21,10 @@ export class ScheduleComponent implements OnInit {
   private ROLE: string;
   private data: any;
   private isLoading: boolean = true;
+
+  private open_note: boolean = false;
+  private textNote
+
   constructor(
     private scheduleService: ScheduleService,
     private convertTimeService: ConvertTimeService,
@@ -208,14 +212,18 @@ export class ScheduleComponent implements OnInit {
   }
 
   public addTimeBusy() {
-    this.scheduleService.setTimeBusy(this.actionType, this.timeSelected).subscribe(data => {
-      console.log(data);
-      this.ngOnInit();
-      this.timeSelected = [];
-    },
-      error => {
-        console.log(error);
-      })
+    if(this.actionType!="busy"){
+      this.scheduleService.setTimeBusy(this.actionType, this.timeSelected,null).subscribe(data => {
+        console.log(data);
+        this.ngOnInit();
+        this.timeSelected = [];
+      },
+        error => {
+          console.log(error);
+        })
+    }else{
+      this.showNote();
+    }
   }
   sendLastestResult() {
     this.historyService.getHistories(0, "newest").subscribe((data) => {
@@ -265,5 +273,38 @@ export class ScheduleComponent implements OnInit {
       this.addTime(element.timeResponses[indexColunm])
     })
     console.log(this.timeSelected)
+  }
+
+  public noteAppointment(message){
+    console.log(message);
+    // console.log(this.id);
+    // this.appointmentService.doctorNoteAppointment(this.data.id,message).subscribe(data=>{
+    //   this.ngOnInit();
+    // });
+    this.scheduleService.setTimeBusy(this.actionType, this.timeSelected,message).subscribe(data => {
+      console.log(data);
+      this.ngOnInit();
+      this.timeSelected = [];
+      this.open_note=false;
+    },
+      error => {
+        console.log(error);
+      })
+  }
+
+  public setOpenNote(status) {
+    this.open_note = status;
+    console.log(status);
+  }
+
+  public ignore(status){
+    console.log(status);
+    // this.setOpenNote(status);
+    this.noteAppointment(null);
+  }
+
+  public showNote() {
+    this.open_note = true;
+    console.log(this.textNote)
   }
 }

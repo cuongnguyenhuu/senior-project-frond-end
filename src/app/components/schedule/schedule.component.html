@@ -32,7 +32,7 @@
                                 Birthday:
                             </td>
                             <th>
-                                {{data.doctor.account.birthday | date: 'd, MMM, y'}}
+                                {{data.doctor.account.birthday | date: 'MMM-d-y'}}
                             </th>
                         </tr>
                         <tr>
@@ -96,8 +96,8 @@
                             <select class="form-control" [(ngModel)]="actionType" (change)="changeActionType($event.target.value)">
                                 <option value="available">Available</option>
                                 <option value="busy">Busy</option>
-                                <option value="default">Default</option>
-                                <option value="other">Other</option>
+                                <option value="default">Break time</option>
+                                <!-- <option value="other">Other</option> -->
                             </select>
                         </div>
                         <div class="col-lg-2" *ngIf="ROLE=='ROLE_DOCTOR'">
@@ -116,13 +116,13 @@
                                         <span class="btn btn-danger margin-right-15px"></span>
                                         <label>Busy</label>
                                     </td>
-                                    <td class="col-3 col-lg-2" *ngIf="ROLE=='ROLE_DOCTOR'">
+                                    <!-- <td class="col-3 col-lg-2" *ngIf="ROLE=='ROLE_DOCTOR'">
                                         <span class="btn btn-info margin-right-15px"></span>
                                         <label>Other</label>
-                                    </td>
+                                    </td> -->
                                     <td class="col-3 col-lg-2" *ngIf="ROLE=='ROLE_DOCTOR'">
                                         <span class=" btn btn-warning margin-right-15px "></span>
-                                        <label>Default</label>
+                                        <label>Break time</label>
                                     </td>
                                     <td class="col-3 col-lg-2" *ngIf="ROLE=='ROLE_DOCTOR'">
                                         <span class="btn btn-primary margin-right-15px"></span>
@@ -147,16 +147,16 @@
                             <td (click)="pickRow(i)" class="row-time">
                                 {{schedule.timeResponses[0].startTime | date:'HH:mm'}}
                             </td>
-                            <td *ngFor="let time of schedule.timeResponses">
+                            <td *ngFor="let time of schedule.timeResponses" style="height: 100%;">
                                 <button (click)="toggleConfirmDialog(time)" [disabled]="time.status!='available'||currentTime>time.startTime" *ngIf="ROLE=='ROLE_PATIENT'" [class]="time.status!='available'?'btn btn-danger btn-block padding-15px':'btn btn-success btn-block padding-15px'">
                                 </button>
                                 <input style="display: none" class="checkbox-schedule" type="checkbox" *ngIf="ROLE=='ROLE_DOCTOR'" [checked]="timeSelected.indexOf(time)!=-1" [id]="time.startTime" (click)="addTime(time)">
-                                <label [for]="time.startTime" *ngIf="ROLE=='ROLE_DOCTOR'" [class]="time.status=='available'?' btn btn-success btn-block padding-15px label-checkbox-chedule':
-                                                    time.status=='default'?'label-checkbox-chedule btn btn-warning btn-block padding-15px':
-                                                    time.status=='busy'?'label-checkbox-chedule btn btn-danger btn-block padding-15px':
-                                                    time.status=='patient'?'label-checkbox-chedule btn btn-primary btn-block padding-15px':
-                                                    'label-checkbox-chedule btn btn-info btn-block padding-15px'">
-
+                                <label data-toggle="tooltip" data-placement="bottom" [title]='time.note!=null&&time.note!="null"?time.note:""' [for]="time.startTime" *ngIf="ROLE=='ROLE_DOCTOR'" [class]="time.status=='available'?' btn btn-success btn-block  label-checkbox-chedule':
+                                                    time.status=='default'?'label-checkbox-chedule btn btn-warning btn-block ':
+                                                    time.status=='busy'?'label-checkbox-chedule btn btn-danger btn-block ':
+                                                    time.status=='patient'?'label-checkbox-chedule btn btn-primary btn-block ':
+                                                    'label-checkbox-chedule btn btn-danger btn-block '">
+                                {{time.note!=null&&time.note!="null"?time.note:""}}
 
                                 </label>
                             </td>
@@ -172,3 +172,4 @@
 <app-confirm-dialog *ngIf="open_confirm" (ok)="bookAppointment()" (closeDialog)="setOpenConfirm($event)" [open]="open_confirm" [message]="messageConfirm"></app-confirm-dialog>
 <app-notif-dialog (closeDialog)="setOpenConfirm($event)" [open]="open_notif"></app-notif-dialog>
 <app-update-schedule *ngIf="ROLE=='ROLE_DOCTOR'" (closeDialog)="setOpenUpdate($event)" (updated)="ngOnInit()" [open]="open_update"></app-update-schedule>
+<app-add-note-dialog *ngIf="open_note" (note)="noteAppointment($event)" (close)="setOpenNote($event)" (ignore)="ignore($event)" [open]="open_note" [textNote]="textNote"></app-add-note-dialog>
