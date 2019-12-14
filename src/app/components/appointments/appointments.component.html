@@ -84,7 +84,7 @@
                                 <th scope="row">{{i+1}}</th>
                                 <td>{{ROLE=='ROLE_PATIENT'?'Dr. '+appointment.doctor.account.name:appointment.patient.profilePatient.name}}
                                 </td>
-                                <td>{{appointment.create_at | date:'MMM-d-y h:mm:ss a'}}</td>
+                                <td>{{appointment.create_at | date:'MMM-d-y H:mm:ss'}}</td>
                                 <td>
                                     <span [class]="appointment.status ==1?'badge-status badge badge-danger badge-pill':appointment.start_at > currentTime?'badge-status badge badge-warning badge-pill':' badge-status badge badge-success badge-pill'">{{appointment.status ==1?'Cancel':appointment.start_at > currentTime?'Booked':'Done'}}</span>
                                 </td>
