@@ -34,20 +34,20 @@
                 <select name="" id="" class="form-control" [(ngModel)]="startAt" (change)="changeStartAt($event.target.value)">
                     <option value="{{time}}" *ngFor="let time of times">{{convertTimeService.intToTime(time)}}</option>
                 </select>
-                <small id="helpId" class="form-text text-muted">(Hour)</small>
+                <small id="helpId" class="form-text text-muted">(hh:mm)</small>
             </div>
             <div class="form-group col-lg-6">
                 <label for="">Working time end at</label>
                 <select name="" id="" class="form-control" [(ngModel)]="endAt" (change)="changeEndAt($event.target.value)">
                     <option value="{{time}}" *ngFor="let time of times">{{convertTimeService.intToTime(time)}}</option>
                 </select>
-                <small id="helpId" class="form-text text-muted">(Hour)</small>
+                <small id="helpId" class="form-text text-muted">(hh:mm)</small>
             </div>
 
         </div>
         <div class="row buttons">
             <div class="col-lg-6">
-                <button type="button" class="btn btn-primary" (click)="updateSchedule()">Update</button>
+                <button type="button" class="btn btn-primary" (click)="updateSchedule()">CREATE</button>
             </div>
             <div class="col-lg-6" style="text-align: left;">
                 <button type="button" class="btn btn-danger">Cancel</button>
