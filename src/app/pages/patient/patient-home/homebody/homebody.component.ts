@@ -9,7 +9,7 @@ import { HomeService } from './../service/home.service';
 })
 export class HomebodyComponent implements OnInit {
 
-  private data:any;
+  public data:any;
   private URL:string= "http://localhost:8080/api/";
   constructor(
     private homeService: HomeService
