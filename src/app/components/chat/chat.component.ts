@@ -153,10 +153,10 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.link_image='';
   }
 
-  public onFocusOut() {
+  public onFocusOut(event) {
     this.firebaseService.setIsTyping(this.listChats[this.indexSelectedChat].$id, false, this.ROLE);
   }
-  public onFocus() {
+  public onFocus(event) {
     this.firebaseService.setIsTyping(this.listChats[this.indexSelectedChat].$id, true, this.ROLE);
     //this.allChatsSubscription.unsubscribe();
   }
