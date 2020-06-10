@@ -8,25 +8,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./appointments.component.css']
 })
 export class AppointmentsComponent implements OnInit {
-  private ROLE: string;
-  private appointments: any[] = [];
-  private totalPages: number[];
-  private currentPage: number;
-  private currentTime: number;
-  private statuses = ["All", "Waiting", "Done", "Canceled"];
-  private sortByList = ["Newest", "Oldest"]
+  public ROLE: string;
+  public appointments: any[] = [];
+  public totalPages: number[];
+  public currentPage: number;
+  public currentTime: number;
+  public statuses = ["All", "Waiting", "Done", "Canceled"];
+  public sortByList = ["Newest", "Oldest"]
   //filter
-  private search = "";
-  private status = "All";
-  private sortBy = "Newest";
+  public search = "";
+  public status = "All";
+  public sortBy = "Newest";
   //dialog
-  private open_confirm: boolean = false;
-  private timeCancel: any;
-  private appointmentCancel: any;
+  public open_confirm: boolean = false;
+  public timeCancel: any;
+  public appointmentCancel: any;
 
   constructor(
-    private appointmentService: AppointmentService,
-    private router: Router
+    public appointmentService: AppointmentService,
+    public router: Router
   ) { }
 
   ngOnInit() {

@@ -1,16 +1,16 @@
 export class patientRegister{
-    private username:string;
-    private password:string;
-    private email:string;
-    private phoneNumber:string;
-    private name: string;
-    private birthday:number;
-    private gender:string;
-    private country:string;
-    private city:string;
-    private district:string;
-    private ward:string;
-    private address:string;
+    public username:string;
+    public password:string;
+    public email:string;
+    public phoneNumber:string;
+    public name: string;
+    public birthday:number;
+    public gender:string;
+    public country:string;
+    public city:string;
+    public district:string;
+    public ward:string;
+    public address:string;
 
     constructor(username, password, email, phoneNumber, name, birthday, gender, country, city, district, ward, address){
         this.username = username;

@@ -18,51 +18,51 @@ import { HistoryService } from 'src/app/pages/patient/patient-history/services/h
 })
 export class ScheduleComponent implements OnInit {
 
-  private ROLE: string;
-  private data: any;
-  private isLoading: boolean = true;
+  public ROLE: string;
+  public data: any;
+  public isLoading: boolean = true;
 
-  private open_note: boolean = false;
-  private textNote
+  public open_note: boolean = false;
+  public textNote
 
   constructor(
-    private scheduleService: ScheduleService,
-    private convertTimeService: ConvertTimeService,
-    private route: ActivatedRoute,
-    private datePipe: DatePipe,
-    private router: Router,
-    private firebaseService: FirebaseService,
-    private historyService: HistoryService
+    public scheduleService: ScheduleService,
+    public convertTimeService: ConvertTimeService,
+    public route: ActivatedRoute,
+    public datePipe: DatePipe,
+    public router: Router,
+    public firebaseService: FirebaseService,
+    public historyService: HistoryService
 
   ) { }
-  private dayName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  private dates: number[] = [];
-  private open_confirm: boolean = false;
-  private open_notif: boolean = false;
-  private open_update: boolean = false;
+  public dayName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  public dates: number[] = [];
+  public open_confirm: boolean = false;
+  public open_notif: boolean = false;
+  public open_update: boolean = false;
 
-  private userdoctor: string;
-  private currentDate: number;
-  private currentTime: number;
+  public userdoctor: string;
+  public currentDate: number;
+  public currentTime: number;
 
-  private scheduleResponse: any;
-  private message: string;
-  private schedules: any[] = [];
-  private times: any[] = [];
-  private weeks: string[] = [];
+  public scheduleResponse: any;
+  public message: string;
+  public schedules: any[] = [];
+  public times: any[] = [];
+  public weeks: string[] = [];
 
-  private weekSelected: number = 0;
-  private actionType: String = "default";
+  public weekSelected: number = 0;
+  public actionType: String = "default";
 
-  private timeSelected: Time[] = [];
-  private timeBook: any;
-  private doctor: any;
+  public timeSelected: Time[] = [];
+  public timeBook: any;
+  public doctor: any;
 
-  private messageConfirm;
+  public messageConfirm;
 
-  private member1;
-  private member2;
-  private messageChat = '';
+  public member1;
+  public member2;
+  public messageChat = '';
 
   ngOnInit() {
     this.message = null;

@@ -1,8 +1,8 @@
 import { Time } from './time';
 
 export class BookingRequest {
-    private userDiseaseId: number;
-    private timeBooking:Time;
+    public userDiseaseId: number;
+    public timeBooking:Time;
 
 
 	constructor($userDiseaseId: number, $timeBooking: Time) {

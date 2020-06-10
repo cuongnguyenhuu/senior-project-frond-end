@@ -8,7 +8,7 @@ import {Observable } from 'rxjs';
 export class LocalServicesService {
 
   constructor(
-    private httpClient: HttpClient
+    public httpClient: HttpClient
   ) { }
 
   public getLocal() : Observable<any>{

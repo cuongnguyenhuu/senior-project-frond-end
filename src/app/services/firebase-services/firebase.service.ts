@@ -9,10 +9,10 @@ import { Message } from 'src/app/models/message';
 })
 export class FirebaseService {
 
-  private subcription: Subscription;
+  public subcription: Subscription;
 
   constructor(
-    private afs: AngularFirestore
+    public afs: AngularFirestore
   ) { }
 
   public getUserFirebase(username): Observable<any> {

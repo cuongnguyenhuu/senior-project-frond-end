@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoctorBodyComponent implements OnInit {
 
-  private ROLE :string = "DOCTOR";
+  public ROLE :string = "DOCTOR";
 
   constructor() { }
 

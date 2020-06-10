@@ -10,11 +10,11 @@ import { AppointmentService } from './../../../../services/appointment-services/
 })
 export class OverviewComponent implements OnInit {
 
-  private appointment;
-  private doctor;
-  private patient;
-  private totalDoctors;
-  private totalPatients;
+  public appointment;
+  public doctor;
+  public patient;
+  public totalDoctors;
+  public totalPatients;
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -43,7 +43,7 @@ export class OverviewComponent implements OnInit {
 
   constructor(
 
-    private appointmentService : AppointmentService
+    public appointmentService : AppointmentService
   ) { }
 
   ngOnInit() {

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BodyAdminComponent implements OnInit {
 
-  private ROLE: string = "ADMIN"
+  public ROLE: string = "ADMIN"
 
   constructor() { }
 

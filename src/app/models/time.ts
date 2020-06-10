@@ -1,9 +1,9 @@
 export class Time {
-    private id: number;
-    private startTime: number;
-    private endTime: number;
-    private status: string;
-    private dayOfWeek: number;
+    public id: number;
+    public startTime: number;
+    public endTime: number;
+    public status: string;
+    public dayOfWeek: number;
 
 
 	constructor($id: number, $startTime: number, $endTime: number, $status: string, $dayOfWeek: number) {

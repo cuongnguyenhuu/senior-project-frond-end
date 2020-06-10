@@ -1,16 +1,16 @@
 export class DoctorUpdateResponse {
-    private name :string;
-    private email:string;
-    private birthday:number;
-    private gender:string;
-    private phoneNumber:string;
-    private country:string;
-    private city:string;
-    private district:string;
-    private ward:string;
-    private addressLine:string;
-    private specialist:string;
-    private experiences:number;
+    public name :string;
+    public email:string;
+    public birthday:number;
+    public gender:string;
+    public phoneNumber:string;
+    public country:string;
+    public city:string;
+    public district:string;
+    public ward:string;
+    public addressLine:string;
+    public specialist:string;
+    public experiences:number;
 
 
 

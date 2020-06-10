@@ -11,12 +11,12 @@ let httpOptions = {
 })
 export class AppointmentService {
 
-  private API: string ;
-  private appointment;
+  public API: string ;
+  public appointment;
 
   constructor(
-    private http: HttpClient,
-    private api: API
+    public http: HttpClient,
+    public api: API
   ) { 
     this.API = api.getLink()+ "/api/";
   }

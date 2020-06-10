@@ -8,19 +8,19 @@ import { HistoryService } from './../services/history-service/history.service';
 })
 export class HistoryComponent implements OnInit {
 
-  private sortBy = 'newest';
-  private pageIndex = 0;
-  private totalPages;
-  private data;
+  public sortBy = 'newest';
+  public pageIndex = 0;
+  public totalPages;
+  public data;
 
-  private historyDelete;
+  public historyDelete;
 
-  private open_confirm = false;
+  public open_confirm = false;
 
-  private messageConfirm = 'Are you sure to remove this result!';
+  public messageConfirm = 'Are you sure to remove this result!';
 
   constructor(
-    private historyService: HistoryService
+    public historyService: HistoryService
   ) { }
 
   ngOnInit() {

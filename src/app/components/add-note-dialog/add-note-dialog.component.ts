@@ -16,8 +16,8 @@ export class AddNoteDialogComponent implements OnInit {
   @Output() note = new EventEmitter();
 
   @Output() ignore = new EventEmitter();
-  // private message = '';
-  private messageError;
+  // public message = '';
+  public messageError;
   constructor() { }
 
   ngOnInit() {

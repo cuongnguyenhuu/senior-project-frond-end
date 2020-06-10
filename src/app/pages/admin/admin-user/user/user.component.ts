@@ -9,16 +9,16 @@ import {Location} from '@angular/common';
 })
 export class UserComponent implements OnInit {
 
-  private username:String;
-  private role:String;
-  private profile;
-  private data;
-  private open_confirm = false;
-  private messageConfirm ;
+  public username:String;
+  public role:String;
+  public profile;
+  public data;
+  public open_confirm = false;
+  public messageConfirm ;
   constructor(
-    private activatedRoute:ActivatedRoute,
-    private userServices:UserServicesService,
-    private _location: Location
+    public activatedRoute:ActivatedRoute,
+    public userServices:UserServicesService,
+    public _location: Location
   ) { }
 
   ngOnInit() {

@@ -15,11 +15,11 @@ let httpOptions = {
   providedIn: 'root'
 })
 export class UserServicesService {
-  private API:string;
+  public API:string;
   constructor(
-    private http: HttpClient,
-    private router: Router,
-    private api: API
+    public http: HttpClient,
+    public router: Router,
+    public api: API
   ) {
     console.log(api.getLink())
     this.API = api.getLink()+ "/api/";

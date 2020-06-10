@@ -2,8 +2,8 @@ import { Time } from './time';
 
 export class Schedule{
 
-    private dayOfTheWeek:number;
-    private time:Time[];
+    public dayOfTheWeek:number;
+    public time:Time[];
 
 
 

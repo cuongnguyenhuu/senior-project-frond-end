@@ -11,7 +11,7 @@ import { LocalServicesService } from './../../../../services/local-services/loca
 })
 export class ResultCheckUpComponent implements OnInit {
 
-  @Input() private data;
+  @Input() public data;
 
   @Input() imageName;
   
@@ -50,13 +50,13 @@ export class ResultCheckUpComponent implements OnInit {
     },
   ];
 
-  private diseases:any[];
-  private indexDetail:number = 0;
-  // private percentages;
-  private top3:any[] = [];
-  private temp:any[];
+  public diseases:any[];
+  public indexDetail:number = 0;
+  // public percentages;
+  public top3:any[] = [];
+  public temp:any[];
   constructor(
-    private localServicesService:LocalServicesService,
+    public localServicesService:LocalServicesService,
   ) {
     
    }

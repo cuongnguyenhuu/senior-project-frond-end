@@ -94,10 +94,10 @@ export class LineChartComponent implements OnInit {
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
   constructor(
-    private dataPipe: DatePipe
+    public dataPipe: DatePipe
   ) { }
 
-  private dt = [];
+  public dt = [];
   ngOnInit() {
     console.log(this.data);
     if (this.data != null) {

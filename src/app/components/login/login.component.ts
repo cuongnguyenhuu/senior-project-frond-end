@@ -12,17 +12,17 @@ export class LoginComponent implements OnInit {
 
   @Output() tranforDataLogin = new EventEmitter();
 
-  private username: string = '';
-  private password: string = '';
-  private errorMessage: string = '';
-  private isCoverPassword: boolean = true;
-  private data: any;
-  private errorField: boolean[] = [];
+  public username: string = '';
+  public password: string = '';
+  public errorMessage: string = '';
+  public isCoverPassword: boolean = true;
+  public data: any;
+  public errorField: boolean[] = [];
 
   constructor(
-    private userServicesService: UserServicesService,
-    private spinner: NgxSpinnerService,
-    private router: Router
+    public userServicesService: UserServicesService,
+    public spinner: NgxSpinnerService,
+    public router: Router
   ) { }
 
   ngOnInit() {

@@ -8,10 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PatientCheckUpComponent implements OnInit {
 
 
-  private TryAgain:boolean = false;
+  public TryAgain:boolean = false;
 
-  private data:any;
-  private imageName:string;
+  public data:any;
+  public imageName:string;
   constructor(
   ) { }
   

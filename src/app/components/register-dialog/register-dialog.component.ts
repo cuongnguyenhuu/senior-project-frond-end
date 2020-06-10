@@ -20,40 +20,40 @@ export class RegisterDialogComponent implements OnInit {
 
   @Output() moveToLogin = new EventEmitter();
 
-  private isDoctor = false;
-  private data: any;
-  private provinces: any[] = [];
-  private districts: any[] = [];
-  private wards: any[] = [];
-  private specialists: any[] = [];
+  public isDoctor = false;
+  public data: any;
+  public provinces: any[] = [];
+  public districts: any[] = [];
+  public wards: any[] = [];
+  public specialists: any[] = [];
 
-  private provinceSelected: any = 'default';
-  private districtSelected: any = 'default';
-  private wardSelected: any = 'default';
-  private specialistSelected: string = 'default';
+  public provinceSelected: any = 'default';
+  public districtSelected: any = 'default';
+  public wardSelected: any = 'default';
+  public specialistSelected: string = 'default';
 
-  private username: string = '';
-  private password: string = '';
-  private rePassword: string = '';
-  private email: string = '';
-  private phoneNumber: string = '';
-  private birthday: number;
-  private name: string = '';
-  private gender: string = "male";
-  private country: string = "Viet Nam";
-  private street: string = '';
-  private experiences: number;
-  private certificate: string = '';
+  public username: string = '';
+  public password: string = '';
+  public rePassword: string = '';
+  public email: string = '';
+  public phoneNumber: string = '';
+  public birthday: number;
+  public name: string = '';
+  public gender: string = "male";
+  public country: string = "Viet Nam";
+  public street: string = '';
+  public experiences: number;
+  public certificate: string = '';
 
-  private errorMessages: string;
+  public errorMessages: string;
 
-  private errorField: boolean[] = [];
+  public errorField: boolean[] = [];
 
   constructor(
-    private localServicesService: LocalServicesService,
-    private userServicesService: UserServicesService,
-    private spinner: NgxSpinnerService,
-    private imageServicesService: ImageServicesService,
+    public localServicesService: LocalServicesService,
+    public userServicesService: UserServicesService,
+    public spinner: NgxSpinnerService,
+    public imageServicesService: ImageServicesService,
   ) { }
 
   ngOnInit() {

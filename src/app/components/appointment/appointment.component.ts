@@ -10,24 +10,24 @@ import {Location} from '@angular/common';
 })
 export class AppointmentComponent implements OnInit {
 
-  private data;
-  private currentTime = new Date().getTime();
+  public data;
+  public currentTime = new Date().getTime();
 
   //dialog
-  private open_confirm: boolean = false;
-  private timeCancel: any;
-  private appointmentCancel: any;
+  public open_confirm: boolean = false;
+  public timeCancel: any;
+  public appointmentCancel: any;
 
-  private open_note: boolean = false;
-  private textNote;
-  private ROLE;
-  private id;
+  public open_note: boolean = false;
+  public textNote;
+  public ROLE;
+  public id;
   
   constructor(
-    private appointmentService: AppointmentService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private location: Location
+    public appointmentService: AppointmentService,
+    public router: Router,
+    public route: ActivatedRoute,
+    public location: Location
   ) { }
 
   ngOnInit() {

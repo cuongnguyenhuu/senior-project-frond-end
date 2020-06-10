@@ -7,15 +7,15 @@ import { UserServicesService } from './../../../../services/user-services/user-s
 })
 export class UsersComponent implements OnInit {
 
-  private textSearch:string;
-  private role:string;
-  private status:string;
-  private page:number;
-  private data;
-  private totalPages;
-  private currentPage;
+  public textSearch:string;
+  public role:string;
+  public status:string;
+  public page:number;
+  public data;
+  public totalPages;
+  public currentPage;
   constructor(
-    private userServices: UserServicesService
+    public userServices: UserServicesService
   ) { }
 
   ngOnInit() {

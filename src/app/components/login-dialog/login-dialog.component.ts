@@ -16,18 +16,18 @@ export class LoginDialogComponent implements OnInit {
 
   @Output() tranforDataLogin = new EventEmitter();
 
-  private open_register: boolean = false;
-  // private username: string = '';
-  // private password: string = '';
-  private errorMessage: string = '';
-  // private isCoverPassword: boolean = true;
-  private data: any;
-  // private errorField: boolean[]=[];
-  private isLoginOpen=true;
+  public open_register: boolean = false;
+  // public username: string = '';
+  // public password: string = '';
+  public errorMessage: string = '';
+  // public isCoverPassword: boolean = true;
+  public data: any;
+  // public errorField: boolean[]=[];
+  public isLoginOpen=true;
   constructor(
-    private userServicesService: UserServicesService,
-    private spinner: NgxSpinnerService,
-    private router: Router
+    public userServicesService: UserServicesService,
+    public spinner: NgxSpinnerService,
+    public router: Router
   ) {
 
   }

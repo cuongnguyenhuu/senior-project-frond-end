@@ -22,30 +22,30 @@ export class AuthenticatedComponent implements OnInit, OnDestroy {
   unloadHandler(event) {
     this.firebaseService.setOffline(this.username);
   }
-  private messagesURL: string = "";
+  public messagesURL: string = "";
 
-  private profileURL: string = "";
+  public profileURL: string = "";
 
-  private newNotificationCollection: AngularFirestoreCollection<any[]>;
-  private newNotification: Observable<any[]>;
+  public newNotificationCollection: AngularFirestoreCollection<any[]>;
+  public newNotification: Observable<any[]>;
 
-  private allNotificationCollection: AngularFirestoreCollection<any[]>;
-  private allNotification: Observable<any[]>;
+  public allNotificationCollection: AngularFirestoreCollection<any[]>;
+  public allNotification: Observable<any[]>;
 
-  private number_new_notification;
-  private total_new_notification: any;
-  private total_notification: any;
+  public number_new_notification;
+  public total_new_notification: any;
+  public total_notification: any;
 
-  private total_new_messages: any;
-  private ROLE2;
-  private username;
-  private nameAndAvatar;
+  public total_new_messages: any;
+  public ROLE2;
+  public username;
+  public nameAndAvatar;
 
   constructor(
-    private userServicesService: UserServicesService,
-    private afs: AngularFirestore,
-    private firebaseService: FirebaseService,
-    private router: Router
+    public userServicesService: UserServicesService,
+    public afs: AngularFirestore,
+    public firebaseService: FirebaseService,
+    public router: Router
   ) { }
 
   ngOnInit() {

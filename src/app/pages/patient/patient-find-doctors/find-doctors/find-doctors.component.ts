@@ -9,22 +9,22 @@ import { ScheduleService } from './../../../../services/schedule-services/schedu
 })
 export class FindDoctorsComponent implements OnInit {
 
-  private textSearch = '';
-  private provinces:any[] = [];
-  private data:any;
-  private specialists:any;
-  private provinceSelected:any = 'all';
-  private districts:any;
-  private districtSelected:any ='all' ;
-  private wardSelected:any;
-  private specialistSelected:any = 'all';
-  private countrySelected = 'Viet Nam';
-  private doctors:any;
-  private isLoading:boolean;
+  public textSearch = '';
+  public provinces:any[] = [];
+  public data:any;
+  public specialists:any;
+  public provinceSelected:any = 'all';
+  public districts:any;
+  public districtSelected:any ='all' ;
+  public wardSelected:any;
+  public specialistSelected:any = 'all';
+  public countrySelected = 'Viet Nam';
+  public doctors:any;
+  public isLoading:boolean;
 
   constructor(
-    private localServicesService: LocalServicesService,
-    private scheduleService: ScheduleService
+    public localServicesService: LocalServicesService,
+    public scheduleService: ScheduleService
   ) { }
 
   ngOnInit() {

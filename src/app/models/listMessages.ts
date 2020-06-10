@@ -1,12 +1,12 @@
 export class ListMessages{
-    private id:String;
-    private username:String;
-    private avatar:String;
-    private title:String;
-    private lastMessage:String;
-    private isRead:boolean;
-    private isTyping:boolean;
-    private isOnline:boolean;
+    public id:String;
+    public username:String;
+    public avatar:String;
+    public title:String;
+    public lastMessage:String;
+    public isRead:boolean;
+    public isTyping:boolean;
+    public isOnline:boolean;
 
 
 	constructor($id: String, $username: String, $avatar: String, $title: String, $lastMessage: String, $isRead: boolean, $isTyping: boolean, $isOnline: boolean) {

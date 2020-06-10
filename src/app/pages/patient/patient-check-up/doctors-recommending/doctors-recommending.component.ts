@@ -9,14 +9,14 @@ import { Router } from '@angular/router';
 })
 export class DoctorsRecommendingComponent implements OnInit {
 
-  private isAuthenticated:boolean=false;
-  private message:string;
-  private data;
-  private isLoading:boolean = true;
+  public isAuthenticated:boolean=false;
+  public message:string;
+  public data;
+  public isLoading:boolean = true;
 
   constructor(
-    private patientRecommendationService: PatientRecommendationService,
-    private router:Router
+    public patientRecommendationService: PatientRecommendationService,
+    public router:Router
   ) { }
 
   ngOnInit() {

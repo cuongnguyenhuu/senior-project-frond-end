@@ -16,7 +16,7 @@ export class ConfirmDialogComponent implements OnInit {
 
   @Output() ok = new EventEmitter();
   constructor(
-    private convertTimeService:ConvertTimeService
+    public convertTimeService:ConvertTimeService
   ) { }
 
   ngOnInit() {

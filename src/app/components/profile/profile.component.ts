@@ -13,30 +13,30 @@ import { ImageServicesService } from 'src/app/services/image-servives/image-serv
 })
 export class ProfileComponent implements OnInit {
 
-  private ROLE;
-  private data;
-  private profile;
-  private dataEdit;
-  private isEditing = false;
+  public ROLE;
+  public data;
+  public profile;
+  public dataEdit;
+  public isEditing = false;
   //infor
-  private dataLocal;
-  private provinceIndex;
-  private provinceName;
+  public dataLocal;
+  public provinceIndex;
+  public provinceName;
 
-  private districtIndex;
-  private districtName;
+  public districtIndex;
+  public districtName;
 
-  private wardIndex;
-  private wardName;
+  public wardIndex;
+  public wardName;
 
-  private specialists;
-  private specialistIndex;
+  public specialists;
+  public specialistIndex;
 
   constructor(
-    private userServices: UserServicesService,
-    private datePipe: DatePipe,
-    private localServices: LocalServicesService,
-    private imageServices: ImageServicesService
+    public userServices: UserServicesService,
+    public datePipe: DatePipe,
+    public localServices: LocalServicesService,
+    public imageServices: ImageServicesService
   ) { }
 
   ngOnInit() {

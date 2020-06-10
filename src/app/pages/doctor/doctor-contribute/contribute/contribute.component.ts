@@ -8,12 +8,12 @@ import { ImageServicesService } from 'src/app/services/image-servives/image-serv
 })
 export class ContributeComponent implements OnInit {
 
-  private listImage:String[] =[];
-  private name="";
-  private description="";
-  private messageError="";
+  public listImage:String[] =[];
+  public name="";
+  public description="";
+  public messageError="";
   constructor(
-    private imageServicesService: ImageServicesService,
+    public imageServicesService: ImageServicesService,
   ) { }
 
   ngOnInit() {

@@ -1,9 +1,9 @@
 import { Message } from './message';
 
 export class Chat{
-    private member1:any;
-    private member2:any;
-    private members:String[];
+    public member1:any;
+    public member2:any;
+    public members:String[];
 
 	constructor(member1:String, member2: String) {
 		this.member1 = {

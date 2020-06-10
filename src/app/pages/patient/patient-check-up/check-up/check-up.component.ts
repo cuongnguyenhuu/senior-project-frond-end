@@ -15,19 +15,19 @@ export class CheckUpComponent implements OnInit {
 
   @Output() imageName = new EventEmitter();
 
-  private image: string;
-  private errorMessage;
-  // private URL:string = "http://localhost:8080/api/utility/image/";
-  private isloading: boolean = false;
-  private disabled: boolean = true;
-  private diseases: any;
-  private result_text: Array<String> = [];
+  public image: string;
+  public errorMessage;
+  // public URL:string = "http://localhost:8080/api/utility/image/";
+  public isloading: boolean = false;
+  public disabled: boolean = true;
+  public diseases: any;
+  public result_text: Array<String> = [];
 
   constructor(
-    private imageServicesService: ImageServicesService,
-    private patientCheckUpService: PatientCheckUpService,
-    private patientAddResultService: PatientAddResultService,
-    private localServicesService: LocalServicesService
+    public imageServicesService: ImageServicesService,
+    public patientCheckUpService: PatientCheckUpService,
+    public patientAddResultService: PatientAddResultService,
+    public localServicesService: LocalServicesService
   ) { }
 
   ngOnInit() {

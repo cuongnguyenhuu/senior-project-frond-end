@@ -1,20 +1,20 @@
 export class doctorRegsiter{
 
-    private username:string;
-    private password:string;
-    private email:string;
-    private phoneNumber:string;
-    private name: string;
-    private birthday:number;
-    private gender:string;
-    private country:string;
-    private city:string;
-    private district:string;
-    private ward:string;
-    private address:string;
-    private specialist:string;
-    private experiences:number;
-    private certificate:string;
+    public username:string;
+    public password:string;
+    public email:string;
+    public phoneNumber:string;
+    public name: string;
+    public birthday:number;
+    public gender:string;
+    public country:string;
+    public city:string;
+    public district:string;
+    public ward:string;
+    public address:string;
+    public specialist:string;
+    public experiences:number;
+    public certificate:string;
 
 
 	constructor($username: string, $password: string, $email: string, $phoneNumber: string, $name: string, $birthday: number, $gender: string, $country: string, $city: string, $district: string, $ward: string, $address: string, $specialist: string, $experiences: number, $certificate: string) {

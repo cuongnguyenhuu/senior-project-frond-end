@@ -10,9 +10,9 @@ import { HomeService } from './../service/home.service';
 export class HomebodyComponent implements OnInit {
 
   public data:any;
-  private URL:string= "http://localhost:8080/api/";
+  public URL:string= "http://localhost:8080/api/";
   constructor(
-    private homeService: HomeService
+    public homeService: HomeService
   ) { }
 
   ngOnInit() {

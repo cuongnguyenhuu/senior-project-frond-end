@@ -1,6 +1,6 @@
 export class UserFirebase{
-    private username:String;
-    private avatar:String;
+    public username:String;
+    public avatar:String;
 
 
 	constructor($username: String, $avatar: String) {

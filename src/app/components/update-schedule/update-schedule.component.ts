@@ -20,27 +20,27 @@ export class UpdateScheduleComponent implements OnInit {
 
   @Output() updated = new EventEmitter();
 
-  private typeUpdate:string;
-  private schedules:Schedule[]=[];
-  private time_per_appointment:string = "00:30";
-  private inputTime:string[] = [];
-  private message:string=null;
+  public typeUpdate:string;
+  public schedules:Schedule[]=[];
+  public time_per_appointment:string = "00:30";
+  public inputTime:string[] = [];
+  public message:string=null;
 
-  private timePerAppointments:number[] = [30,60];
-  private preBooks:number[] = [1,2,3,4];
-  private times:number[];
+  public timePerAppointments:number[] = [30,60];
+  public preBooks:number[] = [1,2,3,4];
+  public times:number[];
 
-  private timePerAppointment:number;
-  private preBook:number;
-  private startAt:number;
-  private endAt:number;
+  public timePerAppointment:number;
+  public preBook:number;
+  public startAt:number;
+  public endAt:number;
 
-  private originalData:any;
+  public originalData:any;
 
   constructor(
-    private convertTimeService:ConvertTimeService,
-    private scheduleService:ScheduleService,
-    private spinner:NgxSpinnerService
+    public convertTimeService:ConvertTimeService,
+    public scheduleService:ScheduleService,
+    public spinner:NgxSpinnerService
   ) { }
 
   ngOnInit() {

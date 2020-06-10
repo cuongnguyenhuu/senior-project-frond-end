@@ -15,11 +15,11 @@ let httpOptions = {
 })
 export class ScheduleService {
 
-  private API: string;
+  public API: string;
 
   constructor(
-    private http: HttpClient,
-    private api: API
+    public http: HttpClient,
+    public api: API
   ) {
     this.API = api.getLink() + "/api/";
   }

@@ -8,7 +8,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class UnloginComponent implements OnInit {
 
   @Output() tranforDataLogin = new EventEmitter();
-  private open_login:boolean = false;
+  public open_login:boolean = false;
   
   constructor() { }
 

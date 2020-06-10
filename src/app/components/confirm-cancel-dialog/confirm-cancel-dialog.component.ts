@@ -16,10 +16,10 @@ export class ConfirmCancelDialogComponent implements OnInit {
 
   @Output() cancel = new EventEmitter();
 
-  private message = '';
-  private messageError;
+  public message = '';
+  public messageError;
   constructor(
-    private convertTimeService:ConvertTimeService
+    public convertTimeService:ConvertTimeService
   ) { }
 
   ngOnInit() {

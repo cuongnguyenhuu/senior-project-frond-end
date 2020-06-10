@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   @Input() ROLE;
   
-  private isLogin:boolean = false;
-  private data: any;
+  public isLogin:boolean = false;
+  public data: any;
 
   constructor(
-    private userServicesService: UserServicesService,
-    private router:Router
+    public userServicesService: UserServicesService,
+    public router:Router
   ) { }
 
   ngOnInit() {

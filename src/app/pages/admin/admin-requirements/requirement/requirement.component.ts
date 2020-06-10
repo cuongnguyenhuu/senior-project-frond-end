@@ -8,14 +8,14 @@ import { UserServicesService } from 'src/app/services/user-services/user-service
 })
 export class RequirementComponent implements OnInit {
 
-  private textSearch;
-  private sortBy;
-  private page;
-  private totalPages;
-  private currentpage;
-  private result;
+  public textSearch;
+  public sortBy;
+  public page;
+  public totalPages;
+  public currentpage;
+  public result;
   constructor(
-    private userService:UserServicesService
+    public userService:UserServicesService
   ) { }
 
   ngOnInit() {

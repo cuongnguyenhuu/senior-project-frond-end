@@ -1,10 +1,10 @@
 import { UserFirebase } from './userFirebase';
 
 export class Message{
-    private sender:String;
-    private image:String;
-    private text_message:String;
-    private create_at:number;
+    public sender:String;
+    public image:String;
+    public text_message:String;
+    public create_at:number;
 
 
 	constructor($sender: String, $image: String, $text_message: String) {

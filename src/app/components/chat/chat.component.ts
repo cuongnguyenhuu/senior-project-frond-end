@@ -14,22 +14,22 @@ import { ImageServicesService } from 'src/app/services/image-servives/image-serv
 })
 export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
-  @ViewChild('scrollMe', null) private myScrollContainer: ElementRef;
+  @ViewChild('scrollMe', null) public myScrollContainer: ElementRef;
 
-  private ROLE;
-  private currentMember;
-  private listChats: ListMessages[] = [];
-  private chatBox: any;
-  private indexSelectedChat: number;
-  private text_message = '';
-  private isLoadingList:boolean = true;
-  private isLoadingMessages:boolean;
-  private message;
-  private link_image='';
-  private allChatsSubscription: Subscription = new Subscription();
+  public ROLE;
+  public currentMember;
+  public listChats: ListMessages[] = [];
+  public chatBox: any;
+  public indexSelectedChat: number;
+  public text_message = '';
+  public isLoadingList:boolean = true;
+  public isLoadingMessages:boolean;
+  public message;
+  public link_image='';
+  public allChatsSubscription: Subscription = new Subscription();
   constructor(
-    private firebaseService: FirebaseService,
-    private imageServices: ImageServicesService
+    public firebaseService: FirebaseService,
+    public imageServices: ImageServicesService
   ) { }
 
   ngAfterViewChecked() {
